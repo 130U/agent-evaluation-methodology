@@ -1,0 +1,2087 @@
+{
+  "schema_version": "g3-test-reporting-v1",
+  "implementation_timing": "post_registration_reporting_implementation",
+  "execution_status": "stopped",
+  "planned_units": 36,
+  "distinct_tasks": 6,
+  "repetitions_per_task": 2,
+  "model_seed_controlled": false,
+  "arms": {
+    "B0": {
+      "assigned_units": 12,
+      "distinct_tasks": 6,
+      "official": {
+        "assigned": 12,
+        "success": 3,
+        "failure": 3,
+        "unknown": 0,
+        "interrupted": 0,
+        "not_run": 6,
+        "success_rate_assigned": 0.25,
+        "all_outcomes_known": false
+      },
+      "qualification": {
+        "assigned": 12,
+        "success": 2,
+        "failure": 4,
+        "unknown": 0,
+        "interrupted": 0,
+        "not_run": 6,
+        "success_rate_assigned": 0.16666666666666666,
+        "all_outcomes_known": false
+      },
+      "official_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "qualified_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "critical_violation_units": [],
+      "test_usage": {
+        "accounted_records": 6,
+        "complete": true,
+        "incomplete_records": 0,
+        "known_subtotals": {
+          "cli_invocations": 89,
+          "input_tokens": 1206474,
+          "output_tokens": 7035,
+          "unknown_usage_calls": 0,
+          "seconds": 1256.6560000000172
+        },
+        "missing_records_by_metric": {
+          "cli_invocations": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "unknown_usage_calls": 0,
+          "seconds": 0
+        },
+        "currency": "unavailable"
+      },
+      "test_cost_per_verified_success": {
+        "denominator": 2,
+        "numerator_scope": "All 12 assigned test runs, including failed runs",
+        "complete_test_cost": false,
+        "values": {
+          "cli_invocations": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "seconds": null
+        }
+      },
+      "confirmed_critical_violation_rate_assigned": 0.0
+    },
+    "B1": {
+      "assigned_units": 12,
+      "distinct_tasks": 6,
+      "official": {
+        "assigned": 12,
+        "success": 3,
+        "failure": 3,
+        "unknown": 0,
+        "interrupted": 1,
+        "not_run": 5,
+        "success_rate_assigned": 0.25,
+        "all_outcomes_known": false
+      },
+      "qualification": {
+        "assigned": 12,
+        "success": 2,
+        "failure": 4,
+        "unknown": 0,
+        "interrupted": 1,
+        "not_run": 5,
+        "success_rate_assigned": 0.16666666666666666,
+        "all_outcomes_known": false
+      },
+      "official_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "interrupted"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "qualified_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "interrupted"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "critical_violation_units": [],
+      "test_usage": {
+        "accounted_records": 7,
+        "complete": true,
+        "incomplete_records": 0,
+        "known_subtotals": {
+          "cli_invocations": 96,
+          "input_tokens": 1296736,
+          "output_tokens": 7604,
+          "unknown_usage_calls": 0,
+          "seconds": 1427.985999999917
+        },
+        "missing_records_by_metric": {
+          "cli_invocations": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "unknown_usage_calls": 0,
+          "seconds": 0
+        },
+        "currency": "unavailable"
+      },
+      "test_cost_per_verified_success": {
+        "denominator": 2,
+        "numerator_scope": "All 12 assigned test runs, including failed runs",
+        "complete_test_cost": false,
+        "values": {
+          "cli_invocations": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "seconds": null
+        }
+      },
+      "confirmed_critical_violation_rate_assigned": 0.0,
+      "optimization_cost_scope": "Reported separately; not excluded from total study costs or billed only to accepted candidates"
+    },
+    "B2": {
+      "assigned_units": 12,
+      "distinct_tasks": 6,
+      "official": {
+        "assigned": 12,
+        "success": 2,
+        "failure": 4,
+        "unknown": 0,
+        "interrupted": 0,
+        "not_run": 6,
+        "success_rate_assigned": 0.16666666666666666,
+        "all_outcomes_known": false
+      },
+      "qualification": {
+        "assigned": 12,
+        "success": 1,
+        "failure": 4,
+        "unknown": 1,
+        "interrupted": 0,
+        "not_run": 6,
+        "success_rate_assigned": 0.08333333333333333,
+        "all_outcomes_known": false
+      },
+      "official_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "qualified_repeated_success": {
+        "task_denominator": 6,
+        "estimable_tasks": 0,
+        "unresolved_tasks": 6,
+        "both_success_tasks": 0,
+        "pass_power_2": null,
+        "tasks": [
+          {
+            "task_id": "36",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "40",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "success",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "62",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "68",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "77",
+            "planned_repetitions": 2,
+            "known_repetitions": 1,
+            "outcomes": [
+              "failure",
+              "not_run"
+            ],
+            "pass_power_2": null
+          },
+          {
+            "task_id": "79",
+            "planned_repetitions": 2,
+            "known_repetitions": 0,
+            "outcomes": [
+              "unknown",
+              "not_run"
+            ],
+            "pass_power_2": null
+          }
+        ]
+      },
+      "critical_violation_units": [],
+      "test_usage": {
+        "accounted_records": 6,
+        "complete": true,
+        "incomplete_records": 0,
+        "known_subtotals": {
+          "cli_invocations": 88,
+          "input_tokens": 1186007,
+          "output_tokens": 7078,
+          "unknown_usage_calls": 0,
+          "seconds": 1237.75
+        },
+        "missing_records_by_metric": {
+          "cli_invocations": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "unknown_usage_calls": 0,
+          "seconds": 0
+        },
+        "currency": "unavailable"
+      },
+      "test_cost_per_verified_success": {
+        "denominator": 1,
+        "numerator_scope": "All 12 assigned test runs, including failed runs",
+        "complete_test_cost": false,
+        "values": {
+          "cli_invocations": null,
+          "input_tokens": null,
+          "output_tokens": null,
+          "seconds": null
+        }
+      },
+      "confirmed_critical_violation_rate_assigned": 0.0,
+      "optimization_cost_scope": "Reported separately; not excluded from total study costs or billed only to accepted candidates"
+    }
+  },
+  "units": [
+    {
+      "unit": 1,
+      "arm": "B0",
+      "task_id": "36",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 13,
+        "input_tokens": 171563,
+        "output_tokens": 844,
+        "unknown_usage_calls": 0,
+        "seconds": 169.95300000000861,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 2,
+      "arm": "B1",
+      "task_id": "36",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 11,
+        "input_tokens": 139122,
+        "output_tokens": 775,
+        "unknown_usage_calls": 0,
+        "seconds": 158.28099999998813,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 3,
+      "arm": "B2",
+      "task_id": "36",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 13,
+        "input_tokens": 171734,
+        "output_tokens": 941,
+        "unknown_usage_calls": 0,
+        "seconds": 164.70300000000861,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 4,
+      "arm": "B1",
+      "task_id": "40",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 14,
+        "input_tokens": 183513,
+        "output_tokens": 1013,
+        "unknown_usage_calls": 0,
+        "seconds": 183.93799999999464,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "success"
+    },
+    {
+      "unit": 5,
+      "arm": "B2",
+      "task_id": "40",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 12,
+        "input_tokens": 157844,
+        "output_tokens": 973,
+        "unknown_usage_calls": 0,
+        "seconds": 164.45300000000861,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "success"
+    },
+    {
+      "unit": 6,
+      "arm": "B0",
+      "task_id": "40",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 14,
+        "input_tokens": 183782,
+        "output_tokens": 1043,
+        "unknown_usage_calls": 0,
+        "seconds": 189.95300000000861,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "success"
+    },
+    {
+      "unit": 7,
+      "arm": "B2",
+      "task_id": "62",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 19,
+        "input_tokens": 255291,
+        "output_tokens": 1674,
+        "unknown_usage_calls": 0,
+        "seconds": 290.4219999999914,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "failure"
+    },
+    {
+      "unit": 8,
+      "arm": "B0",
+      "task_id": "62",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 19,
+        "input_tokens": 251442,
+        "output_tokens": 1385,
+        "unknown_usage_calls": 0,
+        "seconds": 241.51600000000326,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "failure"
+    },
+    {
+      "unit": 9,
+      "arm": "B1",
+      "task_id": "62",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 16,
+        "input_tokens": 218875,
+        "output_tokens": 1420,
+        "unknown_usage_calls": 0,
+        "seconds": 244.48499999998603,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "failure"
+    },
+    {
+      "unit": 10,
+      "arm": "B0",
+      "task_id": "68",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 15,
+        "input_tokens": 205755,
+        "output_tokens": 1122,
+        "unknown_usage_calls": 0,
+        "seconds": 227.64000000001397,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 11,
+      "arm": "B1",
+      "task_id": "68",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 15,
+        "input_tokens": 205875,
+        "output_tokens": 1139,
+        "unknown_usage_calls": 0,
+        "seconds": 227.9529999999795,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 12,
+      "arm": "B2",
+      "task_id": "68",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 15,
+        "input_tokens": 205560,
+        "output_tokens": 1035,
+        "unknown_usage_calls": 0,
+        "seconds": 202.51600000000326,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 13,
+      "arm": "B1",
+      "task_id": "77",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 12,
+        "input_tokens": 161445,
+        "output_tokens": 780,
+        "unknown_usage_calls": 0,
+        "seconds": 156.42199999999139,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 14,
+      "arm": "B2",
+      "task_id": "77",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 12,
+        "input_tokens": 161388,
+        "output_tokens": 866,
+        "unknown_usage_calls": 0,
+        "seconds": 164.5,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 15,
+      "arm": "B0",
+      "task_id": "77",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 12,
+        "input_tokens": 161408,
+        "output_tokens": 777,
+        "unknown_usage_calls": 0,
+        "seconds": 176.42199999999139,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "failure"
+    },
+    {
+      "unit": 16,
+      "arm": "B2",
+      "task_id": "79",
+      "simulation_seed": 103,
+      "critical_violation": null,
+      "cost": {
+        "cli_invocations": 17,
+        "input_tokens": 234190,
+        "output_tokens": 1589,
+        "unknown_usage_calls": 0,
+        "seconds": 251.15599999998813,
+        "complete": true
+      },
+      "official": "failure",
+      "qualification": "unknown"
+    },
+    {
+      "unit": 17,
+      "arm": "B0",
+      "task_id": "79",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 16,
+        "input_tokens": 232524,
+        "output_tokens": 1864,
+        "unknown_usage_calls": 0,
+        "seconds": 251.17199999999139,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "success"
+    },
+    {
+      "unit": 18,
+      "arm": "B1",
+      "task_id": "79",
+      "simulation_seed": 103,
+      "critical_violation": false,
+      "cost": {
+        "cli_invocations": 20,
+        "input_tokens": 283936,
+        "output_tokens": 1927,
+        "unknown_usage_calls": 0,
+        "seconds": 323.39099999997416,
+        "complete": true
+      },
+      "official": "success",
+      "qualification": "success"
+    },
+    {
+      "unit": 19,
+      "arm": "B1",
+      "task_id": "79",
+      "simulation_seed": 107,
+      "critical_violation": null,
+      "cost": {
+        "cli_invocations": 8,
+        "input_tokens": 103970,
+        "output_tokens": 550,
+        "unknown_usage_calls": 0,
+        "seconds": 133.51600000000326,
+        "complete": true
+      },
+      "official": "interrupted",
+      "qualification": "interrupted"
+    },
+    {
+      "unit": 20,
+      "arm": "B2",
+      "task_id": "79",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 21,
+      "arm": "B0",
+      "task_id": "79",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 22,
+      "arm": "B2",
+      "task_id": "77",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 23,
+      "arm": "B0",
+      "task_id": "77",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 24,
+      "arm": "B1",
+      "task_id": "77",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 25,
+      "arm": "B0",
+      "task_id": "68",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 26,
+      "arm": "B1",
+      "task_id": "68",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 27,
+      "arm": "B2",
+      "task_id": "68",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 28,
+      "arm": "B1",
+      "task_id": "62",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 29,
+      "arm": "B2",
+      "task_id": "62",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 30,
+      "arm": "B0",
+      "task_id": "62",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 31,
+      "arm": "B2",
+      "task_id": "40",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 32,
+      "arm": "B0",
+      "task_id": "40",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 33,
+      "arm": "B1",
+      "task_id": "40",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 34,
+      "arm": "B0",
+      "task_id": "36",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 35,
+      "arm": "B1",
+      "task_id": "36",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    },
+    {
+      "unit": 36,
+      "arm": "B2",
+      "task_id": "36",
+      "simulation_seed": 107,
+      "official": "not_run",
+      "qualification": "not_run",
+      "critical_violation": null,
+      "cost": null
+    }
+  ],
+  "paired_B2_minus_B1": {
+    "official": {
+      "assigned_pairs": 12,
+      "repair": 0,
+      "regression": 1,
+      "both_success": 2,
+      "both_failure": 3,
+      "unresolved": 6,
+      "net_known_changes": -1,
+      "paired_difference": null,
+      "assigned_success_rate_difference": -0.08333333333333333,
+      "pairs": [
+        {
+          "task_id": "36",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "36",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "40",
+          "simulation_seed": 103,
+          "B1": "success",
+          "B2": "success",
+          "change": "both_success"
+        },
+        {
+          "task_id": "40",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "62",
+          "simulation_seed": 103,
+          "B1": "success",
+          "B2": "success",
+          "change": "both_success"
+        },
+        {
+          "task_id": "62",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "68",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "68",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "77",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "77",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "79",
+          "simulation_seed": 103,
+          "B1": "success",
+          "B2": "failure",
+          "change": "regression"
+        },
+        {
+          "task_id": "79",
+          "simulation_seed": 107,
+          "B1": "interrupted",
+          "B2": "not_run",
+          "change": "unresolved"
+        }
+      ],
+      "repair_rate": {
+        "numerator": 0,
+        "known_eligible_pairs": 3,
+        "unresolved_pairs": 6,
+        "value": null,
+        "denominator_definition": "B1 failures among all 12 assigned pairs"
+      },
+      "regression_rate": {
+        "numerator": 1,
+        "known_eligible_pairs": 3,
+        "unresolved_pairs": 6,
+        "value": null,
+        "denominator_definition": "B1 successes among all 12 assigned pairs"
+      }
+    },
+    "qualification": {
+      "assigned_pairs": 12,
+      "repair": 0,
+      "regression": 0,
+      "both_success": 1,
+      "both_failure": 4,
+      "unresolved": 7,
+      "net_known_changes": 0,
+      "paired_difference": null,
+      "assigned_success_rate_difference": -0.08333333333333333,
+      "pairs": [
+        {
+          "task_id": "36",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "36",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "40",
+          "simulation_seed": 103,
+          "B1": "success",
+          "B2": "success",
+          "change": "both_success"
+        },
+        {
+          "task_id": "40",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "62",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "62",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "68",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "68",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "77",
+          "simulation_seed": 103,
+          "B1": "failure",
+          "B2": "failure",
+          "change": "both_failure"
+        },
+        {
+          "task_id": "77",
+          "simulation_seed": 107,
+          "B1": "not_run",
+          "B2": "not_run",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "79",
+          "simulation_seed": 103,
+          "B1": "success",
+          "B2": "unknown",
+          "change": "unresolved"
+        },
+        {
+          "task_id": "79",
+          "simulation_seed": 107,
+          "B1": "interrupted",
+          "B2": "not_run",
+          "change": "unresolved"
+        }
+      ],
+      "repair_rate": {
+        "numerator": 0,
+        "known_eligible_pairs": 4,
+        "unresolved_pairs": 7,
+        "value": null,
+        "denominator_definition": "B1 failures among all 12 assigned pairs"
+      },
+      "regression_rate": {
+        "numerator": 0,
+        "known_eligible_pairs": 1,
+        "unresolved_pairs": 7,
+        "value": null,
+        "denominator_definition": "B1 successes among all 12 assigned pairs"
+      }
+    }
+  },
+  "test_usage": {
+    "accounted_records": 19,
+    "complete": true,
+    "incomplete_records": 0,
+    "known_subtotals": {
+      "cli_invocations": 273,
+      "input_tokens": 3689217,
+      "output_tokens": 21717,
+      "unknown_usage_calls": 0,
+      "seconds": 3922.3919999999343
+    },
+    "missing_records_by_metric": {
+      "cli_invocations": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "unknown_usage_calls": 0,
+      "seconds": 0
+    },
+    "currency": "unavailable"
+  },
+  "optimization_usage": {
+    "B1": {
+      "accounted_records": 1,
+      "complete": true,
+      "incomplete_records": 0,
+      "known_subtotals": {
+        "cli_invocations": 131,
+        "input_tokens": 1938309,
+        "output_tokens": 14766,
+        "unknown_usage_calls": 0,
+        "seconds": 1854.6410000000033
+      },
+      "missing_records_by_metric": {
+        "cli_invocations": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "unknown_usage_calls": 0,
+        "seconds": 0
+      },
+      "currency": "unavailable",
+      "provided": true
+    },
+    "B2": {
+      "accounted_records": 1,
+      "complete": true,
+      "incomplete_records": 0,
+      "known_subtotals": {
+        "cli_invocations": 109,
+        "input_tokens": 1650855,
+        "output_tokens": 12261,
+        "unknown_usage_calls": 0,
+        "seconds": 1479.8429999999935
+      },
+      "missing_records_by_metric": {
+        "cli_invocations": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "unknown_usage_calls": 0,
+        "seconds": 0
+      },
+      "currency": "unavailable",
+      "provided": true
+    }
+  },
+  "limitations": [
+    "Twelve runs per arm represent six tasks, not twelve independent tasks.",
+    "Unknown, interrupted and unrun outcomes remain distinct from confirmed failures.",
+    "Assigned-denominator success rates include incomplete coverage; inspect all five outcome counts.",
+    "Pass power two is both-success reliability on two observed repetitions, not pass-at-two.",
+    "Six tasks and one optimization run support descriptive results, not stable significance or equivalence.",
+    "Identical final strategies make arm differences repeat-run variation, not a strategy intervention.",
+    "Known usage subtotals do not estimate missing costs; subscription dollars and research-agent costs are unavailable."
+  ],
+  "strategy_sha256": {
+    "B0": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+    "B2": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+    "B1": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961"
+  },
+  "identical_final_strategies": true,
+  "selection_decisions": {
+    "B0": "fixed_baseline",
+    "B2": "keep_seed",
+    "B1": "keep_seed"
+  },
+  "optimization_completions": {
+    "B2": {
+      "schema_version": "gepa-milestones-g3-v1",
+      "registered_skip_perfect_score": false,
+      "parent_all_perfect": true,
+      "endpoint": "candidate_rejected",
+      "optimizer_iterations": 1,
+      "proposal_starts": 1,
+      "generated_candidates": 1,
+      "accepted_candidates": 0,
+      "rejected_candidates": 1,
+      "skip_reasons": [],
+      "total_metric_calls": 6,
+      "best_candidate_idx": 0,
+      "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+    },
+    "B1": {
+      "schema_version": "gepa-milestones-g3-v1",
+      "registered_skip_perfect_score": false,
+      "parent_all_perfect": false,
+      "endpoint": "candidate_accepted_best_seed",
+      "optimizer_iterations": 1,
+      "proposal_starts": 1,
+      "generated_candidates": 1,
+      "accepted_candidates": 1,
+      "rejected_candidates": 0,
+      "skip_reasons": [],
+      "total_metric_calls": 8,
+      "best_candidate_idx": 0,
+      "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+    }
+  },
+  "review_mode": "Two separately recorded AI reviews; disagreements become unknown; not human gold or fully blinded; incidental prior-label exposure disclosed",
+  "review_disagreements": [
+    {
+      "unit": 16,
+      "field": "critical_violation",
+      "review_a": true,
+      "review_b": false
+    }
+  ],
+  "critical_user_error_units": [],
+  "shared_test_ledger": {
+    "cli_invocations": 273,
+    "input_tokens": 3689217,
+    "output_tokens": 21717,
+    "unknown_usage_calls": 0,
+    "client_seconds": 3922.875,
+    "ledger_available": true,
+    "halt_reason": "ValueError: Unknown, duplicate, or out-of-order event: error"
+  },
+  "transport_audit": {
+    "status": "not_complete",
+    "reason": "test_stopped"
+  },
+  "post_registration_reporting_sources": {
+    "scripts/report_g3_test.py": "341defcedb652aa5eb63f452f0a406d8247f35d7cfed52fbc9ef894a33a6f460",
+    "src/tau_feedback/g3_reporting.py": "adcbf2f6397c7e3dc9c3724af41501d5031624d508209d1628e891eaaa4ae81c"
+  },
+  "selection_implementation": {
+    "script": "scripts/finalize_g3_strategies_v2.py",
+    "script_sha256": "74e8400a01bcb3cf9bc6e54501d5df86c1743c981d73e76a45da8da4776de318",
+    "timing": "post_registration_binding_bug_fix",
+    "original_script_sha256": "a5c7932771fc28f34c62d0bb6ba1c6a9cea942c7cc7b9d8d07b244f9f717b257",
+    "amendment": "research/G3_SELECTION_BINDING_AMENDMENT.md",
+    "amendment_sha256": "d3775257221b3a75e5fd4e572b5b6aaf367defdc656a439d4d69404828f452d0"
+  },
+  "review_process_disclosure": {
+    "path": "research/G3_REVIEW_PROCESS_NOTE.md",
+    "sha256": "171383e8d9db0a51ba5bf51b4efa584e8717e82f19871fdc8b3f0989da86b419",
+    "scope": "related_work encountered some sealed optimization labels and early test summaries after saving its first six test labels; existing labels retained; no assumption of no influence"
+  },
+  "public_schema": "g3-derived-public-summary-v1",
+  "original_report_sha256": "538fd486ea64614ba914b2b2d1dd40b470ae17adb4b39b2f6e073091d47f6249",
+  "manifest_id": "g3-retail-proposal-holdout-v1",
+  "original_manifest_sha256": "c42bc06eee8130335b3361983e7c3bd2af6ecc60b8a0d71df0aef3cc2c2ebd50",
+  "original_final_strategies_sha256": "75bbab0ceaf5c27d3262122fcb89ca04db637426a570d033fc9f28e39c944567",
+  "configuration": {
+    "model": "gpt-5.6-sol",
+    "effort": "low",
+    "transport": "HttpCliTextClient",
+    "arm_order": [
+      "B2",
+      "B1"
+    ],
+    "splits": {
+      "train": [
+        "76",
+        "0"
+      ],
+      "validation": [
+        "16",
+        "19"
+      ],
+      "test": [
+        "36",
+        "40",
+        "62",
+        "68",
+        "77",
+        "79"
+      ]
+    },
+    "optimizer": {
+      "max_episodes": 8,
+      "diagnosis_cap": 2,
+      "sampling_salt": "g3-retail-proposal-holdout-v1",
+      "simulation_seed": 101,
+      "optimizer_seed": 0,
+      "max_strategy_chars": 6000
+    },
+    "gepa_behavior": {
+      "skip_perfect_score": false,
+      "proposal_limit": 1,
+      "acceptance_criterion": "strict_improvement",
+      "cache_evaluation": false,
+      "use_merge": false,
+      "write_agent_state": false
+    },
+    "episode_limits": {
+      "max_steps": 40,
+      "max_errors": 6,
+      "simulation_seconds": 900
+    },
+    "client_limits_per_arm": {
+      "max_calls": 220,
+      "max_input_tokens": 3000000,
+      "max_output_tokens": 30000,
+      "max_seconds": 3600,
+      "request_timeout": 120
+    },
+    "test_client_limits": {
+      "max_calls": 600,
+      "max_input_tokens": 8000000,
+      "max_output_tokens": 60000,
+      "max_seconds": 10800,
+      "request_timeout": 120
+    },
+    "test_schedule": [
+      {
+        "unit": 1,
+        "arm": "B0",
+        "task_id": "36",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 2,
+        "arm": "B1",
+        "task_id": "36",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 3,
+        "arm": "B2",
+        "task_id": "36",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 4,
+        "arm": "B1",
+        "task_id": "40",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 5,
+        "arm": "B2",
+        "task_id": "40",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 6,
+        "arm": "B0",
+        "task_id": "40",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 7,
+        "arm": "B2",
+        "task_id": "62",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 8,
+        "arm": "B0",
+        "task_id": "62",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 9,
+        "arm": "B1",
+        "task_id": "62",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 10,
+        "arm": "B0",
+        "task_id": "68",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 11,
+        "arm": "B1",
+        "task_id": "68",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 12,
+        "arm": "B2",
+        "task_id": "68",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 13,
+        "arm": "B1",
+        "task_id": "77",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 14,
+        "arm": "B2",
+        "task_id": "77",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 15,
+        "arm": "B0",
+        "task_id": "77",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 16,
+        "arm": "B2",
+        "task_id": "79",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 17,
+        "arm": "B0",
+        "task_id": "79",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 18,
+        "arm": "B1",
+        "task_id": "79",
+        "simulation_seed": 103
+      },
+      {
+        "unit": 19,
+        "arm": "B1",
+        "task_id": "79",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 20,
+        "arm": "B2",
+        "task_id": "79",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 21,
+        "arm": "B0",
+        "task_id": "79",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 22,
+        "arm": "B2",
+        "task_id": "77",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 23,
+        "arm": "B0",
+        "task_id": "77",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 24,
+        "arm": "B1",
+        "task_id": "77",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 25,
+        "arm": "B0",
+        "task_id": "68",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 26,
+        "arm": "B1",
+        "task_id": "68",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 27,
+        "arm": "B2",
+        "task_id": "68",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 28,
+        "arm": "B1",
+        "task_id": "62",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 29,
+        "arm": "B2",
+        "task_id": "62",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 30,
+        "arm": "B0",
+        "task_id": "62",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 31,
+        "arm": "B2",
+        "task_id": "40",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 32,
+        "arm": "B0",
+        "task_id": "40",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 33,
+        "arm": "B1",
+        "task_id": "40",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 34,
+        "arm": "B0",
+        "task_id": "36",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 35,
+        "arm": "B1",
+        "task_id": "36",
+        "simulation_seed": 107
+      },
+      {
+        "unit": 36,
+        "arm": "B2",
+        "task_id": "36",
+        "simulation_seed": 107
+      }
+    ]
+  },
+  "optimization_judgments": [
+    {
+      "arm": "B2",
+      "task_id": "16",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 251366,
+      "output_tokens": 1583
+    },
+    {
+      "arm": "B2",
+      "task_id": "19",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 0.0,
+      "structural_status": "fail",
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 204782,
+      "output_tokens": 1571
+    },
+    {
+      "arm": "B2",
+      "task_id": "76",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 372775,
+      "output_tokens": 2456
+    },
+    {
+      "arm": "B2",
+      "task_id": "0",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 198707,
+      "output_tokens": 1433
+    },
+    {
+      "arm": "B2",
+      "task_id": "76",
+      "strategy_sha256": "310df62649acc3e6dfeb2ac6be06d1f9eec8f4faccd272570ee372abbb7124b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 318317,
+      "output_tokens": 2166
+    },
+    {
+      "arm": "B2",
+      "task_id": "0",
+      "strategy_sha256": "310df62649acc3e6dfeb2ac6be06d1f9eec8f4faccd272570ee372abbb7124b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 220451,
+      "output_tokens": 1537
+    },
+    {
+      "arm": "B1",
+      "task_id": "16",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 251423,
+      "output_tokens": 1598
+    },
+    {
+      "arm": "B1",
+      "task_id": "19",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 216622,
+      "output_tokens": 1483
+    },
+    {
+      "arm": "B1",
+      "task_id": "76",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 0.0,
+      "structural_status": "fail",
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 114418,
+      "output_tokens": 678
+    },
+    {
+      "arm": "B1",
+      "task_id": "0",
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 198875,
+      "output_tokens": 1478
+    },
+    {
+      "arm": "B1",
+      "task_id": "76",
+      "strategy_sha256": "ceb59e13696b68a088d8cdfd8158ebd27bfc687d2ee22a0af0c81c6d8af6e2b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 350054,
+      "output_tokens": 2542
+    },
+    {
+      "arm": "B1",
+      "task_id": "0",
+      "strategy_sha256": "ceb59e13696b68a088d8cdfd8158ebd27bfc687d2ee22a0af0c81c6d8af6e2b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 220676,
+      "output_tokens": 1619
+    },
+    {
+      "arm": "B1",
+      "task_id": "16",
+      "strategy_sha256": "ceb59e13696b68a088d8cdfd8158ebd27bfc687d2ee22a0af0c81c6d8af6e2b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 256367,
+      "output_tokens": 1588
+    },
+    {
+      "arm": "B1",
+      "task_id": "19",
+      "strategy_sha256": "ceb59e13696b68a088d8cdfd8158ebd27bfc687d2ee22a0af0c81c6d8af6e2b1",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "input_tokens": 249691,
+      "output_tokens": 1902
+    }
+  ],
+  "final_strategies": {
+    "B0": {
+      "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome.",
+      "sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "decision": "fixed_baseline",
+      "reasons": []
+    },
+    "B2": {
+      "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome.",
+      "sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "decision": "keep_seed",
+      "reasons": [
+        "gepa_did_not_select_new_candidate",
+        "candidate_text_unchanged",
+        "candidate_validation_incomplete",
+        "qualified_count_not_strictly_higher",
+        "baseline_qualified_task_regressed_or_unresolved",
+        "validation_token_cost_unknown"
+      ]
+    },
+    "B1": {
+      "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome.",
+      "sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "decision": "keep_seed",
+      "reasons": [
+        "gepa_did_not_select_new_candidate",
+        "qualified_count_not_strictly_higher",
+        "baseline_qualified_task_regressed_or_unresolved"
+      ]
+    }
+  },
+  "review_hashes": {
+    "optimization": [
+      {
+        "reviewer": "red_team",
+        "sha256": "417726ca395622eb339a7a2ea449982f3a3615c8247f8cc64405ddf630bb7a9c"
+      },
+      {
+        "reviewer": "related_work",
+        "sha256": "4d405501e9fbabb4e7bb4f6c61a81418bad82ed1cbf775326a8ad57cdcf2a6a6"
+      }
+    ],
+    "test": [
+      {
+        "reviewer": "red_team",
+        "sha256": "2c3f6ebe2dbe49c83f4b7470460c46b353f5edeb2f6cb13e38be17dd50466d22"
+      },
+      {
+        "reviewer": "related_work",
+        "sha256": "864eb9365e3a2c0e9f84ed49a614df99340fc604332c2fffd8b9aef5d0f76a35"
+      }
+    ]
+  },
+  "publication_status": "local_derived_summary_not_published",
+  "evidence_boundary": "Public synthetic tasks; raw CLI records, full catalog and original snapshots omitted. Hashes alone do not independently authenticate those missing artifacts. AI reviews are not human gold.",
+  "mechanism_execution": {
+    "B2": {
+      "completion": {
+        "schema_version": "gepa-milestones-g3-v1",
+        "registered_skip_perfect_score": false,
+        "parent_all_perfect": true,
+        "endpoint": "candidate_rejected",
+        "optimizer_iterations": 1,
+        "proposal_starts": 1,
+        "generated_candidates": 1,
+        "accepted_candidates": 0,
+        "rejected_candidates": 1,
+        "skip_reasons": [],
+        "total_metric_calls": 6,
+        "best_candidate_idx": 0,
+        "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+      },
+      "strategies_actually_executed": [
+        {
+          "sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+          "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome."
+        },
+        {
+          "sha256": "310df62649acc3e6dfeb2ac6be06d1f9eec8f4faccd272570ee372abbb7124b1",
+          "text": "Follow the retail policy exactly and treat tool results as the sole source of record-specific facts.\n\n1. Authenticate before disclosing information or handling requests: locate the user ID using either email or name plus ZIP code, even if the user supplies an ID. Serve only that authenticated user throughout the conversation; deny requests involving another user.\n2. Clarify the customer’s complete request and gather only the information required by policy. For order actions, retrieve the order, verify ownership and current status, and distinguish product IDs from variant item IDs.\n3. Check eligibility before proposing an action: cancellation and permitted modifications require a pending order; returns and exchanges require a delivered order. Enforce allowed reasons, payment/refund rules, availability, same-product variant constraints, gift-card balance requirements, and all other action-specific conditions.\n4. For item modification or exchange, collect every requested item change before proceeding because the relevant tool can be used only once per order. Remind the customer to confirm that the list is complete and explain any irreversible consequence stated by policy.\n5. Before every database-changing action, present a precise summary of all action details and ask for explicit confirmation. Do not treat ambiguity, earlier intent, or anything short of an explicit “yes” to that summary as authorization. If details change, present the revised summary and reconfirm.\n6. After confirmation, make exactly the applicable tool call, no more than one tool call per turn. Never combine a tool call with a user-facing response in the same turn. Report success only when supported by the tool result, including policy-defined refund timing or next steps when applicable; otherwise state the uncertainty or failure accurately.\n7. Do not invent facts, procedures, availability, outcomes, or subjective recommendations. Deny requests prohibited by policy. Transfer to a human if and only if the request cannot be handled within the available scope: call the transfer tool first, then send exactly the required transfer message in the following turn."
+        }
+      ],
+      "parent_feedback": [
+        {
+          "task_id": "76",
+          "native_count": 0,
+          "selected_indices": [],
+          "semantic_judge_calls": 0
+        },
+        {
+          "task_id": "0",
+          "native_count": 0,
+          "selected_indices": [],
+          "semantic_judge_calls": 0
+        }
+      ],
+      "origin_routes": [
+        {
+          "semantic_selected": [],
+          "final_selected": [],
+          "routes": []
+        },
+        {
+          "semantic_selected": [],
+          "final_selected": [],
+          "routes": []
+        }
+      ],
+      "semantic_gate_precedes_origin_intersection": true,
+      "original_arm_outcome_sha256": "6b2ab7600e25e7884bd62306760468890089a2f0421ec84171b17d807fd8f176"
+    },
+    "B1": {
+      "completion": {
+        "schema_version": "gepa-milestones-g3-v1",
+        "registered_skip_perfect_score": false,
+        "parent_all_perfect": false,
+        "endpoint": "candidate_accepted_best_seed",
+        "optimizer_iterations": 1,
+        "proposal_starts": 1,
+        "generated_candidates": 1,
+        "accepted_candidates": 1,
+        "rejected_candidates": 0,
+        "skip_reasons": [],
+        "total_metric_calls": 8,
+        "best_candidate_idx": 0,
+        "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+      },
+      "strategies_actually_executed": [
+        {
+          "sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+          "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome."
+        },
+        {
+          "sha256": "ceb59e13696b68a088d8cdfd8158ebd27bfc687d2ee22a0af0c81c6d8af6e2b1",
+          "text": "Follow the retail policy exactly and manage the conversation as a complete workflow:\n\n1. Authenticate the customer first using an allowed lookup method, even if they provide a user ID. Serve only that authenticated customer throughout the conversation.\n2. Decompose multi-part requests into a checklist and keep every part active until it is completed, denied under policy, or genuinely requires transfer.\n3. Gather evidence with one tool call per turn: inspect the customer’s profile, orders, products, variants, availability, payment methods, and prices as needed. Distinguish product IDs from item IDs, verify order status and ownership, and calculate requested totals from tool data without guessing.\n4. For each request, pursue every supported path and any user-stated fallback. Do not treat an unsupported preferred operation as making the whole request unsupported when a permitted alternative—such as canceling an eligible pending order—can satisfy the customer.\n5. Before any database-changing action, validate all eligibility and required inputs. For modify or exchange actions, collect the complete set of item changes because the tool may be usable only once per order; remind the customer to include every desired item. Validate replacement variants, payment/refund methods, and gift-card balances where applicable.\n6. Present the exact action details and consequences, then obtain an explicit “yes” before making the update. A prior request or conditional preference is not confirmation. After confirmation, call only the appropriate tool and report its actual result accurately.\n7. Continue through all requests from the same customer, including informational calculations, rather than stopping after one action or obstacle. Do not invent facts, procedures, recommendations, or outcomes.\n8. Deny requests prohibited by policy. Transfer only when the remaining request truly cannot be handled within the permitted actions after supported options and stated fallbacks have been exhausted; follow the mandated transfer sequence and wording exactly.\n9. Maintain the interaction constraint: make at most one tool call at a time, and never combine a tool call with a user-facing response in the same turn."
+        }
+      ],
+      "parent_feedback": [
+        {
+          "task_id": "76",
+          "native_count": 1,
+          "selected_indices": [
+            0
+          ],
+          "semantic_judge_calls": 0
+        },
+        {
+          "task_id": "0",
+          "native_count": 0,
+          "selected_indices": [],
+          "semantic_judge_calls": 0
+        }
+      ],
+      "origin_routes": [],
+      "semantic_gate_precedes_origin_intersection": false,
+      "original_arm_outcome_sha256": "43fa437c897138e88cc1700e466c263dd8da332c802c153fc78c4b4e7238fcc3"
+    }
+  },
+  "public_summary_exporter_sha256": "9cf4f1fb708183de15bfe37122685971614a20fcda3eff86232c178c61b39e86"
+}

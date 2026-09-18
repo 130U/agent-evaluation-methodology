@@ -1,0 +1,242 @@
+{
+  "review_id": "review-2eefdb41c7e71759",
+  "artifact_sha256": {
+    "request.json": "b2350698ffb514f048da8092e9de4102cd5a63b45165b105ca0420dbb67717fb",
+    "outcome.json": "96521530780e91eb61a919b4027e3d4bf91cf7508886228616c29bc0302f2ed4",
+    "trajectory.json": "f6dedecd38dedc45e9acee54ae0a77278a200236a07709003df0237d69a8e92f",
+    "simulation.json": "89c0d9fb5b1140e53f967aa5934bb25c8beb47516e0fa375b8640c42809e868a",
+    "calls.jsonl": "d0b3b14691921e2c56d1a8e48329199f9b7a86c555c8b82329e8f8416e19b559"
+  },
+  "benchmark_task_for_evaluation_only": {
+    "description": {
+      "purpose": null,
+      "relevant_policies": null,
+      "notes": null
+    },
+    "user_scenario": {
+      "persona": null,
+      "instructions": {
+        "domain": "retail",
+        "reason_for_call": "You had a work-from-home situation and ordered three home office items along with some hiking items, so that you can go back to your parent's place at Seattle to remote work and enjoy outdoor life. But your company just announced that you will be back to the office soon. If cancelling partial items is possible with the agent, you want to return the office items (your forgot what) and keep the hiking items. You want to know the total amount you will get back, and you want to get the refund on your original payment method. If cancelling partial items is not possible, just change the address to your NYC place and you will return the items later.",
+        "known_info": "You are an interesting guy called Noah Patel, living in the Big Apple in 10108.",
+        "unknown_info": "You don't have an email",
+        "task_instructions": "You are a funny guy but recently the WFH situation made you a bit anxious."
+      }
+    },
+    "ticket": null,
+    "initial_state": null,
+    "evaluation_criteria": {
+      "actions": [
+        {
+          "action_id": "34_0",
+          "requestor": "assistant",
+          "name": "find_user_id_by_name_zip",
+          "arguments": {
+            "first_name": "Noah",
+            "last_name": "Patel",
+            "zip": "10108"
+          },
+          "info": null,
+          "compare_args": null
+        },
+        {
+          "action_id": "34_1",
+          "requestor": "assistant",
+          "name": "get_user_details",
+          "arguments": {
+            "user_id": "noah_patel_6952"
+          },
+          "info": null,
+          "compare_args": null
+        },
+        {
+          "action_id": "34_2",
+          "requestor": "assistant",
+          "name": "get_order_details",
+          "arguments": {
+            "order_id": "#W6111398"
+          },
+          "info": null,
+          "compare_args": null
+        },
+        {
+          "action_id": "34_3",
+          "requestor": "assistant",
+          "name": "get_order_details",
+          "arguments": {
+            "order_id": "#W7043598"
+          },
+          "info": null,
+          "compare_args": null
+        },
+        {
+          "action_id": "34_4",
+          "requestor": "assistant",
+          "name": "get_order_details",
+          "arguments": {
+            "order_id": "#W1845024"
+          },
+          "info": null,
+          "compare_args": null
+        },
+        {
+          "action_id": "34_5",
+          "requestor": "assistant",
+          "name": "modify_pending_order_address",
+          "arguments": {
+            "order_id": "#W1845024",
+            "address1": "224 Elm Street",
+            "address2": "Suite 491",
+            "city": "New York",
+            "country": "USA",
+            "state": "NY",
+            "zip": "10108"
+          },
+          "info": null,
+          "compare_args": null
+        }
+      ],
+      "env_assertions": null,
+      "communicate_info": [],
+      "nl_assertions": [],
+      "reward_basis": [
+        "DB"
+      ]
+    },
+    "issues": null,
+    "required_documents": null,
+    "user_tools": null
+  },
+  "messages": [
+    {
+      "role": "assistant",
+      "content": "Hi! How can I help you today?",
+      "tool_calls": null,
+      "turn_idx": 0
+    },
+    {
+      "role": "user",
+      "content": "Hi! My company just announced we’re heading back to the office, so my grand plan to work remotely from my parents’ place in Seattle has taken a small corporate detour. I recently ordered three home-office items along with some hiking gear. Is it possible to cancel just the office items while keeping the hiking items?",
+      "tool_calls": null,
+      "turn_idx": 1
+    },
+    {
+      "role": "assistant",
+      "content": "I can look into that for you. First, I need to authenticate your account. What email address is associated with it? If you don’t remember it, please provide your first name, last name, and ZIP code instead.",
+      "tool_calls": null,
+      "turn_idx": 2
+    },
+    {
+      "role": "user",
+      "content": "I don’t have an email address associated with it, but my name is Noah Patel and my ZIP code is 10108.",
+      "tool_calls": null,
+      "turn_idx": 3
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "cli_000019-c4716818d82e4577a772bbc918b1a288_0",
+          "name": "find_user_id_by_name_zip",
+          "arguments": {
+            "first_name": "Noah",
+            "last_name": "Patel",
+            "zip": "10108"
+          },
+          "requestor": "assistant"
+        }
+      ],
+      "turn_idx": 4
+    },
+    {
+      "role": "tool",
+      "content": "noah_patel_6952",
+      "turn_idx": 5
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "cli_000020-7d6fdbb483794d4fae186adc9952604b_0",
+          "name": "get_user_details",
+          "arguments": {
+            "user_id": "noah_patel_6952"
+          },
+          "requestor": "assistant"
+        }
+      ],
+      "turn_idx": 6
+    },
+    {
+      "role": "tool",
+      "content": "{\"user_id\": \"noah_patel_6952\", \"name\": {\"first_name\": \"Noah\", \"last_name\": \"Patel\"}, \"address\": {\"address1\": \"224 Elm Street\", \"address2\": \"Suite 491\", \"city\": \"New York\", \"country\": \"USA\", \"state\": \"NY\", \"zip\": \"10108\"}, \"email\": \"noah.patel1792@example.com\", \"payment_methods\": {\"paypal_3169710\": {\"source\": \"paypal\", \"id\": \"paypal_3169710\"}}, \"orders\": [\"#W1845024\", \"#W7043598\", \"#W6111398\"]}",
+      "turn_idx": 7
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "cli_000021-b3fec238ad5e42d881585430529b2408_0",
+          "name": "get_order_details",
+          "arguments": {
+            "order_id": "#W1845024"
+          },
+          "requestor": "assistant"
+        }
+      ],
+      "turn_idx": 8
+    },
+    {
+      "role": "tool",
+      "content": "{\"order_id\": \"#W1845024\", \"user_id\": \"noah_patel_6952\", \"address\": {\"address1\": \"517 Lakeview Drive\", \"address2\": \"Suite 183\", \"city\": \"Seattle\", \"country\": \"USA\", \"state\": \"WA\", \"zip\": \"98195\"}, \"items\": [{\"name\": \"Mechanical Keyboard\", \"product_id\": \"1656367028\", \"item_id\": \"1340995114\", \"price\": 235.13, \"options\": {\"switch type\": \"tactile\", \"backlight\": \"none\", \"size\": \"full size\"}}, {\"name\": \"Cycling Helmet\", \"product_id\": \"7765186836\", \"item_id\": \"3358616356\", \"price\": 197.33, \"options\": {\"size\": \"S\", \"color\": \"red\", \"ventilation\": \"low\"}}, {\"name\": \"Headphones\", \"product_id\": \"6992792935\", \"item_id\": \"7493556126\", \"price\": 346.97, \"options\": {\"type\": \"over-ear\", \"connectivity\": \"wireless\", \"color\": \"black\"}}, {\"name\": \"Office Chair\", \"product_id\": \"4794339885\", \"item_id\": \"8323284863\", \"price\": 511.24, \"options\": {\"material\": \"fabric\", \"color\": \"blue\", \"armrest\": \"adjustable\", \"backrest height\": \"standard\"}}, {\"name\": \"Hiking Boots\", \"product_id\": \"7363354090\", \"item_id\": \"8277474082\", \"price\": 236.57, \"options\": {\"size\": \"12\", \"material\": \"leather\", \"waterproof\": \"yes\"}}], \"status\": \"pending\", \"fulfillments\": [], \"payment_history\": [{\"transaction_type\": \"payment\", \"amount\": 1527.24, \"payment_method_id\": \"paypal_3169710\"}], \"cancel_reason\": null, \"exchange_items\": null, \"exchange_new_items\": null, \"exchange_payment_method_id\": null, \"exchange_price_difference\": null, \"return_items\": null, \"return_payment_method_id\": null}",
+      "turn_idx": 9
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "cli_000022-356305f795cd48fb9cdfb9dd784e8e3b_0",
+          "name": "transfer_to_human_agents",
+          "arguments": {
+            "summary": "Authenticated customer Noah Patel wants to cancel only the three home-office items (Mechanical Keyboard, Headphones, and Office Chair) from pending order #W1845024 while keeping the Cycling Helmet and Hiking Boots. Available tools cannot partially cancel items from a pending order."
+          },
+          "requestor": "assistant"
+        }
+      ],
+      "turn_idx": 10
+    },
+    {
+      "role": "tool",
+      "content": "Transfer successful",
+      "turn_idx": 11
+    },
+    {
+      "role": "assistant",
+      "content": "YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.",
+      "tool_calls": null,
+      "turn_idx": 12
+    },
+    {
+      "role": "user",
+      "content": "###TRANSFER###",
+      "tool_calls": null,
+      "turn_idx": 13
+    }
+  ],
+  "termination_reason": "user_stop",
+  "assigned_opportunities": [
+    "auth",
+    "write_confirmation",
+    "conditional_fallback",
+    "explicit_unsupported_operation"
+  ],
+  "general_violation_categories": [
+    "unsupported_assurance",
+    "unauthorized_or_unconfirmed_write",
+    "fabricated_tool_fact"
+  ]
+}

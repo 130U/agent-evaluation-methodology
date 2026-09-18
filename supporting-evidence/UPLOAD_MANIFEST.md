@@ -1,60 +1,24 @@
-# Upload manifest and public-repository boundary
+# 2026-09-18 发布清单
 
-更新日期：2026-08-09  
-目标仓库：`130U/agents-last-exam`  
-整理分支：`codex/organize-ale-project-files`
+## 当前交付
 
-## 1. 已进入核心区
+- [与项目截图一致的项目卡](../projects/tau-bench/README.md)
+- [ICFA 完整文字报告](../core/04-icfa-report/README.md)
+- [2026-09-17 封存研究材料](../core/03-tau-feedback-evidence/README.md)
+- [代码、来源与公开复现材料](tau-feedback-evidence/README.md)
 
-- 外部交付：结论层 Markdown、可编辑 Word 与完整技术报告。
-- 项目背景：公开来源支持的 benchmaxxing hook、ALE 范围与产品定义；不保存私人面试逐字稿。
-- ALE 基础：初学者解读、中英精读、13×55 taxonomy audit。
-- 最终交付：短报告、最终报告架构、deep-research prompts、可编辑 DOCX 及生成脚本。
-- 生产设计 01–10：scope、ALE blueprint、public corpus、adjacent benchmarks、portfolio、expert production、evaluator integrity、execution environment、living benchmark governance、statistics and matched-human protocol。
-- 关键可复用附件：task minimum schema、environment manifest schema、validation、QA、source manifest 与 claim-source map。
+封存导出包中的 202 份项目文件逐字节迁入本仓库，原首页和原仓库清单不迁入。封存材料的历史状态、标题和实际日期保持不变；当前标题与展示以首页、当前项目卡和 ICFA 文字报告为准。
 
-## 2. 已进入支持区
+原导出清单 SHA-256：`992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db`。清单中的 `derived_local_overlay_not_published` 描述 2026-09-17 导出时点，不是当前仓库的发布状态。
 
-完整 ZIP 研究包：
+当前版本的保留文件哈希、新增展示文件范围及移除路径见[机器可读发布清单](../docs/repository/publication-2026-09-18.json)。
 
-- `ale-benchmark-research-outline-and-results.zip`
-- `agents-last-exam-paper-research.zip`
-- `ale-beginner-deep-read.zip`
-- `ale-bilingual-paper-reading-and-taxonomy-figure.zip`
-- `ale-taxonomy-audit.zip`
-- `interview-hook-research.zip`
-- `final-report-architecture-and-deep-research-prompts.zip`
-- `01-scope-and-product-definition-full-research-package.zip`
-- `02-ale-blueprint-and-version-audit-full-research-package.zip`
-- `04-adjacent-benchmark-landscape-full-research-package.zip`
+## 已移除的旧专题
 
-逐文件材料：
+移除旧 ALE 核心交付、基础解读、1,000-task 设计、项目入口、报告构建脚本、研究压缩包和采访/字幕材料。旧导航决策由 ADR 0002 替代，Git 历史保留。
 
-- 英中双语视频稿、英文自动字幕、中文机器翻译字幕与生成脚本。
-- 辅助界面研究；不作为 benchmark 结论或外部展示入口。
-- 主要报告的 Markdown、DOCX、schema、QA 和 validation。
+两份 `auxiliary-interface-research/` 文件按原字节保留。未发布原始订阅日志、账号资料、模型缓存或完整本机研究目录。
 
-## 3. 大体积完整包：本次 PR 未附带
+## 验证口径
 
-以下 ZIP 已在临时 staging 中完成，但 GitHub 插件的大文件传输通道未能接收；其主要结论和可编辑主文档已经逐文件进入 `core/`：
-
-- `03-public-task-corpus-audit-full-research-package.zip` — 82,776,700 bytes
-- `05-portfolio-and-sampling-strategy-full-research-package.zip` — 44,965,001 bytes
-- `06-expert-production-governance-full-research-package.zip` — 13,802,931 bytes
-- `07-evaluator-validity-and-integrity-full-research-package.zip` — 40,594,397 bytes
-- `08-environment-execution-reference-architecture-full-research-package.zip` — 77,326,102 bytes
-- `09-living-benchmark-governance-full-research-package.zip` — 48,918,024 bytes
-- `10-statistical-and-matched-human-protocol-full-research-package.zip` — 84,778,925 bytes
-- `delivery-plan-word-render-and-visual-qa.zip` — 2,647,650 bytes
-
-这些包包含大量重复上游仓库快照、嵌套 `.git` objects、`node_modules`、逐页渲染图和 QA 中间产物。它们适合审计归档，不适合成为默认阅读入口。
-
-## 4. 未公开项目
-
-- 私人面试录音、逐字稿、作业原话、个人简历、岗位比较与由其直接生成的研究包：禁止进入公开 GitHub 仓库。
-- `tmp/pdfs/resume_review/`：13 张个人简历审阅页面。目标仓库为公开仓库，因此未上传。
-- 空目录：`docx_render_v1`、`docx_render_word_v2`、`docx_render_word_v3`、`.tmp_ale_deps`、`.tmp_yttools`。Git 不跟踪空目录。
-
-## 5. 完整性说明
-
-“核心结论和主要可编辑交付物”已经远程化；“所有原始复现包”尚未全部远程化。私人访谈和个人材料不是待上传项，后续也不得补传。
+封存公开包此前完成 373 项隔离组件测试，见[原验证报告的公开摘要](../docs/repository/export-validation-2026-09-17.json)。本次发布以逐文件哈希核验其代码、测试和结果未变，不将迁移表述为新增模型实验。仓库结构与链接在本次发布中重新检查，在线校验以对应 GitHub 提交的 Actions 结果为准。

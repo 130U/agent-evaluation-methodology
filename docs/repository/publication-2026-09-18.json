@@ -1,0 +1,911 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-09-18",
+  "base_commit": "2821ff225aeefa7ac68ba4210058802510e7af14",
+  "title": "Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究",
+  "subtitle": "ICFA：面向智能体反思优化的干预约束反馈准入",
+  "display_period": "2026.05 - 2026.08",
+  "display_period_is_not_experiment_timestamp": true,
+  "report_date": "2026-09-18",
+  "frozen_export_manifest_sha256": "992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db",
+  "frozen_export_files_preserved_byte_for_byte": [
+    {
+      "path": "core/03-tau-feedback-evidence/C1_SYNTHETIC_RESULT.md",
+      "sha256": "09d6055ddecdca2bdfdbaf8206b920d54575846264b9bf161db3caf6d5663807"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/DEFENSE_BRIEF.md",
+      "sha256": "a1ff67de4774e47f3f181a15381413fb039805d7a1ba092dbd311f6e25b87e4e"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/E4_ACTION_ORIGIN_REVIEW.md",
+      "sha256": "674e9f526e8c2e7124dd6d4a14bcc71f5f3143fdb43fd4a0d74620be7dea25f4"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/G2_EXPLORATORY_RESULT_REVIEW.md",
+      "sha256": "f80585254f19af52a2a0e676f6932f32017b8c49b5ac078557ec7a5572ae0676"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/G3_PILOT_RESULT.md",
+      "sha256": "6e8e636394b79b090be03767bbc86e836533e894a953e94ee3e880e7fd1f250c"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/G4_STOP_RESULT.md",
+      "sha256": "5621131198d12bb3c8ff140932a339e944260db19164f23d449391a8e6247111"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/N1_R1_FINDINGS.md",
+      "sha256": "ce2c7290453aa779d6a970c9e49fea1a1117a3e7d42a62ae2efce9ead555827a"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/PROJECT_STATUS.md",
+      "sha256": "405964e961282b277ba78215d42b1e0e779a89fe9223e2c416d337e8c555b156"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/README.md",
+      "sha256": "6ccd0b3d8a41c0277a95714cab9a1ee73a873f0924faa69c5e1d8731a5b12042"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/RESEARCH_REPORT.md",
+      "sha256": "7045a4abaa753e6841e27fc2acaed93ccef4b50a115576d9543024cacc83369d"
+    },
+    {
+      "path": "core/03-tau-feedback-evidence/TASK_CARD.md",
+      "sha256": "5cd678611c25fbc2a1b9d8c512dc8c464e8a13c4df6d56a77ef3cd872558619e"
+    },
+    {
+      "path": "projects/tau-feedback-evidence/README.md",
+      "sha256": "c67cd2fabb4097dfb80a8d39744e1150680a86632014c91cb831a05a6d422c50"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/.gitignore",
+      "sha256": "25ef91e8ec1c02918b725dd80deb6267e1f76a195b194ef34172700ffcf2e153"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/archive_sources.json",
+      "sha256": "39e7a294c3d130a941f567c373c8ae290774f40bd08f4126ccb6e92f9430b346"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/C1_CONTROLLED_CASES_DRAFT.json",
+      "sha256": "b0347122acd3a1d4489c696857a3387245a8905562589170d644ac1fa8f77316"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/G4_SPLIT_CANDIDATE.json",
+      "sha256": "b4bc78553c7fa82371001e23daf117a0cda0fed9998180542fbee969c2b2aae0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/gepa_sources.json",
+      "sha256": "c279cb056a905216ed5cee8dbf19406e0a6b72b2c5d72b5f402c9d3c9d66a1c3"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/local_model_assets.json",
+      "sha256": "032cd670b69749ba24cab30c81f89b23a9357a259298ca56b261b19f2b3e4896"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/local_model_assets_v2.json",
+      "sha256": "b914b7ea5043f5a660774ace7cf30cf1dde11e4676187a112f6f03c2719c2b2a"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/local_model_assets_v3.json",
+      "sha256": "0eb3ee8aec7d203ecc1501fa062ec9f27aea9b65f92dea3a1053d6a5b202276f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/OFFLINE_REGISTRATION.md",
+      "sha256": "641d07f071025b3b6a4ae9178ca0a072c86640d23ced1a11dd5719e8b39e7ccf"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/REPLAY_AMENDMENT.md",
+      "sha256": "e9451d71b6e113977e39d5481b95830291cc3e2d14c685d99f099b4ac53ee4e5"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/experiments/runtime_sources.json",
+      "sha256": "9f9e1eaf60c6e633e385570afc8d1c8fba7088b52c66f83fab224b8984eb0cc8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/PUBLIC_EXPORT_MANIFEST.json",
+      "sha256": "992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/PUBLIC_EXPORT_MANIFEST.sha256",
+      "sha256": "37e4626f539ac74c85dda3847c1d41799e62db64e07d68c9089fd5d80b6881b5"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/PUBLIC_REPRODUCTION_BOUNDARY.md",
+      "sha256": "b4a0aa436f9d1a4bf8a0f8feaab44aea08d5379ccffc731afb4da7d1c9d307f2"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/pyproject.toml",
+      "sha256": "a5028ab481f30c42d36bb856a27641997931098a7abe58c10d22b3f71cf59f71"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/README.md",
+      "sha256": "c49b7c4d68a422fe000bdfe1a175383bf167fc0953cbc5ef5ad9ead1d530c31b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/requirements.lock",
+      "sha256": "2a826711b5900133aef1e60487641bcc038732071ac8a4b8703507f62423398d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/ACTION_ORIGIN_RELATED_WORK.md",
+      "sha256": "206e299c6c4e86d26533e6688fce7f778a98934b64f6ab748faaaf0667b37069"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/ADMISSION_MECHANISM.md",
+      "sha256": "67e4e6a48268e6364dadef7f30ebc875a540a1a8922e026645509cb6776d30d7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_BLIND_MAP.json",
+      "sha256": "7c8548881090eb61d69a9844a6cded59349ea6257f7e5fd43d4c2bb55af32a6f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_BLIND_PACKET.json",
+      "sha256": "92031a9d4c6dcfd3f2cf4941a839bd2e4bbfa25e7f7ed9c27400d705770b8bc2"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_CONTROLLED_CALIBRATION_DRAFT.md",
+      "sha256": "bf5432d1320cd50883f6fb89991f61c279c4055b8ce353fb9cc04ec0d982d676"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_EXECUTION_REVIEW.md",
+      "sha256": "fb68f23faa6df20b0fe53d60386fb83e6df8517e200b8df30d807d805a1c3edb"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_RED_BLIND_LABELS.json",
+      "sha256": "9f40552100a39081b9eda5c3610b066c410ffde35f1d7ba09c79b8d4e770f459"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_RESULT_REVIEW.md",
+      "sha256": "3ac4d14b8884d3a654a2de96db9c6f431e4d52dadd29967da7648729fa3c8748"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/C1_SYNTHETIC_PROTOCOL.md",
+      "sha256": "617b27401e5d501c8bf94aa6686b82e880a66497ac25de7a1ac7aaf59851e82f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/FINAL_TEXT_REVIEW.md",
+      "sha256": "25ce904f86b95d4702107b8b5b60d3c7ff0bc80b5d2e46ff40ce6a1424a9724d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/FULLTEXT_NOVELTY_CHECK.md",
+      "sha256": "1468ad2e0f341132d537a2cc418d527f27f6a6769344abbef8d808fbe4c74c7a"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G1_TRANSPORT_RECOVERY_OPTIONS.md",
+      "sha256": "379ba5f948d103cc65389fa695c22bfd405a97caefc68e3ddd93a9a5844bf82c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G2_EXPLORATORY_CASE_PROTOCOL.md",
+      "sha256": "05ca433a217a18f8ddac90463ee1d54e82495c00758e66ba7346172fd8ffb246"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_PILOT_PROTOCOL.md",
+      "sha256": "438debe2a086a0e915fcf59b3358b8967dde3663796c5fa5b3efcc4f52b79a86"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_PUBLIC_EVIDENCE_DESIGN.md",
+      "sha256": "b78271b438b515c2ccb1a45ce89c27cf40bfcdb5ce93a0e2403fd82eea3fa434"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_REPORTING_IMPLEMENTATION_REVIEW.md",
+      "sha256": "b1e44d8372725d00d2a1a40fe52dfcc505c7cc7e44ed17d9a36d3034334eb309"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_REVIEW_PROCESS_NOTE.md",
+      "sha256": "171383e8d9db0a51ba5bf51b4efa584e8717e82f19871fdc8b3f0989da86b419"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_SELECTION_BINDING_AMENDMENT.md",
+      "sha256": "d3775257221b3a75e5fd4e572b5b6aaf367defdc656a439d4d69404828f452d0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G3_TEST_STOP_REVIEW.md",
+      "sha256": "465b4c6e9765f31332d89c121495fd91735e6bfaaf970c4e8defeb69bcf3465c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/PACKET_SEAL.json",
+      "sha256": "dfc2d770b5b673c46c3653e03648f7749cd23fa1bcd4d791d8097953274ed060"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/COMMON.json",
+      "sha256": "35005ab86404c44f680292946c9e8daad9c6407da25784b0f6825b2f133691f5"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/review-2eefdb41c7e71759.json",
+      "sha256": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/review-6db0fdda658d24f7.json",
+      "sha256": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/review-9487584d8be36ec6.json",
+      "sha256": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/review-f7bc2815caa83b21.json",
+      "sha256": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/g4-review/cohort/packets/REVIEW_INSTRUCTIONS.txt",
+      "sha256": "ce61968bb9190e3fe36cd5f476c795958d4f598fdb3ea2ce969e93205ab04e60"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_COHORT_RED_BLIND_LABELS.json",
+      "sha256": "d6eba9197a364a61209c4a1561cb6d35431ad45bca403ca23dfca296aa5b15a9"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_COHORT_RELATED_BLIND_LABELS.json",
+      "sha256": "aa4780344f52de5068203776959bb83f4f235f065f056ff2c85c32e8a1c20a5a"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_LAUNCH_REVIEW.md",
+      "sha256": "75869600cf8d406c47a1e59d5a3d75654e61e27ccdffcdc946f2ae5d4adfded1"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_PAIRED_IMPLEMENTATION_REVIEW.md",
+      "sha256": "2b563425ffb78bf19af431ac99c22b9cce01e17bf3d612d2a11aa466c0295c12"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_PROTOCOL.md",
+      "sha256": "177db635fd2a5cd0d0a7bea161f37b0339ff6a29d83d48774b85baaddb68dc91"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_RECOVERY_CLIENT_REVIEW.md",
+      "sha256": "d67d1324d3227e0edcea90979f0d7d9c862c3a0339cb2a9912b848d27406ad95"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_SELECTION_FINALIZER_REVIEW.md",
+      "sha256": "bfd83ef1cde3c6d7c780c0f933023ed35e8fd1dee12e9b108cb4be8445551f95"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_SPLIT_REVIEW.md",
+      "sha256": "6009b2c2c12635b5d1a28c43c1768fa7bcb8ee52ab0bda1f9f808a96ad38a648"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/G4_STOP_RESULT_REVIEW.md",
+      "sha256": "437a0b721c78dc320969ad61805f238f03a6f965749459117b34d047c6f41a61"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/GEPA_INTEGRATION_NOTES.md",
+      "sha256": "af8d722a5b2a66f328056aeeeff32f42420d21de818be870279d79a0f81c2ac1"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/N1_METHOD_REVIEW.md",
+      "sha256": "0fb00cd4c8a5ce8024352d3f005b1dc1b3a416cd0dc42c4529f8312accb7c1d7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/N1_PACKET_LABEL_REVIEW.md",
+      "sha256": "3fc76e4c0a7bee7150d72830fd7b532e07f1fb4f234a69f5f12034c127e180dc"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/N1_R1_METHOD_REVIEW.md",
+      "sha256": "c5ffb2e5f68ff1461ac7a829a6353736475b69ad116f16c0732dda964e5b04ad"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/NEXT_STUDY_SPLIT_REVIEW.md",
+      "sha256": "2640519021acce09768119970bd94e7b8e9fee3c6a88a97fbb3324786ee3b49c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/RED_TEAM_INITIAL.md",
+      "sha256": "c25bded501e8f7c1d84bae457ba4c01723f46c997a198cb3911f3b8f5179741d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/SUBSCRIPTION_OPTIMIZATION_INTEGRATION.md",
+      "sha256": "60551d67fee2454c0345c1ea33a41a7bea737e8638d9a71e27d82d4ecf73704d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/research/SYSTEM_SPECIFICATION.md",
+      "sha256": "831b62b038744d200b6c47a80eb4b30943722e362aadde81d7b1cb1540a69315"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/archive_audit.json",
+      "sha256": "b54e3c827c1406b348764740cd465df1fb97fc5aba6d4887e1f12c839786ee75"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/ARCHIVE_AUDIT.md",
+      "sha256": "9327a04edcf34892f95acd25f590782b2b6346edfcd32f996b0af5b8dacad3d7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/C1_SYNTHETIC_REPORT.json",
+      "sha256": "d68b67b2abea18345634cd0c1d55edcd4fc6f0caf8c5506def439279f87d93e6"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/C1_SYNTHETIC_REPORT.sha256",
+      "sha256": "2b0fa731dc860dde2f3e2fc850d2f9e855bdacbb568f1d35d227916af15ac680"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/contract_experiment.json",
+      "sha256": "32990cf928a15837560436fdbffcb71f45ee70645dc3f94d0f1c80dc4adffe39"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/E4_PUBLIC_SUMMARY.json",
+      "sha256": "b097657515ba6d7bd9a00b8742ab400803c8bba29502bde2089c2fc162f7cbcc"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G2_PUBLIC_SUMMARY.json",
+      "sha256": "900c5f4915854a82aca85af0bdbdab531b482cbe7ca4f420d0cb771f92ae10f8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G3_PUBLIC_SUMMARY.json",
+      "sha256": "32e8d177421ff7c8273511397b2566a263138b876b5ca41945e7a2df8d89a938"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G3_PUBLIC_TRAJECTORIES.json",
+      "sha256": "14089c9bf773d58b539dc6f01c818ec37b6a920cc054ef94e6b914e00d327f2c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_OPPORTUNITY_REPORT.json",
+      "sha256": "6e9e29994986ce1c367e51e85c1e3188be915fdfd7816d29f5d8b2f127c50807"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_OPPORTUNITY_REPORT.sha256",
+      "sha256": "72b0f042620a8ff95e294299a3d7f98c30618dff2d27ffdd06a71e8c03057cab"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_STOP_REPORT.json",
+      "sha256": "97d9e8983345a12d10619b7d93c33eb431fe49ac0f2206c111b0f17a020c9622"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_STOP_REPORT.sha256",
+      "sha256": "ea025a36a4113b3913b8aa35efa0b599e90ef1b6bda5f0956153954f9c512ec8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_STOP_TRANSPORT_AUDIT.json",
+      "sha256": "313cc9f6da1017d23d5a58f6685ffb826e724829b1b71bddafddd69218bdf28d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/G4_STOP_TRANSPORT_AUDIT.sha256",
+      "sha256": "2d0ca9c335541c22ace08797ca7b6e464d744ed4e29fdbf919999f1d8a3169bb"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/N1_R1_PUBLIC_SUMMARY.json",
+      "sha256": "2e68ef333ba0a822eb4926395cdafbb46665982cb16f1f1eabb8b01283d46dd4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/OFFLINE_FINDINGS.md",
+      "sha256": "abecaa42155eee15fc5bb8172e8055b1626da34353cd7f275efb470c9c01532b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/projection_experiment.json",
+      "sha256": "82cb64909f2cd3036cd62df146d088ed4796a5cb9b8c881fa9c8bff67ae9859f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/results/replay_experiment.json",
+      "sha256": "c43919888337e81fbf9f26b04c9a5ac6675c84910b0dd9a530c7376a8844a04d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/audit_archives.py",
+      "sha256": "9097f466fc2b54757a8734fd0817e358fc98526f4ef01740579ad0d90bc4f788"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/audit_g3_stopped_test.py",
+      "sha256": "b95d1884886bbd2464ac862ca92200fed4717747a7a73b33db34e35f19032b9c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/audit_g3_test_transport.py",
+      "sha256": "37532773532207cb7966378628715491243e5e3b3e9a0fb9892f1c67f4c7d9aa"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/audit_g3_transport.py",
+      "sha256": "4551a02396a6c3d1a282549d5c54e0873c03e9830b5b88aea730574bcef473b7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/audit_recovered_transport.py",
+      "sha256": "0029c633d42045f56c774c92d92e9a53161b8cc997cdbbde0a8eecfe16cc5a02"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/bind_g4_review_labels.py",
+      "sha256": "e6512065e4bb409d3ada317af1c84e6b060a85d5de1c6bc25ae49742f57b96f0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/build_g4_review_packets.py",
+      "sha256": "e53cef0f7869989af047c42248e5e6a6d456edd00b298456c9139265edc12b87"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/build_n1_review_packets.py",
+      "sha256": "27a3a4cec6caf30686ed42e49ca0171c97458f11f85e79ad6cd6d0339ce306a7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/c1_synthetic_calibration.py",
+      "sha256": "e46471cf6253e90bc7015d4d5eacd4682dcd1c818913c4111a1632d7a13fc260"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/download_archives.py",
+      "sha256": "1dc5ce3d282199bb3c86cbf2ef577f04e68ac3cf6f998f8778371c448c6f7626"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/download_gepa.py",
+      "sha256": "a1f5758d812e8d4fcd3406a22b6b26b436b75e34768b07c253ee6d41f24f1ce0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/download_local_model.py",
+      "sha256": "b38b4de6c58057d721e022ab0449417293abf61dcd848a5910d65de114b77b23"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/download_runtime.py",
+      "sha256": "340ba9f3612f3a765a42ac53ca3786821d84fe13df5ef721e7c9f50bacfa66be"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/export_final_research_package.py",
+      "sha256": "5f765773a4a816ab07793557fd3554a0c915513384116bfe764bc120529a1543"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/export_g3_public_summary.py",
+      "sha256": "9cf4f1fb708183de15bfe37122685971614a20fcda3eff86232c178c61b39e86"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/export_g3_public_trajectories.py",
+      "sha256": "3f1da866adcaeca360010a827ebaa6b9b280e91226d4609b9f8a5226cc7b6679"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/export_n1_public_summary.py",
+      "sha256": "f1adffa1397d9d92d303f8ced8590a9574018c947ad0606df2d119a42866b4df"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/export_public_package.py",
+      "sha256": "bc43dfced32e77a1d9c7e258104d0b8f7b0d1d812524ebba2aa764fdcaca61de"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/finalize_g3_strategies.py",
+      "sha256": "a5c7932771fc28f34c62d0bb6ba1c6a9cea942c7cc7b9d8d07b244f9f717b257"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/finalize_g3_strategies_v2.py",
+      "sha256": "74e8400a01bcb3cf9bc6e54501d5df86c1743c981d73e76a45da8da4776de318"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/finalize_g4_selection.py",
+      "sha256": "8e68a5dffaac61d465224e491f61fe0c9c3c96284ae6d172501774e20b8ff8cd"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/freeze_n1_selection.py",
+      "sha256": "e44c4153e7a7ae845aca4687ddfd3117aa3b19d975d224e0caff72faaa05d0e0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/prepare_final_repository_change.py",
+      "sha256": "68a4a003fcb13d7dd5b88166ad919bfc7af2c196337546d3cb838fec1e096635"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/prepare_repository_change.py",
+      "sha256": "96804ebc34c76c2adc280edce86297ef702298b93b3c8322beb06d182c034f2f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/register_g3_pilot.py",
+      "sha256": "2420bfadd3885a8cbf9465fa49c55096909e179337980962648fe76e5cf49b13"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/register_g4_paired.py",
+      "sha256": "3987e504a0d3ccacaa8154a11242b7c5734ccfc3ab019b5c628680c658c946cb"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/register_subscription_g2.py",
+      "sha256": "9a2918a0cb7eb28d64324dd38f915a9a32a870690a8db114cae5d6527004ef65"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/register_subscription_n1r1.py",
+      "sha256": "81df947dc1c90ad6ae59ba91cfb35e646b8a31f8c1db4a8184ba13ffbee16305"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/render_findings.py",
+      "sha256": "e4d753c35fef1abe78fbe8da92788e69aaf0bd93e6734c0e0fa20130976a5aa4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/replay_archives.py",
+      "sha256": "15038161db322b85211ae58ea9d39ef094b9030467049a6ec0faeb096dd597fe"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/report_c1_synthetic.py",
+      "sha256": "0cd491875b67e4d5bc5cb534238326645336b7f1d06a0b72e76891f0c6293151"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/report_g3_test.py",
+      "sha256": "341defcedb652aa5eb63f452f0a406d8247f35d7cfed52fbc9ef894a33a6f460"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/report_g4_opportunities.py",
+      "sha256": "b2e58f67bec5f21943d07945e10a76f4fe03e32447054dfdfd3a71166153ee11"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/report_g4_stopped.py",
+      "sha256": "8b27959afce0e692cf38d1205300af7c078ff8f59418d3c92770906060720ba8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/reproduce_origin_initialization.py",
+      "sha256": "1f9126694caaf710d9c46da26f8bef53ea7c7bc6df36c88faf928aacad96d32e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_action_origin_audit.py",
+      "sha256": "4793c28b6a8f524b85d3c8d5f857a47157ddf707450f1d1c131c9ab28744a7df"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_contract_experiment.py",
+      "sha256": "0fd2c9d02ae6243b6c90ea0d047faf697cb571470c8f03cb7565ff5da539102b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_g3_pilot.py",
+      "sha256": "126970569f2c62138e43f03f429b87f2a4150b391eceff2d57a482ed9269832e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_g3_test.py",
+      "sha256": "db2abd773400d0ca90c07662c9c39cf3bf22822bc97ec55a78274c83b91ae929"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_g4_paired.py",
+      "sha256": "7f8731fe5d67c1d2441e36ac92f90c4cbacef3c5d973ef93e43c6fb273e323a9"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_g4_test.py",
+      "sha256": "a215afece991d36cd70661ec38f9a3fcebd9a63969e1f84a27bb5ac05efeffc0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_gepa_example.py",
+      "sha256": "afa1fb0678cb083ea2f296294a43a39f7cf9b02d51e79c61f410d3afe579209c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_offline.py",
+      "sha256": "0096f21115ed53c942b2852c77e4f69b365177d50fb3aea0ea18e7b96f1139fe"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_projection_experiment.py",
+      "sha256": "d9f4071709f6a424713b66a768ecff23d24352b4baecf48687bb392f8636624e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_subscription_g2.py",
+      "sha256": "63d0ded8eb27db335ac2f7b1084a6bb9c5473885ef3e91d9d6170894ef024adf"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/run_subscription_n1.py",
+      "sha256": "0e7dabb721e71e43da5e68a5e0a9bacb93eb0b4155082dd4a67ca73536ac8a6d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/summarize_n1_results.py",
+      "sha256": "3a38c4df67d638d14867ca2669104beb1fd17974277581c443153728a4c6abc1"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/scripts/verify_sources.py",
+      "sha256": "f313adca7c6f125bd423e095c6984590d2203cb7377a587d025b77ae253899c0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/sources/tau2/data/tau2/domains/retail/policy.md",
+      "sha256": "38324af30352c00c0ed43a600ab41b2c682bd5ff81770042aa63889f4ad4c1ff"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/sources/tau2/data/tau2/domains/retail/tasks.json",
+      "sha256": "aa8404695ab3035ea60dbe80ebd65121358c8e028d5c204b5186d1efca9665df"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/__init__.py",
+      "sha256": "035c9247f27cd37be7864e4ac3d1078e63431799e20a76ceb469137135fc3247"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/action_origin.py",
+      "sha256": "4e8cbd8cf45423d9ef7ff38e8935eb9c48536d4e9385d413713f72456c54a79a"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/admission.py",
+      "sha256": "269206c222878d0a92b22fad86cabe3785048417a00a51b5e4328349fe0805f8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/contracts.py",
+      "sha256": "0074f541cf5ca4bd0144f360e45c643f520a347bf55d62757dd92ee86ce347ac"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/episode.py",
+      "sha256": "ee4c7ead78777dd699dd7e75ec493690b65ec22c5926e1e4134761daeb53b1e5"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/episode_privacy.py",
+      "sha256": "a7d688ad3354ec35a7292ce3644da445bfb58691443968bc122b585263a21961"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/g3_acceptance.py",
+      "sha256": "9184d0575bd06e0639003ec6b7a6c826152609c75d20901ac675b2e067b80356"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/g3_optimization.py",
+      "sha256": "e2d2ad1e6e2548571570a4eafd3f815e2c4f31502582ac87cb5c5dcc6cb64ee9"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/g3_reporting.py",
+      "sha256": "adcbf2f6397c7e3dc9c3724af41501d5031624d508209d1628e891eaaa4ae81c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/g4_assessment.py",
+      "sha256": "5157ee19df12b93bab9eb68fbb3903d779fa71a1ca1daae2f7931e54202eb3a4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/g4_paired.py",
+      "sha256": "b01500d2c27e5528428c52c98bf9b51fa27a3c4cf304c9217456fdeb2f1f0814"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/gepa_adapter.py",
+      "sha256": "eca0db6f5e604f2b4bfcec14700018e734e51f84efc84eeec6435957bc262642"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/gepa_milestones.py",
+      "sha256": "8844c3edc24d995d106fccaaa452a6daecaf3b95d9007126d17939867bd3627a"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/gepa_milestones_g3.py",
+      "sha256": "81dd16596f1c47529e3ce52a521a406b956ac2c3b9b231318a0bcff96f5a42b1"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/local_backend.py",
+      "sha256": "cb5208de10231c12a9890fb8724c5db10c8b4957f83178c830481c1e07f40bb0"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/local_runtime.py",
+      "sha256": "8cea15bc9a6685ba1bbb94ce8b7799bb427cff2a7dae7ca2369c62d7c4a93dc2"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/n1_audit.py",
+      "sha256": "ef3eba446d5cc559932998bd5dba361f4bdd58c861f77eb5f8880a6a7f73e845"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/pre_admission_adapter.py",
+      "sha256": "1663f5434dd1be042a65bd189c25a6849f24fb8cd6338a9d6f64274f0ed9901b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/projection.py",
+      "sha256": "5dab2c9cc49fb4e2434434963ded8815cc746e1e6a47c964c4553526a1fbd780"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/recovered_events.py",
+      "sha256": "40c669397d80cabcbf1f1461b8c1a569c480955e0735436e04920d01be9ca591"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_backend.py",
+      "sha256": "c9b0541c0d355d4fa00cc88c7b3ba113011d6e7c1f24357870cf41fe581ac70f"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_client.py",
+      "sha256": "05a96a58d700df04ef831e3ce7831d8d3d9bac04c01bcfc5a31a016c4cd4a931"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_episode.py",
+      "sha256": "22bb299e1a5a7488909ba0848b4cd8fa00eaa889c326762ba56a41a7d999e9ee"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_evidence.py",
+      "sha256": "fc78f63882432171f52d96bc96251224ed972f59574c4e685005a1145229de0c"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_feedback.py",
+      "sha256": "32f5f869b55c05c48945a21134d20fd4490528479ce50c593ddf3ac7e88356d8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_http_client.py",
+      "sha256": "157ef64b7311ea2fed19f6dba9a6e2dae5167da983ef31362bdf288981380211"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_optimization.py",
+      "sha256": "3f7c820a7889a2fc6c492b775d20fcc5404b005d31e2efa1238c26ea4667a8c2"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_recovery_client.py",
+      "sha256": "c10288f5f559bc75f5cca2f717154a16cbc5686373ab1aae177e4919d442a0ba"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/src/tau_feedback/subscription_reflection.py",
+      "sha256": "b36c0c14c5ce872059acf360c0cbd885088966c3c3ca10ae91db2a351ac8e2b8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/STRUCTURAL_GROUPS.json",
+      "sha256": "355e40604d4344da666489583db3a96b25c78d4d96370290d3fae073fff7d09b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_action_origin.py",
+      "sha256": "a05b9cd510e26e14bbce43f052781bea11ac0d645c0e607e4f802ac64875fff8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_admission.py",
+      "sha256": "a2417ea08d9be28aae6357d779daa203f19a8fa0a851cdeaa1a3fdb61602ba80"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_archive_audit.py",
+      "sha256": "dc696aa01dad78fe317b9f2adae9872ad2817dd29de446a8102f5d3c14fbb87e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_episode.py",
+      "sha256": "46eac88f42d090781e3eeb7b66afabc70695b37605f86ffa9fbc6735dbca3ce7"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_episode_privacy.py",
+      "sha256": "699ddb9d81190d7932b1b868f71530663cdf451b0af8ba9fb5b72cd92f35cf12"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_final_research_export.py",
+      "sha256": "1e198d82b0b1c17ee6bb5a3e2b275d42f84ae59f3aa234b60ba7dee2a16644b8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_finalize_g4_selection.py",
+      "sha256": "33511870e5e112e22085f49e538b6dc3a14410444dcfd5bd528234b3f2d28f99"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_acceptance.py",
+      "sha256": "d781ad16ac66f9628e768782d2e650e48c116aa98d00bb78521c94b8ff959f64"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_artifact_report.py",
+      "sha256": "e12361111d797d9aee154dced157714328fb839538c01e141b2f03e0d0f3ed9e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_optimization.py",
+      "sha256": "4ee4915796bb1864bb84ed1b199cf1b17a686b37da50c1493acb6edd91dd58a4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_public_summary.py",
+      "sha256": "a4df707baef24e33b5bf5994bcc091f07564822da0a26f058642e2a02ac0a648"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_public_trajectories.py",
+      "sha256": "68aed8776cd4fadf88209e1017c891721d22350e7b32ec030e169c35a70be8b4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_reporting.py",
+      "sha256": "7f5a443e4e3fe3d836510bafa1989571a682e8b878dd1c464c3aa6181e75cf23"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_selection_binding.py",
+      "sha256": "1e3e4f2d50bbd0276c1f776c2033dff25742660ca010c74c3c0282a6b77f83a8"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g3_stage_guards.py",
+      "sha256": "434cd099bb96d4fc8d33377d2650d3f8542efab39aa56f3af4628442b9678296"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g4_assessment.py",
+      "sha256": "e8e4db47786c5d56b2a865b4deeb1fc77dafe61a34b14218fe7eb5a0af56c96b"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g4_measurement.py",
+      "sha256": "a2aaa1a70deac73a2884a07c1da88511bc037908a5e1e17618a8f5dbb46f02c9"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g4_paired.py",
+      "sha256": "d9f7dfcebcfb361c994f2cdfc5f68ed25449a9b30690826090911453b5aea328"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g4_paired_review.py",
+      "sha256": "b0d10ee3861dcea795382ad8c406cf6f90ea24a840a3ee0567c0a2649fd3bef4"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_g4_stage_review.py",
+      "sha256": "06fca36c71f8036fd1425d4ed85ce93bb71863432b6f2d7ef95e16428e16e169"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_gepa_adapter.py",
+      "sha256": "39103b80238f18be5a2742c24791a84ba144fee9333e8804ecac8ddd32fbea06"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_gepa_milestones.py",
+      "sha256": "cf0133336ff6e9cb5836351f3d879d6e949bfc453d9e08ceb328590bc03a361e"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_gepa_milestones_g3.py",
+      "sha256": "5d0017d565d1c31261b5442d6c9deb2ac07e7a3cd4dae7b3f9028bc87cdebe5d"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_local_backend.py",
+      "sha256": "f2211ebbebf2f5e75c90a8e4b82ef84fba9cdedff8c5549d24f4abfbf5f82484"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_pre_admission_adapter.py",
+      "sha256": "c1b2d8e99628f9a7eb34f642ca921dbddf11f69a82af5abdf3b5ac428d538e56"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_recovered_events.py",
+      "sha256": "71aae271403c12712c2072f9b50e5e4988375c7dec263f8087bcc880be2c37a9"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_red_team.py",
+      "sha256": "bb118af16a8f817f97667fcf6b10d3a5c2fd78c05edf8f9f47afd937d13ea4bb"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/tests/test_subscription_recovery_client.py",
+      "sha256": "4f862323754cea1a34f3ee34450d054d247214fd26de6aa262a787bde26bf7d3"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/third_party/GEPA_LICENSE.txt",
+      "sha256": "10c47467a961feb40adf3294fe27dd9cba79d4d1b7cf27173b1c34586d4126c3"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/third_party/TAU2_LICENSE.txt",
+      "sha256": "e67c5aa0074dfcaefd3c3a1aedb94cb539234aecd15d5a972574e3200e6252fe"
+    },
+    {
+      "path": "supporting-evidence/tau-feedback-evidence/THIRD_PARTY_NOTICES.md",
+      "sha256": "dbd6be19c3ae5726c796d4048e19e6a14021100673e79c95e842969e6a407087"
+    }
+  ],
+  "auxiliary_files_preserved": [
+    {
+      "path": "supporting-evidence/auxiliary-interface-research/theodore-ouyang-particle-hero-build-prompt.md",
+      "sha256": "08060acb29fdb1160bb1526505b0847782291ef2134b95ca76f90c682d5cc029"
+    },
+    {
+      "path": "supporting-evidence/auxiliary-interface-research/unipat-particle-morph-replication-report.md",
+      "sha256": "325fb4d917156d1b75409124fbfb17ecc325f1250028a8294c95d24c137984e7"
+    }
+  ],
+  "removed_paths": [
+    "core/00-executive-deliverables/ale-1000-task-delivery-plan-editable.docx",
+    "core/00-executive-deliverables/ale-benchmark-short-report-2026-08-08.md",
+    "core/00-executive-deliverables/build-ale-delivery-plan-docx.py",
+    "core/00-executive-deliverables/final/ale-private-benchmark-interview-brief-2026-08-09.docx",
+    "core/00-executive-deliverables/final/ale-private-benchmark-interview-brief-2026-08-09.md",
+    "core/00-executive-deliverables/report-architecture/deep-research-prompts-06-to-12-2026-08-09.md",
+    "core/00-executive-deliverables/report-architecture/report-outline.yaml",
+    "core/00-executive-deliverables/report-architecture/research-fields.yaml",
+    "core/00-executive-deliverables/report-architecture/research-plan.md",
+    "core/00-executive-deliverables/report-architecture/source-index.csv",
+    "core/00-executive-deliverables/report-architecture/synthesis-and-report-architecture-2026-08-09.md",
+    "core/00-project-context/benchmaxxing-interview-hook-brief-2026-08-08.md",
+    "core/01-ale-foundations/ale-beginner-explainer-2026-08-05.md",
+    "core/01-ale-foundations/ale-bilingual-deep-reading-and-six-question-analysis.md",
+    "core/01-ale-foundations/ale-taxonomy-13-domains-55-subdomains-2026-08-06.md",
+    "core/02-1000-task-delivery-design/01-scope-and-product-definition/decision-report-2026-08-08.md",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/ale-style-task-minimum-schema.yaml",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/glossary.md",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/one-page-system-diagram.md",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/one-thousand-tasks-interpretation.md",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/proof-boundary.md",
+    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/technical-blueprint-2026-08-08.md",
+    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/README.md",
+    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/evaluator-archetype-library.md",
+    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/mini-case-studies.md",
+    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/public-corpus-audit-report.md",
+    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/validation.json",
+    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/benchmark-matrix-16.md",
+    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/landscape-report-2026-08-08.md",
+    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/quality-assurance.md",
+    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/reusable-production-framework.md",
+    "core/02-1000-task-delivery-design/05-portfolio-and-sampling-strategy/portfolio-and-sampling-strategy-report.md",
+    "core/02-1000-task-delivery-design/06-expert-production-governance/expert-production-governance-report-2026-08-09.docx",
+    "core/02-1000-task-delivery-design/06-expert-production-governance/expert-production-governance-report-2026-08-09.md",
+    "core/02-1000-task-delivery-design/06-expert-production-governance/quality-assurance.md",
+    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/evaluator-validity-and-scoring-integrity-report-2026-08-09.md",
+    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/evaluator-validity-and-scoring-integrity-report.docx",
+    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/validation.md",
+    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/environment-execution-reference-architecture-report-2026-08-09.md",
+    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/environment-manifest-schema.yaml",
+    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/validation.md",
+    "core/02-1000-task-delivery-design/09-living-benchmark-governance/claim-to-source-map.csv",
+    "core/02-1000-task-delivery-design/09-living-benchmark-governance/living-benchmark-governance-report-2026-08-09.docx",
+    "core/02-1000-task-delivery-design/09-living-benchmark-governance/living-benchmark-governance-report-2026-08-09.md",
+    "core/02-1000-task-delivery-design/09-living-benchmark-governance/source-manifest.csv",
+    "core/02-1000-task-delivery-design/10-statistical-and-matched-human-protocol/statistical-and-matched-human-protocol-2026-08-09.docx",
+    "core/02-1000-task-delivery-design/10-statistical-and-matched-human-protocol/statistical-and-matched-human-protocol-2026-08-09.md",
+    "docs/ADR/0001-separate-core-from-supporting-evidence.md",
+    "projects/agents-last-exam/README.md",
+    "scripts/build-ale-private-benchmark-interview-brief-docx.py",
+    "supporting-evidence/full-research-packages/01-scope-and-product-definition-full-research-package.zip",
+    "supporting-evidence/full-research-packages/02-ale-blueprint-and-version-audit-full-research-package.zip",
+    "supporting-evidence/full-research-packages/04-adjacent-benchmark-landscape-full-research-package.zip",
+    "supporting-evidence/full-research-packages/agents-last-exam-paper-research.zip",
+    "supporting-evidence/full-research-packages/ale-beginner-deep-read.zip",
+    "supporting-evidence/full-research-packages/ale-benchmark-research-outline-and-results.zip",
+    "supporting-evidence/full-research-packages/ale-bilingual-paper-reading-and-taxonomy-figure.zip",
+    "supporting-evidence/full-research-packages/ale-taxonomy-audit.zip",
+    "supporting-evidence/full-research-packages/final-report-architecture-and-deep-research-prompts.zip",
+    "supporting-evidence/full-research-packages/interview-hook-research.zip",
+    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-auto-captions-en-orig.json3",
+    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-bilingual-transcript-en-zh.md",
+    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-machine-translated-captions-zh-Hans.json3",
+    "supporting-evidence/interview-and-video-source-material/build-bilingual-transcript.ps1"
+  ],
+  "current_presentation": [
+    "README.md",
+    "projects/tau-bench/README.md",
+    "core/04-icfa-report/README.md"
+  ],
+  "report_editorial_changes": [
+    "project title and subtitle",
+    "date and scope metadata",
+    "public relative links",
+    "GitHub display math delimiters",
+    "publication provenance footer"
+  ],
+  "frozen_experiments_modified": false,
+  "git_history_rewritten": false
+}

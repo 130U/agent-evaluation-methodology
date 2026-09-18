@@ -1,0 +1,18 @@
+{
+  "manifest_sha256": "617e95e6780eba899e59156a73998f4d1ac2fd172f146e34ba5e13cf884a8e1b",
+  "packet_files_sha256": {
+    "COMMON.json": "35005ab86404c44f680292946c9e8daad9c6407da25784b0f6825b2f133691f5",
+    "review-2eefdb41c7e71759.json": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+    "review-6db0fdda658d24f7.json": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+    "review-9487584d8be36ec6.json": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+    "review-f7bc2815caa83b21.json": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+    "REVIEW_INSTRUCTIONS.txt": "ce61968bb9190e3fe36cd5f476c795958d4f598fdb3ea2ce969e93205ab04e60"
+  },
+  "review_ids": [
+    "review-2eefdb41c7e71759",
+    "review-6db0fdda658d24f7",
+    "review-9487584d8be36ec6",
+    "review-f7bc2815caa83b21"
+  ],
+  "blinding": "No arm, strategy, optimizer choice, reward, native/gate judgement or source paths; prior involvement and transcript inference remain possible"
+}

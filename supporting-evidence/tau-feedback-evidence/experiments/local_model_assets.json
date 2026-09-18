@@ -1,0 +1,19 @@
+{
+  "purpose": "Connectivity and resource pilot only; not yet the final experimental model choice",
+  "runtime": {
+    "project": "ggml-org/llama.cpp",
+    "release": "b10964",
+    "stable_version": "v0.4.1",
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+    "size": 18427629,
+    "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7"
+  },
+  "model": {
+    "repository": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+    "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+    "file": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+    "size": 1117320736,
+    "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+    "license": "Apache-2.0"
+  }
+}

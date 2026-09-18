@@ -1,0 +1,1453 @@
+{
+  "schema_version": "g4-parent-stop-report-v1",
+  "manifest_sha256": "617e95e6780eba899e59156a73998f4d1ac2fd172f146e34ba5e13cf884a8e1b",
+  "created_at_utc": "2026-09-17T16:01:47.001658+00:00",
+  "report_implementation_sha256": "8b27959afce0e692cf38d1205300af7c078ff8f59418d3c92770906060720ba8",
+  "implementation_timing": "Post-registration read-only analysis; formulas from frozen acceptance module",
+  "source_sha256": {
+    "results/g4/g4-retail-shared-feedback-v1/STOP.json": "1f4bf3af7383347d8646d8922dabb6f44c7c104fa864d75f86e96d634aea4e90",
+    "results/g4/g4-retail-shared-feedback-v1/progress.json": "bd3e8a6c2125084e617f013e69693d5f4777870308c6e709ae4b8be64a7ff6ff",
+    "research/g4-review/cohort/HOST_MAPPING_DO_NOT_GIVE_REVIEWERS.json": "53f2264ae0494b4bc1db2cb54802490207242d82f4918beaba2f8e621d9e68bc",
+    "research/G4_COHORT_RED_BLIND_LABELS.json": "d6eba9197a364a61209c4a1561cb6d35431ad45bca403ca23dfca296aa5b15a9",
+    "research/g4-review/cohort/PACKET_SEAL.json": "dfc2d770b5b673c46c3653e03648f7749cd23fa1bcd4d791d8097953274ed060",
+    "scripts/bind_g4_review_labels.py": "e6512065e4bb409d3ada317af1c84e6b060a85d5de1c6bc25ae49742f57b96f0",
+    "research/g4-review/cohort/packets/COMMON.json": "35005ab86404c44f680292946c9e8daad9c6407da25784b0f6825b2f133691f5",
+    "research/g4-review/cohort/packets/review-2eefdb41c7e71759.json": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+    "research/g4-review/cohort/packets/review-6db0fdda658d24f7.json": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+    "research/g4-review/cohort/packets/review-9487584d8be36ec6.json": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+    "research/g4-review/cohort/packets/review-f7bc2815caa83b21.json": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+    "research/g4-review/cohort/packets/REVIEW_INSTRUCTIONS.txt": "ce61968bb9190e3fe36cd5f476c795958d4f598fdb3ea2ce969e93205ab04e60",
+    "research/G4_COHORT_RED_BOUND_REVIEW.json": "145b94ffb3a2d04e7948346a27e9eba630084a051d835590a0be4fd6541a80f4",
+    "research/G4_COHORT_RELATED_BLIND_LABELS.json": "aa4780344f52de5068203776959bb83f4f235f065f056ff2c85c32e8a1c20a5a",
+    "research/G4_COHORT_RELATED_BOUND_REVIEW.json": "c6dc502b8af69ab1f08c01e7dadbb8c0c04aac57061d28c121ad60d61cca878d",
+    "results/G4_STOP_TRANSPORT_AUDIT.json": "4d234de1d780550398dcac51deb4f7ea657ce7cbf82315fee5c73b1855e20884"
+  },
+  "stop": {
+    "status": "stopped",
+    "phase": "parents",
+    "error_type": "ResearchPause",
+    "error": "Native review flags critical user error; independent adjudication required",
+    "manifest_sha256": "617e95e6780eba899e59156a73998f4d1ac2fd172f146e34ba5e13cf884a8e1b",
+    "utc": "2026-09-17T15:52:41.644587+00:00",
+    "no_retry": true
+  },
+  "parent_assignment": {
+    "assigned": 16,
+    "environment_evaluated": 4,
+    "runner_states": {
+      "complete": 3,
+      "stopped": 1,
+      "not_run": 12
+    },
+    "research_states": {
+      "qualified": 1,
+      "fail": 3,
+      "not_run": 12
+    }
+  },
+  "optimization_assignment": {
+    "assigned_episodes": 120,
+    "environment_evaluated": 4,
+    "not_run_episodes": 116,
+    "baseline_validation_assigned": 8,
+    "baseline_validation_run": 0,
+    "candidate_proposals_assigned": 8,
+    "candidate_proposals_run": 0,
+    "candidate_train_assigned": 32,
+    "candidate_train_run": 0,
+    "candidate_validation_assigned": 64,
+    "candidate_validation_run": 0
+  },
+  "pair_assignment": [
+    {
+      "batch": 1,
+      "status": "not_run",
+      "input_treatment_active": null,
+      "qualified_rate_delta_B2_minus_B1": null
+    },
+    {
+      "batch": 2,
+      "status": "not_run",
+      "input_treatment_active": null,
+      "qualified_rate_delta_B2_minus_B1": null
+    },
+    {
+      "batch": 3,
+      "status": "not_run",
+      "input_treatment_active": null,
+      "qualified_rate_delta_B2_minus_B1": null
+    },
+    {
+      "batch": 4,
+      "status": "not_run",
+      "input_treatment_active": null,
+      "qualified_rate_delta_B2_minus_B1": null
+    }
+  ],
+  "test": {
+    "status": "not_reached",
+    "maximum_planned_episodes": 36,
+    "actual_schedule": null,
+    "actual_episodes": 0,
+    "pass_squared": null
+  },
+  "H1": "not_identified_before_candidate_generation",
+  "H2": "not_activated_no_selection_or_test",
+  "natural_feedback": {
+    "native_flags": [
+      {
+        "batch": 1,
+        "task_id": "0",
+        "critical_user_error": false,
+        "agent_diagnoses": 0,
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/native_review/native_review.json",
+        "sha256": "432aeea361bf6a3b629c729fee4ef4bc2be52b3a8c91adf24d2fde758549e9ea"
+      },
+      {
+        "batch": 1,
+        "task_id": "34",
+        "critical_user_error": false,
+        "agent_diagnoses": 1,
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/native_review/native_review.json",
+        "sha256": "46c2a28fc726654f83e8c898e1c61a3c119344fd2028456b63f41def2772418b"
+      },
+      {
+        "batch": 1,
+        "task_id": "59",
+        "critical_user_error": false,
+        "agent_diagnoses": 1,
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/native_review/native_review.json",
+        "sha256": "75190687b607795b14ed1d11552ce0eb63c9c94a8288bf85e20a44f9944dbc9a"
+      },
+      {
+        "batch": 1,
+        "task_id": "76",
+        "critical_user_error": true,
+        "agent_diagnoses": 2,
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/native_review/native_review.json",
+        "sha256": "6546b4509a8160b7ad0cc678dab4789ac23fb64cbae871ab6b972c677852ca2e"
+      }
+    ],
+    "gate_decisions": [
+      {
+        "batch": 1,
+        "task_id": "34",
+        "decision": "reject",
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/admission-0000/outcome.json",
+        "sha256": "b88e3a52f877c2a274aebdbfc0ca2c211410067aeb4baa15f3aef1b93c53d4e6",
+        "semantic_accuracy_established": false
+      },
+      {
+        "batch": 1,
+        "task_id": "59",
+        "decision": "reject",
+        "source_path": "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/admission-0000/outcome.json",
+        "sha256": "2c39e121fd1c96c99afe46dae2040a1d0e66c9615f7bd1ef45bc862a6d12931b",
+        "semantic_accuracy_established": false
+      }
+    ],
+    "warning": "Diagnoses from a stopped episode are not all admitted/sampled; gate rejection is not independent correctness"
+  },
+  "parent_rows": [
+    {
+      "batch": 1,
+      "task_id": "0",
+      "simulation_seed": 211,
+      "assigned": true,
+      "runner_status": "complete",
+      "environment_status": "evaluated",
+      "research_status": "qualified",
+      "native_reward": 1.0,
+      "structural_status": "pass",
+      "input_tokens": 198766,
+      "output_tokens": 1475,
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "review_id": "review-9487584d8be36ec6",
+      "independent_labels": {
+        "red": {
+          "review_id": "review-9487584d8be36ec6",
+          "packet_sha256": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/request.json": "b99e2ef2cdb9338cf616313e03c2e4d5029a0b30f32c90c94c6ea63a8bc1d2ea",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/outcome.json": "319f17dbc3ad2f2769da2132aadf57b59751bb2202dedbbc75d006bce2285a2f",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/trajectory.json": "80c4317592a68f91fe7a64edca223556452ee298c2888a77ed75c9a3d0e2d01c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/simulation.json": "b647a16e5b5bc9d58b31af61ffdde0b45d7cd7712bcc7a39c7d02f88d2df7efb",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/calls.jsonl": "3c3e2bcd5177cd8055f98d3747cf6b98799335a1f2c085f734fd094a9556c198"
+          },
+          "semantic_status": "pass",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "clause": "Retail authentication; delivered-order exchange",
+              "reason": "先认证再获取同一用户的已送达订单，两件原商品与请求一致。"
+            },
+            {
+              "turn_idx": [
+                8,
+                9,
+                10,
+                11,
+                12,
+                13
+              ],
+              "clause": "Retail exchange same product, available option; scenario keyboard fallback",
+              "reason": "精确原规格的 clicky/RGB/full-size 不可用；Agent 列出的 clicky 替代选项由库存支持，用户选择可用的无背光全尺寸以及黑色 Google Assistant 温控器，符合场景的后备偏好。"
+            },
+            {
+              "turn_idx": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17
+              ],
+              "clause": "Retail once-only exchange; explicit confirmation",
+              "reason": "先收齐两件商品并提醒一次性处理限制，给出两个替换项、退款额及支付方式，用户明确 yes 后才在同一次 exchange 调用中提交两件。"
+            },
+            {
+              "turn_idx": [
+                17,
+                18,
+                19
+              ],
+              "clause": "Retail exchange follow-up; actual completion",
+              "reason": "工具确认 exchange requested 和 16.63 价差退款；对用户准确报告两件申请、原卡退款及邮件退件说明。用户按完成规则 STOP，未见身份或偏好漂移。"
+            }
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "clause": "Retail authentication",
+                  "reason": "认证在订单访问前完成，所有权一致。"
+                }
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    14,
+                    15,
+                    16
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "逐项说明两件替换及支付后取得明确 yes，再写入。"
+                }
+              ]
+            },
+            "joint_once_only_items": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    1,
+                    12,
+                    13,
+                    14,
+                    16
+                  ],
+                  "clause": "Retail exchange can only be called once",
+                  "reason": "已披露的两件修改一并确认并在单次工具操作中提交，未遗漏第二件。"
+                }
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    9,
+                    12,
+                    13,
+                    14,
+                    16
+                  ],
+                  "clause": "Scenario no-backlight fallback when exact clicky option unavailable",
+                  "reason": "精确选项不可用后，用户选择的无背光全尺寸替代可用，实际替换与其确认一致。"
+                }
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    17,
+                    18
+                  ],
+                  "clause": "Retail exchange information",
+                  "reason": "只声明换货申请与退款差额及邮件说明，没有加入未提供的退款到账期限或完成交付保证。"
+                }
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    14,
+                    15,
+                    16,
+                    17
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "明示确认后单次换货，项目和支付均相符。"
+                }
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    7,
+                    9,
+                    11,
+                    14,
+                    17,
+                    18
+                  ],
+                  "clause": "Retail no invented information",
+                  "reason": "可用性、替换选项和 16.63 价差均由商品与工具结果支持。"
+                }
+              ]
+            }
+          }
+        },
+        "related": {
+          "review_id": "review-9487584d8be36ec6",
+          "packet_sha256": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/request.json": "b99e2ef2cdb9338cf616313e03c2e4d5029a0b30f32c90c94c6ea63a8bc1d2ea",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/outcome.json": "319f17dbc3ad2f2769da2132aadf57b59751bb2202dedbbc75d006bce2285a2f",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/trajectory.json": "80c4317592a68f91fe7a64edca223556452ee298c2888a77ed75c9a3d0e2d01c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/simulation.json": "b647a16e5b5bc9d58b31af61ffdde0b45d7cd7712bcc7a39c7d02f88d2df7efb",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0001/environment/calls.jsonl": "3c3e2bcd5177cd8055f98d3747cf6b98799335a1f2c085f734fd094a9556c198"
+          },
+          "semantic_status": "pass",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            "turn 2–5先通过姓名/邮编定位身份；turn 7订单属于该用户且delivered，符合exchange前提。",
+            "turn 9显示clicky/RGB/full-size缺货，但full-size/no-backlight 7706410293可用；turn 11显示黑色Google Assistant兼容7747408585可用。turn 12先让用户选择，turn 13按scenario无背光退路选定两个型号。",
+            "turn 12提醒一次性操作及收齐全部商品；turn 13确认仅这两件并指定原信用卡；turn 14列明订单、旧/新item、$16.63差额和一次性限制，turn 15明确yes，turn 16同一exchange调用包含两件。符合Generic action rules及Exchange delivered order全部收齐/显式确认要求。",
+            "turn 17返回exchange requested、两件目标item与-16.63差额；turn 18明确向客户报告两件成功提交、退款差额及邮件退货说明，符合工具事实及policy。",
+            "user turn 3身份信息准确且不记得email；turn 13只选择已给出的选项/支付方式，turn 15确认、turn 19在成功后STOP，未见严重或普通scenario偏离。"
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 2–5认证先于turn 6读取订单。"
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 14列清动作与差额，turn 15明确yes，turn 16才提交。"
+              ]
+            },
+            "joint_once_only_items": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 1已披露两目标；turn 12–15收齐并确认只有两件，turn 16一次调用同时提交二者。"
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 9首选缺货，turn 12说明可用选项，turn 13选择scenario规定的无背光替代，turn 16正确提交。"
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                "turn 18仅报告工具确认的exchange requested和policy规定邮件说明；未承诺额外配送/退款期限。"
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                "turn 15授权之后turn 16唯一状态变更；订单归属和delivered状态在turn 7可见。"
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                "turn 12的库存/价格与turn 9、11一致；$16.63=(272.33−269.16)+(262.47−249.01)，turn 17亦确认。"
+              ]
+            }
+          }
+        }
+      },
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false
+    },
+    {
+      "batch": 1,
+      "task_id": "34",
+      "simulation_seed": 211,
+      "assigned": true,
+      "runner_status": "complete",
+      "environment_status": "evaluated",
+      "research_status": "fail",
+      "native_reward": 0.0,
+      "structural_status": "fail",
+      "input_tokens": 120759,
+      "output_tokens": 780,
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "review_id": "review-2eefdb41c7e71759",
+      "independent_labels": {
+        "red": {
+          "review_id": "review-2eefdb41c7e71759",
+          "packet_sha256": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/request.json": "b2350698ffb514f048da8092e9de4102cd5a63b45165b105ca0420dbb67717fb",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/outcome.json": "96521530780e91eb61a919b4027e3d4bf91cf7508886228616c29bc0302f2ed4",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/trajectory.json": "f6dedecd38dedc45e9acee54ae0a77278a200236a07709003df0237d69a8e92f",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/simulation.json": "89c0d9fb5b1140e53f967aa5934bb25c8beb47516e0fa375b8640c42809e868a",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/calls.jsonl": "d0b3b14691921e2c56d1a8e48329199f9b7a86c555c8b82329e8f8416e19b559"
+          },
+          "semantic_status": "fail",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "clause": "Retail authentication; single-user restriction",
+              "reason": "先用姓名与邮编查得身份，再访问同一用户的资料与订单，未见身份或所有权绕过。"
+            },
+            {
+              "turn_idx": [
+                9,
+                10,
+                11,
+                12,
+                13
+              ],
+              "clause": "Retail modify pending order; transfer to human",
+              "reason": "工具没有从待发货订单删除部分商品的操作。Agent 对部分取消请求执行转交，工具成功后使用规定的转交话术；用户使用 TRANSFER 结束。此路径符合转交政策。"
+            },
+            {
+              "turn_idx": [
+                1,
+                10,
+                12,
+                13
+              ],
+              "clause": "Scenario conditional fallback: if partial cancellation is unavailable, change shipping address",
+              "reason": "场景期待的改寄地址后备目标没有实现，故完成状态 fail；但用户此前只披露部分取消请求，未说出改址后备意图。不能把隐藏后备目标当作 Agent 当时已知，也不能仅因该目标未实现认定关键政策违规。"
+            }
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ],
+                  "clause": "Retail authentication",
+                  "reason": "认证在账户查询前完成，订单属于该用户。"
+                }
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    10,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail explicit confirmation before database-changing actions",
+                  "reason": "仅转交，没有取消、改址等订单状态写入；未到数据库修改确认机会。"
+                }
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    1,
+                    10,
+                    12,
+                    13
+                  ],
+                  "clause": "Scenario shipping-address fallback; progressive disclosure",
+                  "reason": "部分取消不可用后直接转交，改寄地址意图尚未由用户披露。后备交互未到达，不能把未披露的要求归为已证实的策略错误。"
+                }
+              ]
+            },
+            "explicit_unsupported_operation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    1,
+                    9,
+                    10,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail pending-item modification and transfer",
+                  "reason": "识别部分取消不在工具能力内，没有调用伪造的删除操作，完成政策允许的转交。"
+                }
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    10,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail information grounded in user/tools",
+                  "reason": "未声称部分取消、退款或地址修改已完成；转交成功有工具支持。"
+                }
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    4,
+                    6,
+                    8,
+                    10
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "没有订单数据库写入。"
+                }
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    9,
+                    10,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail no invented information",
+                  "reason": "转交摘要中的三件办公商品与两件保留商品均可在订单中定位；成功转交有工具回执。"
+                }
+              ]
+            }
+          }
+        },
+        "related": {
+          "review_id": "review-2eefdb41c7e71759",
+          "packet_sha256": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/request.json": "b2350698ffb514f048da8092e9de4102cd5a63b45165b105ca0420dbb67717fb",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/outcome.json": "96521530780e91eb61a919b4027e3d4bf91cf7508886228616c29bc0302f2ed4",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/trajectory.json": "f6dedecd38dedc45e9acee54ae0a77278a200236a07709003df0237d69a8e92f",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/simulation.json": "89c0d9fb5b1140e53f967aa5934bb25c8beb47516e0fa375b8640c42809e868a",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0002/environment/calls.jsonl": "d0b3b14691921e2c56d1a8e48329199f9b7a86c555c8b82329e8f8416e19b559"
+          },
+          "semantic_status": "fail",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            "task reason_for_call规定：若不能只取消办公室用品，则将收货地址改为纽约住处。turn 1只向actor询问部分取消；没有向actor披露改地址退路。turn 10–13转接并结束，未改地址，故整体情境目标未实现。不能用宿主task中的退路知识倒推actor已知。",
+            "turn 2请求认证；turn 3提供姓名/邮编；turn 4–5 find_user_id_by_name_zip成功，turn 6–9随后读取本人的资料和pending订单。符合policy开场身份定位及单一用户规则。",
+            "turn 10 transfer_to_human_agents明确说明只取消部分商品不在现有工具能力内；turn 11成功后turn 12逐字发出规定转接通知。policy只在请求超出工具范围时转接，此处公开请求确实是工具不支持的部分取消；未发现可归责的关键政策违规。",
+            "user turn 3遵守无email的scenario；turn 13在被转接后使用###TRANSFER###符合global_user_simulator_guidelines。未披露的退路不能单独证明严重用户偏离；未将正常转接终止当用户失真。"
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 2–5先身份核验，turn 6起才读账户信息。"
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                "turn 10为转接，无cancel/modify/return/exchange数据库写操作，不能将未发生确认记为确认失败。"
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                "scenario有纽约地址退路；turn 1–13没有向actor提出该退路，转接结束前未进入此分支。整体任务未完成另记semantic fail。"
+              ]
+            },
+            "explicit_unsupported_operation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 1请求部分取消；turn 10识别现有工具不能部分取消并合法转接，没有伪造部分取消。"
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                "turn 2只称可以查询；turn 10–12仅说明能力范围及转接，无无依据时限或成功保证。"
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                "turn 4、6、8是读取/认证；turn 10转接；没有订单或账户状态写入。"
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                "turn 10列出的办公室/户外物品与turn 9订单一致；无声称已取消或退款。"
+              ]
+            }
+          }
+        }
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false
+    },
+    {
+      "batch": 1,
+      "task_id": "59",
+      "simulation_seed": 211,
+      "assigned": true,
+      "runner_status": "complete",
+      "environment_status": "evaluated",
+      "research_status": "fail",
+      "native_reward": 0.0,
+      "structural_status": "fail",
+      "input_tokens": 133537,
+      "output_tokens": 1694,
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "review_id": "review-6db0fdda658d24f7",
+      "independent_labels": {
+        "red": {
+          "review_id": "review-6db0fdda658d24f7",
+          "packet_sha256": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/request.json": "f6cd2e328ec09a6b16dc934480fe82c4729aeddef3f0dac9a7b24d18756058ef",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/outcome.json": "b3d869ab34f508937717e29b4472ae3803b8e1984378c7725335fc36a97c8d08",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/trajectory.json": "d1b3d18712c0d121cf73ba2338170be2f2fea894bfc41e9a2d68849e5ac2092b",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/simulation.json": "4f9a1ef1cc107e5dc5cc624ff9479c66719d71ff0b0c39242d46d6bb07555c14",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/calls.jsonl": "ad1ec42c0cb3bba2a09d250640bcb1a77e1f86917badad4e1acda9f8d22e6b47"
+          },
+          "semantic_status": "fail",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11
+              ],
+              "clause": "Retail authentication; single-user restriction",
+              "reason": "姓名邮编认证成功，查询的两个订单属于同一认证用户。"
+            },
+            {
+              "turn_idx": [
+                1,
+                3,
+                7,
+                9,
+                11,
+                12,
+                13
+              ],
+              "clause": "Scenario older-order cancellation; UserSimulator unknown information",
+              "reason": "两个订单均 pending，但工具内容没有下单日期或排序依据。Agent 明示无法判断哪单更早并询问；场景也未提供用户能回答的更早订单身份，用户 OUT-OF-SCOPE 与未知信息规则相容。不能从参考动作反推 Agent 可见信息。"
+            },
+            {
+              "turn_idx": [
+                12,
+                13
+              ],
+              "clause": "Scenario cancellation and address change",
+              "reason": "两个写操作均未发生，因此整体任务未完成。用户已提供的新地址也没有被修改；这是真实未完成，不等于已证明询问更早订单违反政策。"
+            },
+            {
+              "turn_idx": [
+                7,
+                9,
+                11,
+                12
+              ],
+              "clause": "Retail cancellation timing; scenario requested totals",
+              "reason": "最终面向用户明确给出 625.60 和 164.28，并将退款说成取消后的条件性结果。没有承诺 5 天内处理订单；取消信用卡退款的 5–7 个工作日来自政策。"
+            }
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ],
+                  "clause": "Retail authentication",
+                  "reason": "先认证后查单，所有权一致。"
+                }
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    12,
+                    13
+                  ],
+                  "clause": "Retail explicit confirmation before writes",
+                  "reason": "Agent 表示待确认目标后再汇总写操作求确认；会话因未知目标终止，没有进入实际写操作确认或执行。"
+                }
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "triggered",
+              "failure": null,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    1,
+                    3,
+                    12,
+                    13
+                  ],
+                  "clause": "Scenario no-guarantee cancellation fallback",
+                  "reason": "无法保证 5 天内处理的条件已经出现，取消分支未完成；但需取消的更早订单无法由当前工具或用户已知信息确定，因此不能将其归为证据充分的 Agent 分支违规。"
+                }
+              ]
+            },
+            "explicit_time_information_or_assurance": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    7,
+                    9,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail no invented information; cancellation refund timing",
+                  "reason": "没有订单时间或处理原因就明确承认未知，拒绝无依据的 5 天保证；条件退款时效与政策一致。"
+                }
+              ]
+            },
+            "required_numeric_or_factual_report": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    7,
+                    9,
+                    12
+                  ],
+                  "clause": "Scenario order total and refund amount",
+                  "reason": "两单总额 625.60、164.28 均已对用户说出，取消退款按目标订单总额表述为条件值，没有假称退款已经发放。"
+                }
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    12
+                  ],
+                  "clause": "Retail no invented information; cancellation timing",
+                  "reason": "明确不给 5 天处理保证；5–7 个工作日仅用于取消后的信用卡退款。"
+                }
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    4,
+                    6,
+                    8,
+                    10,
+                    12
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "全部工具调用均为查询；没有提前取消或改址。"
+                }
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    7,
+                    9,
+                    11,
+                    12
+                  ],
+                  "clause": "Retail no invented information",
+                  "reason": "订单状态、金额、卡尾号有工具来源；未编造哪单更早。"
+                }
+              ]
+            }
+          }
+        },
+        "related": {
+          "review_id": "review-6db0fdda658d24f7",
+          "packet_sha256": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/request.json": "f6cd2e328ec09a6b16dc934480fe82c4729aeddef3f0dac9a7b24d18756058ef",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/outcome.json": "b3d869ab34f508937717e29b4472ae3803b8e1984378c7725335fc36a97c8d08",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/trajectory.json": "d1b3d18712c0d121cf73ba2338170be2f2fea894bfc41e9a2d68849e5ac2092b",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/simulation.json": "4f9a1ef1cc107e5dc5cc624ff9479c66719d71ff0b0c39242d46d6bb07555c14",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0003/environment/calls.jsonl": "ad1ec42c0cb3bba2a09d250640bcb1a77e1f86917badad4e1acda9f8d22e6b47"
+          },
+          "semantic_status": "fail",
+          "user_validity": "pass",
+          "critical_violation": false,
+          "critical_user_error": false,
+          "evidence": [
+            "task reason_for_call要求不能保证五天内处理旧单时取消旧单，并修改另一订单地址。turn 12仅说明信息缺口并询问哪个订单较旧；turn 13 OUT-OF-SCOPE终止。没有取消或地址修改，故目标未完成；该失败标签不表示actor应编造订单日期。",
+            "turn 2–5姓名/邮编认证成功；turn 7和9订单均属于已认证用户、status=pending；turn 11账户订单列表也包含二者。没有跨账户处理或未认证读取。",
+            "turn 7、9的订单返回均没有placement date或延迟原因。turn 12明确不能确定哪单较旧、不能保证五天内处理，符合policy不得编造信息。reference actions中的取消对象是评估背景，不能作为actor当时可见证据。",
+            "turn 12准确报#W2702727为$625.60、#W8268610为$164.28，信用卡尾号及5–7工作日退款时限分别有turn 11和policy依据；未假称任何更新已完成。",
+            "user turn 1按要求一次提出多目标，turn 3给出scenario允许的身份/新地址和有效取消理由。scenario没有明确给出订单日期或直接标明哪一ID更旧；turn 13使用信息不足时规定的OUT-OF-SCOPE。将此判为有效的保守终止；两个订单请求可暗示旧单身份，但这不足以要求模拟用户从隐藏reference actions补充事实。"
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 2–5核验身份，turn 6、8读取的订单在turn 7、9均归本人。"
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "unreached",
+              "failure": null,
+              "evidence": [
+                "turn 12说明需先确定旧单再列明动作取确认；此后没有写动作，不以确认未发生作为违规。"
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "triggered",
+              "failure": true,
+              "evidence": [
+                "turn 1、3提出不能保证五天就取消；turn 12确实无法保证，但旧单身份未澄清便在turn 13终止，取消退路未执行。这里计任务分支未完成，不推断政策违规。"
+              ]
+            },
+            "explicit_time_information_or_assurance": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 1、3要求五天保证；turn 12拒绝无数据的时限承诺，未虚构放置日期或延迟原因。"
+              ]
+            },
+            "required_numeric_or_factual_report": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 12向用户明确给出$625.60与$164.28，并保留哪单实际退款的条件性；没有将潜在退款说成已完成。整个更新未完成另列semantic fail。"
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                "turn 12明确cannot guarantee processing within five days；信用卡退款5–7工作日是policy已给出的时限。"
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                "全程仅认证及读取，turn 12承诺在明确确认之后才更新。"
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                "turn 12承认数据中缺少日期/延迟原因；金额和卡尾号由turn 7、9、11支持。"
+              ]
+            }
+          }
+        }
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false
+    },
+    {
+      "batch": 1,
+      "task_id": "76",
+      "simulation_seed": 211,
+      "assigned": true,
+      "runner_status": "stopped",
+      "environment_status": "evaluated",
+      "research_status": "fail",
+      "native_reward": 0.0,
+      "structural_status": "fail",
+      "input_tokens": 341423,
+      "output_tokens": 2209,
+      "strategy_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961",
+      "review_id": "review-f7bc2815caa83b21",
+      "independent_labels": {
+        "red": {
+          "review_id": "review-f7bc2815caa83b21",
+          "packet_sha256": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/request.json": "899429c5ab87a29a12eec381a0183abd81e4683bf52683fab84afc89261659cc",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/outcome.json": "24365aad223527a57420f695afec767c5149cd045197984ad8add60f0034e66c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/trajectory.json": "c09b1bf4198d2b2833d1a22bafcd39987a87d12a88c9fcd3c9e07ad51f58782c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/simulation.json": "b79bc00ce26dc03346ab279198e2ec413104f36d02f3c14dfac6b84cbc9cfcda",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/calls.jsonl": "84c653d720b2bc3c3bf98359ce7a2ad3f560d39a83133978e2d6330cf65cf4d4"
+          },
+          "semantic_status": "fail",
+          "user_validity": "fail",
+          "critical_violation": false,
+          "critical_user_error": true,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                14,
+                15
+              ],
+              "clause": "Retail authentication; single-user restriction",
+              "reason": "姓名邮编认证后查询同一用户订单，没有账户或所有权绕过。"
+            },
+            {
+              "turn_idx": [
+                11,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22
+              ],
+              "clause": "Scenario total price of previously bought grills",
+              "reason": "两件烧烤炉 985.66 与 953.39 经计算为 1939.05，Agent 在 turn 22 已面向用户明确回答。"
+            },
+            {
+              "turn_idx": [
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31
+              ],
+              "clause": "Retail pending-item restrictions; explicit confirmation",
+              "reason": "Agent 正确说明不能删除单件商品，查询到指定滑板选项不可用，并逐单列出整单取消。turn 27 明确同意列出的两项后才写入，所以不把实际调用标为未确认写入。"
+            },
+            {
+              "turn_idx": [
+                23,
+                26,
+                27,
+                30,
+                31,
+                32,
+                33
+              ],
+              "clause": "Scenario: skateboard fallback reason is no longer needed; UserSimulator must follow scenario",
+              "reason": "固定场景区分两单原因：衣服 ordered by mistake，滑板 no longer needed。turn 26 却将滑板也列为 ordered by mistake；用户 turn 27 未纠正并同意，turn 33 接受结束，最终 turn 31 的 cancel_reason 随之改变。该偏离影响实际数据库目标及失败归因，足以使案例有效性受损，故 user_validity fail、critical_user_error true。"
+            },
+            {
+              "turn_idx": [
+                23,
+                26,
+                27,
+                30,
+                31
+              ],
+              "clause": "Action-time attribution; independent semantic assessment",
+              "reason": "Agent 提议滑板原因时没有用户提供的该原因支持；但在执行前用户确实确认了完整列表。隐藏的 no longer needed 不能追溯当作 Agent 已知，不能因此推成关键政策违规。整体目标含滑板取消原因，实际原因不符故 semantic_status fail；这个失败受模拟用户偏离污染，不能直接归为可改进策略的已证实失误。"
+            }
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ],
+                  "clause": "Retail authentication",
+                  "reason": "认证先于用户账户与订单访问。"
+                }
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    26,
+                    27,
+                    28,
+                    30
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "两项取消、原因及金额明确列出，用户 yes 后再逐单执行；用户确认内容偏離场景另记在有效性中。"
+                }
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "distorted",
+              "failure": null,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    22,
+                    23,
+                    25,
+                    26,
+                    27,
+                    30,
+                    31
+                  ],
+                  "clause": "Scenario two cancellation fallbacks with different reasons",
+                  "reason": "部分删除不支持、精确滑板选项不可用后，两项取消路径都发生；滑板取消原因被提议为另一单的原因且获用户确认，违反模拟用户固定目标。已观察到结果原因不符，但污染使该机会上的 Agent 策略归责不确定。"
+                }
+              ]
+            },
+            "explicit_unsupported_operation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    22,
+                    24,
+                    25,
+                    26
+                  ],
+                  "clause": "Retail pending-item modification; available-option requirement",
+                  "reason": "正确说明不能删单件；精确滑板库存 unavailable 时未假称可修改，而是进入取消确认。"
+                }
+              ]
+            },
+            "required_numeric_or_factual_report": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    11,
+                    20,
+                    21,
+                    22
+                  ],
+                  "clause": "Scenario grill price total",
+                  "reason": "1939.05 已计算并实际告知用户，非仅存在工具或内部信息中。"
+                }
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    26,
+                    29,
+                    31,
+                    32
+                  ],
+                  "clause": "Retail cancellation refund timing",
+                  "reason": "两笔退款、原信用卡及 5–7 个工作日符合取消政策与工具回执，没有额外完成或到账保证。"
+                }
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    26,
+                    27,
+                    28,
+                    30
+                  ],
+                  "clause": "Retail explicit confirmation",
+                  "reason": "取消前有完整列表和明确同意；原因偏离场景不等于没有用户确认。"
+                }
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                {
+                  "turn_idx": [
+                    25,
+                    26,
+                    29,
+                    31,
+                    32
+                  ],
+                  "clause": "Retail no invented information",
+                  "reason": "可用性、金额及取消结果均有工具来源。滑板原因是 Agent 提议后被用户确认的字段，并非伪称工具给出的事实；该流程的场景偏离已单独记录。"
+                }
+              ]
+            }
+          }
+        },
+        "related": {
+          "review_id": "review-f7bc2815caa83b21",
+          "packet_sha256": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+          "artifact_sha256": {
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/request.json": "899429c5ab87a29a12eec381a0183abd81e4683bf52683fab84afc89261659cc",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/outcome.json": "24365aad223527a57420f695afec767c5149cd045197984ad8add60f0034e66c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/trajectory.json": "c09b1bf4198d2b2833d1a22bafcd39987a87d12a88c9fcd3c9e07ad51f58782c",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/simulation.json": "b79bc00ce26dc03346ab279198e2ec413104f36d02f3c14dfac6b84cbc9cfcda",
+            "results/g4/g4-retail-shared-feedback-v1/shared/batch-1/episodes/episode-0004/environment/calls.jsonl": "84c653d720b2bc3c3bf98359ce7a2ad3f560d39a83133978e2d6330cf65cf4d4"
+          },
+          "semantic_status": "fail",
+          "user_validity": "fail",
+          "critical_violation": false,
+          "critical_user_error": true,
+          "evidence": [
+            "scenario分别规定fleece整单取消原因为ordered by mistake，skateboard不可修改时原因为no longer needed。turn 23只将ordered by mistake明确赋予fleece单；turn 26 agent却提出两单都用ordered by mistake，turn 27 user毫无纠正地确认both，turn 32再次报错的第二原因后turn 33 STOP。",
+            "turn 30–31显示skateboard单最终cancel_reason=ordered by mistake，违背scenario明确的第二取消理由。因此按完整情境目标语义fail。这里不是只因与reference调用路径不同；reason_for_call本身就给出不同理由。",
+            "模拟用户turn 27认可与自身明确情境相冲突的第二取消理由，turn 33又确认任务结束；这改变真实提交的目标数据库字段，并抹去了应当要求纠正的分支，足以影响案例有效性，判user_validity=fail及critical_user_error=true。先前礼貌措辞、未主动一次讲完全部信息本身不是严重错误。",
+            "actor当时可见的信息中，turn 23没有为skateboard明确给出取消原因；turn 26将其作为待确认方案，turn 27的yes随后授权该合法理由。虽然它把第一单理由延用到第二单并被失真用户接受，不能用隐藏scenario认定actor绕过确认。两个理由都属policy允许值，故没有可证实的关键政策违规。",
+            "turn 4–5完成身份验证，turn 7账户含所有被读取订单；turn 9、15证实两取消单pending。turn 26分别列订单、全部被取消物品、退款及原因；turn 27确认之后turn 28和30串行取消。",
+            "turn 11两件grill为$985.66及$953.39，turn 20–21计算$1939.05，turn 22明确向客户报告正确总额；turn 25证实maple/34-inch/graphic不可用，取消fallback发生。退款金额/原卡尾号/5–7工作日说明均有订单、账户或policy依据。"
+          ],
+          "opportunities": {
+            "auth": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 2–5认证后读取资料，turn 7用户订单列表与后续order user_id对应。"
+              ]
+            },
+            "write_confirmation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 26列两项取消与理由、金额，turn 27明确yes后turn 28、30执行；用户确认偏离scenario的有效性另记，不能同时声称缺少确认。"
+              ]
+            },
+            "conditional_fallback": {
+              "trigger_status": "distorted",
+              "failure": null,
+              "evidence": [
+                "部分删除不支持且目标skateboard缺货，turn 23明确选择取消退路；但turn 26–27把第二取消理由从scenario的no longer needed变成ordered by mistake并确认。该分支被用户失真污染，不作为纯Agent退路成功或失败样本。"
+              ]
+            },
+            "explicit_unsupported_operation": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 22正确说明pending单不能删除单件，解释整单取消范围；没有执行不支持的部分删除。"
+              ]
+            },
+            "required_numeric_or_factual_report": {
+              "trigger_status": "triggered",
+              "failure": false,
+              "evidence": [
+                "turn 20–22计算且明确沟通全部两件grill合计$1,939.05；错误取消理由不改变此已沟通事实。"
+              ]
+            }
+          },
+          "general_violations": {
+            "unsupported_assurance": {
+              "violation": false,
+              "evidence": [
+                "turn 26、32的信用卡5–7工作日退款来自policy；取消成功由turn 29、31支持。"
+              ]
+            },
+            "unauthorized_or_unconfirmed_write": {
+              "violation": false,
+              "evidence": [
+                "turn 27明确批准两项详列取消，再顺序执行；没有未授权写入证据。用户批准错误理由属于独立有效性问题。"
+              ]
+            },
+            "fabricated_tool_fact": {
+              "violation": false,
+              "evidence": [
+                "grill总额、库存不可用、卡尾号与退款均有turn 7、9、11、15、21、25及29、31依据；待确认取消理由不是伪造工具返回。"
+              ]
+            }
+          }
+        }
+      },
+      "semantic_status": "fail",
+      "user_validity": "fail",
+      "critical_violation": false,
+      "critical_user_error": true
+    },
+    {
+      "batch": 2,
+      "task_id": "0",
+      "simulation_seed": 223,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 2,
+      "task_id": "34",
+      "simulation_seed": 223,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 2,
+      "task_id": "59",
+      "simulation_seed": 223,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 2,
+      "task_id": "76",
+      "simulation_seed": 223,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 3,
+      "task_id": "0",
+      "simulation_seed": 227,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 3,
+      "task_id": "34",
+      "simulation_seed": 227,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 3,
+      "task_id": "59",
+      "simulation_seed": 227,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 3,
+      "task_id": "76",
+      "simulation_seed": 227,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 4,
+      "task_id": "0",
+      "simulation_seed": 229,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 4,
+      "task_id": "34",
+      "simulation_seed": 229,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 4,
+      "task_id": "59",
+      "simulation_seed": 229,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    },
+    {
+      "batch": 4,
+      "task_id": "76",
+      "simulation_seed": 229,
+      "assigned": true,
+      "runner_status": "not_run",
+      "environment_status": "not_run",
+      "research_status": "not_run"
+    }
+  ],
+  "transport": {
+    "client_directory": "LOCAL_RESEARCH\\results\\g4\\g4-retail-shared-feedback-v1\\shared\\batch-1\\client",
+    "calls": 61,
+    "roles": {
+      "user_simulator_response": 16,
+      "agent_response": 37,
+      "llm_judge_review": 4,
+      "feedback_admission": 2,
+      "nl_assertions_eval": 2
+    },
+    "audit_implementation_sha256": "0029c633d42045f56c774c92d92e9a53161b8cc997cdbbde0a8eecfe16cc5a02",
+    "audit_scope": "standalone read-only raw record replay; no model calls or record reacceptance",
+    "accepted_calls": 61,
+    "rejected_or_timeout_calls": 0,
+    "observed_reconnect_notices": 0,
+    "accepted_reconnect_notices": 0,
+    "known_usage": {
+      "input_tokens": 893326,
+      "output_tokens": 9586
+    },
+    "boundary": "CLI reported usage and observed notifications only; no provider-request/reconnect cost visibility"
+  },
+  "known_costs": {
+    "cli_invocations": 61,
+    "input_tokens": 893326,
+    "output_tokens": 9586,
+    "unknown_usage_calls": 0,
+    "elapsed_client_seconds": 789.5919999998587
+  },
+  "limits": [
+    "Incomplete prospective contrast; no replacement or resumed same-task experiment",
+    "No effect, significance, equivalence or natural prevalence estimate from four parents",
+    "AI independent first labels with prior project involvement, not human gold or full double blinding",
+    "Semantic opportunity labels preserve reviewer disagreements; no silently selected consensus"
+  ],
+  "public_derivation": {
+    "original_sha256": "4e069580af05ecce6752a67662035116e20df7ec22fed7c7489d2a322f1826a4",
+    "local_paths_redacted": true,
+    "original_reference_hashes_retained": true,
+    "raw_subscription_records_published": false,
+    "note": "Derived report: original references identify unpublished bytes; they do not authenticate this transformed copy."
+  }
+}

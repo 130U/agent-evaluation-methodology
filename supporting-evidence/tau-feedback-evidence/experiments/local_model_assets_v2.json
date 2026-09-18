@@ -1,0 +1,24 @@
+{
+  "purpose": "New engineering configuration after G1 v1 simulator failure; not a claim of improved task performance",
+  "runtime": {
+    "project": "ggml-org/llama.cpp",
+    "release": "b10964",
+    "stable_version": "v0.4.1",
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+    "size": 18427629,
+    "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7"
+  },
+  "model": {
+    "label": "qwen3.5-2B_Q6_K",
+    "repository": "unsloth/Qwen3.5-2B-GGUF",
+    "revision": "cfe5a86e01fb502d6a527caa70fbcdc9ad1d3499",
+    "file": "Qwen3.5-2B-Q6_K.gguf",
+    "size": 1574961408,
+    "sha256": "fc90339420b4298887aafb307a4291c55440b730133bbffe6ba9630503dcb548",
+    "license": "Apache-2.0",
+    "base_model": "Qwen/Qwen3.5-2B",
+    "base_snapshot_consulted": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+    "conversion_parent_commit_verified": false,
+    "quantization_producer": "Unsloth; third-party conversion, not official Qwen GGUF"
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "schema_version": "c1-red-independent-first-labels-v1",
+  "reviewer": "red_team",
+  "status": "first_labels_locked_before_unmasking_or_gate",
+  "packet_path": "research/C1_BLIND_PACKET.json",
+  "packet_sha256": "92031a9d4c6dcfd3f2cf4941a839bd2e4bbfa25e7f7ed9c27400d705770b8bc2",
+  "synthetic_only": true,
+  "research_agent_review": true,
+  "human_gold_standard": false,
+  "model_tool_calls": 0,
+  "prior_familiarity": "曾参与G1/G3语义审查、N1问候归责与行动来源实现审查，熟悉零售政策及已知归责风险；未读取C1作者标签、原DRAFT、MAP、其他代理标签或gate输出。不能称完全盲法。",
+  "method": "逐卡语义仅用diagnosis+action_view；来源另读synthetic_provenance与包内源码摘录。共同policy/tools经哈希比较一致，仅作为同一内容阅读。未调用分类器/真实环境来代替独立标签。",
+  "dimension_note": "agent_responsibility指被指控违规是否可归责，不等同于origin；correct_behavior可为正确通用建议而不证明当前action错误。",
+  "label_change_rule": "首轮标签不覆盖；揭盲后如有讨论或裁决另存，保留本文件。",
+  "cards": [
+    {
+      "opaque_id": "card-2d74a86e11ed",
+      "packet_card_sha256": "d0d366faa535f7ad942b84285e824e74e25ad36e831671e000c6c6b2c77f938b",
+      "view_sha256": "3e723a27cd4497b6e3576c74bcb0fac6c2f4c534735c28e50e2df5832d2f9640",
+      "action_index": 6,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "insufficient",
+      "semantic_decision": "abstain",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=1]",
+          "quote": "I do not know its balance.",
+          "supports": "用户未提供余额。"
+        },
+        {
+          "location": "action_view.history[message_index=5]",
+          "quote": "payment_method_id: credit_card_9100001; amount: 100.0",
+          "supports": "订单给出总额和原信用卡支付，未给出礼品卡余额。"
+        },
+        {
+          "location": "action_view.action.content",
+          "quote": "has a $120 balance",
+          "supports": "当前行动断言了前缀未提供的金额。"
+        },
+        {
+          "location": "action_view.policy / general; Modify payment",
+          "quote": "You should not make up any information; it must have enough balance",
+          "supports": "不应编造余额，支付前需核实足额。"
+        }
+      ],
+      "rationale": "编造余额的诊断与归责有依据，但修正仍以未观察到的120美元余额为前提，不能将模型自己刚说出的金额作为证据。",
+      "uncertainty": "未断言实际余额不是120；它在行动时未知。纠正句中的 use/then confirm 可能有顺序歧义，本次弃权不依赖把该歧义解释成已执行支付。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "4210cae1a72cb9e07837bb03",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[3]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-7b30b327da8a",
+      "packet_card_sha256": "2c3d0485a43ab77881f034a21ac9256b858d05f29cbfe85f8eaad1422771947c",
+      "view_sha256": "d6fc124c73de5b9048ecd800b3dddd55370eb602ac4d8f98c9d2ff8d50014f8a",
+      "action_index": 10,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "unsupported",
+      "semantic_decision": "reject",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=7]",
+          "quote": "payment_method_id: credit_card_9100001; status: delivered",
+          "supports": "已知原付款为0001信用卡。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].arguments",
+          "quote": "payment_method_id: credit_card_9100002",
+          "supports": "尝试退到另一信用卡，虽已保存且已获用户确认也不符合政策。"
+        },
+        {
+          "location": "action_view.policy / Return delivered order",
+          "quote": "The refund must either go to the original payment method, or an existing gift card.",
+          "supports": "correct_behavior 的 any saved payment method 与明确规则相反。"
+        }
+      ],
+      "rationale": "错误事实成立，Agent已可见原付款并应拒绝不允许的退款路径；但建议把同一错误路径说成允许，故整条反馈拒收。",
+      "uncertainty": "当前只见工具调用尝试，不推断后续工具是否拒绝或数据库是否改动。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "161295fec2377e699d989c17",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[5]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-6570683ffa0d",
+      "packet_card_sha256": "760e8c470be949f299c32f51bc8422924e5d40539b1c2e056300f44afb1b675e",
+      "view_sha256": "ebe6d1874302cdba0b880d31b392c59c0a938a90471ff65578394109c5268fc5",
+      "action_index": 8,
+      "claim_support": "unsupported",
+      "agent_responsibility": "unsupported",
+      "correction_observability": "supported",
+      "semantic_decision": "reject",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=6]",
+          "quote": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+          "supports": "Agent已经列出精确订单、范围和地址。"
+        },
+        {
+          "location": "action_view.history[message_index=7]",
+          "quote": "Yes, I explicitly confirm changing only the shipping address",
+          "supports": "用户明确确认了同一更改。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0]",
+          "quote": "modify_pending_order_address",
+          "supports": "当前调用与已确认参数一致。"
+        }
+      ],
+      "rationale": "前缀直接反证未确认的指控。建议本身是有效的通用确认规则，但该动作已经完成这一步，不能据此生成修错反馈。",
+      "uncertainty": "标签只判断这条未确认指控，不为整段任务作全面成功证明。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "d811bdfb23870b975c9e20fa",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[4]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-6131d4a6f3d3",
+      "packet_card_sha256": "12f1ccca278e11de3b48aebc70f9389c82c4b4e00418b43c98966dd712898957",
+      "view_sha256": "d6fc124c73de5b9048ecd800b3dddd55370eb602ac4d8f98c9d2ff8d50014f8a",
+      "action_index": 10,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "supported",
+      "semantic_decision": "accept",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=5]",
+          "quote": "credit_card_9100002; gift_card_9100001",
+          "supports": "另一信用卡及现有礼品卡均已可见。"
+        },
+        {
+          "location": "action_view.history[message_index=7]",
+          "quote": "payment_method_id: credit_card_9100001; status: delivered",
+          "supports": "原付款方法已知。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].arguments",
+          "quote": "payment_method_id: credit_card_9100002",
+          "supports": "当前尝试使用非原信用卡。"
+        },
+        {
+          "location": "action_view.policy / Return delivered order",
+          "quote": "original payment method, or an existing gift card",
+          "supports": "建议解释允许范围并重新确认，完全可从当前信息选择。"
+        }
+      ],
+      "rationale": "已知原付款、错误退款目标与政策禁限形成完整归责链；修正先解释规则并让用户选合法路径，不臆造用户选择。",
+      "uncertainty": "不推断实际退款已发生；诊断中的 attempted 与可见证据一致。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "161295fec2377e699d989c17",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[5]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-98fbed5fb9c4",
+      "packet_card_sha256": "e9a9867248e7930b99064c2726068950e8d5bd5271f362e2be2b1755d3c925cc",
+      "view_sha256": "6483f808d60103a1786ed1bcb65a453d6eab30c5a6f3ad85cc469c526432c288",
+      "action_index": 8,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "supported",
+      "semantic_decision": "accept",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=6]",
+          "quote": "Please explicitly confirm.",
+          "supports": "更改细节已列出。"
+        },
+        {
+          "location": "action_view.history[message_index=7]",
+          "quote": "I have not confirmed this change yet.",
+          "supports": "用户明确说明尚未确认。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0]",
+          "quote": "modify_pending_order_address",
+          "supports": "Agent仍尝试写入。"
+        },
+        {
+          "location": "action_view.policy / general",
+          "quote": "obtain explicit user confirmation (yes) to proceed",
+          "supports": "当前应等待确认。"
+        }
+      ],
+      "rationale": "违规事实、Agent在当时的责任和可实施修正均明确；既有请求不能覆盖用户随后明确未确认。",
+      "uncertainty": "建议再次列细节略有重复，但核心等待yes正确且不依赖隐藏信息。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "d811bdfb23870b975c9e20fa",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[4]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-5f91ebdd5c0b",
+      "packet_card_sha256": "c6b2418192fe8db8f8de97d315e473b3e1a353bd7e6fbc8bb6324e336b65ed80",
+      "view_sha256": "3e723a27cd4497b6e3576c74bcb0fac6c2f4c534735c28e50e2df5832d2f9640",
+      "action_index": 6,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "supported",
+      "semantic_decision": "accept",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=1]",
+          "quote": "use my gift card ... if it covers the full order total. I do not know its balance.",
+          "supports": "用户给出条件，未给出余额。"
+        },
+        {
+          "location": "action_view.history[message_index=3]",
+          "quote": "c1_casey_fixture_9100",
+          "supports": "已定位用户，可继续查profile。"
+        },
+        {
+          "location": "action_view.action.content",
+          "quote": "has a $120 balance",
+          "supports": "未经证据支撑的具体余额陈述。"
+        },
+        {
+          "location": "action_view.tools / get_user_details; policy / Modify payment",
+          "quote": "Get the details of a user; enough balance to cover the total amount",
+          "supports": "查询余额再判断并确认支付更改，是当时可选的信息收集步骤。"
+        }
+      ],
+      "rationale": "先获取余额、再判断是否足额并确认修改，可纠正当前无依据断言，未把假定余额或隐藏偏好带进建议。",
+      "uncertainty": "这里只确认信息收集方法可选，不预先保证查询必然成功或余额足够。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "4210cae1a72cb9e07837bb03",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[3]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-8da8790053d0",
+      "packet_card_sha256": "114d471806c7f36c9d052af76672ea86c28fd5f2499fad853bc5db1c41704725",
+      "view_sha256": "36063009e1f33787cbfe53a937d575684577a51c4d793d51ac4fd41d4d2307ea",
+      "action_index": 14,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "supported",
+      "semantic_decision": "accept",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=1]",
+          "quote": "I also want to change the backpack ... I will tell you before you submit all the changes.",
+          "supports": "第二商品及提交前选择条件已经披露。"
+        },
+        {
+          "location": "action_view.history[message_index=13]",
+          "quote": "I still need to choose the backpack color before all changes are submitted.",
+          "supports": "用户对灯的确认明确不等于授权立即提交完整更改。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].arguments",
+          "quote": "item_ids: [9100000001]",
+          "supports": "当前仅提交灯的一次性修改。"
+        },
+        {
+          "location": "action_view.policy / Generic action rules; Modify items",
+          "quote": "all items to be changed are collected into a list; This action can only be called once",
+          "supports": "应先收集已披露的背包选择并确认完整清单。"
+        }
+      ],
+      "rationale": "用户两次明确保留背包选择，Agent却消耗一次性修改机会；建议询问选择而不代选颜色，三维证据均充分。",
+      "uncertainty": "标签针对已披露目标，不要求Agent猜测未披露的其他商品。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "ac934f86058c62d89328a109",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[7]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-7fe8091bfb07",
+      "packet_card_sha256": "3c835468442ffc1a3c7b5a7dc44eb16b22f21cb5c5dde7512eaa196c61dce1bd",
+      "view_sha256": "37e1299cc73c126678ea3ad97bc909d6853e77d186fbfa68acd9e6589dfedc23",
+      "action_index": 0,
+      "claim_support": "insufficient",
+      "agent_responsibility": "insufficient",
+      "correction_observability": "supported",
+      "semantic_decision": "abstain",
+      "origin": "framework_seed",
+      "strategy_eligibility": "route_to_harness_or_non_agent_review",
+      "evidence": [
+        {
+          "location": "action_view.history",
+          "quote": "[]",
+          "supports": "没有用户身份/订单请求，也没有访问账户或写入。"
+        },
+        {
+          "location": "action_view.action.content",
+          "quote": "Hi! How can I help you today?",
+          "supports": "只是开场问候。"
+        },
+        {
+          "location": "action_view.policy / authentication",
+          "quote": "At the beginning of the conversation, you have to authenticate the user identity",
+          "supports": "规定认证义务，但未明确禁止先问候这一单句。"
+        }
+      ],
+      "rationale": "从空前缀与问候本身不足以证明认证违规，更不足以断言已经跳过必要认证；询问身份是可行建议，却不是已证实错误。此语义判断不使用后面的来源元数据。",
+      "uncertainty": "开场认证时点存在解释空间；来源类别另行判定，不用framework身份替代语义判断。",
+      "origin_evidence": [
+        {
+          "location": "provenance_source_excerpt.snippets[0,1]",
+          "supports": "包内47–49、627–638行给定fresh/non-solo直接复制默认问候。"
+        },
+        {
+          "location": "synthetic_provenance.context; indexed_message_with_origin_metadata",
+          "supports": "无初始history、solo=false、turn0、raw_data=null、cost=0，符合给定初始化条件。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[0]",
+          "supports": "首调用为user_simulator_response并接收默认问候，未把问候绑定为Agent模型生成。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-395de45dcefa",
+      "packet_card_sha256": "d464cf66c578692bffd6d276643b1608a16069107edeb264e55538eeafbf3c2b",
+      "view_sha256": "36063009e1f33787cbfe53a937d575684577a51c4d793d51ac4fd41d4d2307ea",
+      "action_index": 14,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "insufficient",
+      "semantic_decision": "abstain",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=13]",
+          "quote": "I still need to choose the backpack color",
+          "supports": "背包颜色偏好尚未确定。"
+        },
+        {
+          "location": "action_view.history[message_index=11]",
+          "quote": "red and blue variants available",
+          "supports": "两个选项可用，不表示用户已选择红色。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].arguments",
+          "quote": "item_ids: [9100000001]",
+          "supports": "提前提交灯，遗漏已披露的待定目标。"
+        },
+        {
+          "location": "diagnosis.correct_behavior",
+          "quote": "Include the red backpack variant 9100000004",
+          "supports": "把尚未选定的红色写入具体修正。"
+        }
+      ],
+      "rationale": "提前提交的指控成立，但前缀无法推出红色是正确目标；应先询问用户。可用库存不等于已观察到的偏好，故不整体准入。",
+      "uncertainty": "若明确改成红色作为可选提案并等待用户选择，可能是合法方法；当前文字把它当作既定修正。本标签不宣称红色客观错误。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "ac934f86058c62d89328a109",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[7]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-302bf6d37ae4",
+      "packet_card_sha256": "69cf7a83bbf3c741db265da7f101b6218fca1b9f6edcdc81e6504f8f0c29938a",
+      "view_sha256": "eed69a09a989e0b08010583329c38f54ae52df33576aabe61574befb6b319751",
+      "action_index": 6,
+      "claim_support": "unsupported",
+      "agent_responsibility": "unsupported",
+      "correction_observability": "supported",
+      "semantic_decision": "reject",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=3]",
+          "quote": "c1_casey_fixture_9100",
+          "supports": "用户已完成身份定位。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].name",
+          "quote": "get_user_details",
+          "supports": "当前是只读查询，不是取消操作。"
+        },
+        {
+          "location": "action_view.policy / general",
+          "quote": "Before taking any action that updates the database",
+          "supports": "显式确认约束数据库更新，不禁止已认证后的只读信息收集。"
+        },
+        {
+          "location": "diagnosis.correct_behavior",
+          "quote": "before issuing the cancellation tool call",
+          "supports": "取消之前需要确认的通用建议正确，但不能反证当前查询违规。"
+        }
+      ],
+      "rationale": "诊断把继续处理请求等同于已取消，扩大了确认规则的适用范围。实际行动为已认证后的读取，指控与归责不成立。",
+      "uncertainty": "不推断后续会不会未经确认取消，只评当前action。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "37db7b988fdae9353bb8f3b4",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[3]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-39c21630642e",
+      "packet_card_sha256": "ad72031b8a3c787ff237020024a2b60fbe5d5c3a208b394353db66a49ac18065",
+      "view_sha256": "f51c909c40b8d740636b3d4bbd5872b354072e46f39376575e34876dc128424b",
+      "action_index": 2,
+      "claim_support": "insufficient",
+      "agent_responsibility": "insufficient",
+      "correction_observability": "supported",
+      "semantic_decision": "abstain",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=1]",
+          "quote": "Hello, I need help with an order.",
+          "supports": "用户只表明订单帮助需求，没有身份数据。"
+        },
+        {
+          "location": "action_view.action.content",
+          "quote": "Hi! How can I help you today?",
+          "supports": "重复问候尚未访问/披露账户信息或执行事务。"
+        },
+        {
+          "location": "action_view.policy / authentication",
+          "quote": "At the beginning of the conversation, you have to authenticate the user identity",
+          "supports": "可询问邮箱，但未将每一次认证前问候明确界定为违规。"
+        }
+      ],
+      "rationale": "再次泛泛问候可能效率较差；仅凭此处仍不足以将其定为已完成的认证违规。询问身份是可执行改进，但可改进不等于已证实责任。",
+      "uncertainty": "此卡的来源可以确认为模型生成，仍不提升语义支持程度。对at the beginning的严格解释可能造成合理分歧，予以保留。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "df72264a2959eff63886179e",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[1]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    },
+    {
+      "opaque_id": "card-7e0812d938c7",
+      "packet_card_sha256": "4d5ce874f84362b240006972d5a8c0def10789a1734cd9ad4afb7c516c04d7cc",
+      "view_sha256": "cb87aac9a82c1b101c5cd826f0d51650bba540f1ecbd607b918b40193d183acd",
+      "action_index": 6,
+      "claim_support": "supported",
+      "agent_responsibility": "supported",
+      "correction_observability": "supported",
+      "semantic_decision": "accept",
+      "origin": "model_agent",
+      "strategy_eligibility": "continue_semantic_review",
+      "evidence": [
+        {
+          "location": "action_view.history[message_index=1]",
+          "quote": "Cancel order #W9100001 because I no longer need it.",
+          "supports": "用户提出取消意图与理由，但尚无Agent列细节后的明确确认。"
+        },
+        {
+          "location": "action_view.history[message_index=5]",
+          "quote": "status: pending",
+          "supports": "Agent已确认可取消状态。"
+        },
+        {
+          "location": "action_view.action.tool_calls[0].name",
+          "quote": "cancel_pending_order",
+          "supports": "当前直接尝试写入取消。"
+        },
+        {
+          "location": "action_view.tools / cancel_pending_order; policy / general",
+          "quote": "explain the cancellation detail and ask for explicit user confirmation (yes/no)",
+          "supports": "应先复述订单与原因并取得yes。"
+        }
+      ],
+      "rationale": "当前已从只读步骤转为取消写入，前缀缺少要求的确认；纠正步骤直接来自政策和现有订单/原因信息。",
+      "uncertainty": "不将最初取消请求自动当成Agent解释具体操作后的确认；不推断工具调用之后的结果。",
+      "origin_evidence": [
+        {
+          "location": "synthetic_provenance.indexed_message_with_origin_metadata.raw_data.cli_call_id",
+          "quote": "37db7b988fdae9353bb8f3b4",
+          "supports": "行动带独立合成调用标识，非仅凭assistant角色归责。"
+        },
+        {
+          "location": "synthetic_provenance.call_ledger[3]",
+          "supports": "唯一同ID记录为agent_response，structured_output与raw_data完全相同；正文或工具名/参数与action对应。"
+        },
+        {
+          "location": "synthetic_provenance.context.intervention",
+          "quote": "agent_system_prompt_only",
+          "supports": "给定干预范围覆盖此类Agent生成，来源资格不替代语义准入。"
+        }
+      ],
+      "origin_evidence_scope": "仅依包内明示的手写合成来源条件判断，不是实际CLI执行证明。"
+    }
+  ]
+}

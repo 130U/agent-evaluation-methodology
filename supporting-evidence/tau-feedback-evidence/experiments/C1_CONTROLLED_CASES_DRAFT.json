@@ -1,0 +1,4590 @@
+{
+  "schema_version": "c1-synthetic-admission-calibration-draft-v1",
+  "status": "draft_not_registered",
+  "execution_authorized": false,
+  "created_date": "2026-09-17",
+  "author": "related_work AI research agent",
+  "relationship_to_old_C1": "Separate fully hand-authored synthetic calibration variant, not execution of the older native-clean/polluted C1-A or C1-B protocol. No native reviewer output is invented or overwritten.",
+  "tau2_commit": "2174a603f6d014ef94473ffa95957f6ce27100db",
+  "intervention": "agent_system_prompt_only",
+  "task_ids_used": [],
+  "natural_benchmark_trajectories": 0,
+  "native_reviewer_calls": 0,
+  "model_calls": 0,
+  "actual_environment_or_tool_execution": false,
+  "synthetic_data_notice": "All customers, identifiers, tool responses, messages, diagnoses and origin call ledgers are fabricated fixtures. The policy/tool schemas and source-code hashes are real pinned assets. These are not records of model behavior.",
+  "source_hashes": {
+    "research/C1_CONTROLLED_PROTOCOL_DRAFT.md": "e25dbf68f2e779d0bf6b301b6387f96a17982b141b0005da20ee0a5e0f186a5f",
+    "src/tau_feedback/admission.py": "269206c222878d0a92b22fad86cabe3785048417a00a51b5e4328349fe0805f8",
+    "src/tau_feedback/projection.py": "5dab2c9cc49fb4e2434434963ded8815cc746e1e6a47c964c4553526a1fbd780",
+    "src/tau_feedback/subscription_feedback.py": "32f5f869b55c05c48945a21134d20fd4490528479ce50c593ddf3ac7e88356d8",
+    "src/tau_feedback/action_origin.py": "4e8cbd8cf45423d9ef7ff38e8935eb9c48536d4e9385d413713f72456c54a79a",
+    "scripts/smoke_subscription_feedback.py": "c25d4951cf9763376fd4135ed926987f7913ff2deeb14a65c4c2e78854f9424a",
+    "scripts/smoke_subscription_admission.py": "dec6de1024008798da9a5e5c1b3cc144229fed77dc6309c691ba5b8d9a094a4a",
+    "tests/test_admission.py": "a2417ea08d9be28aae6357d779daa203f19a8fa0a851cdeaa1a3fdb61602ba80",
+    "tests/test_action_origin.py": "a05b9cd510e26e14bbce43f052781bea11ac0d645c0e607e4f802ac64875fff8",
+    "vendor/tau2/data/tau2/domains/retail/policy.md": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467",
+    "vendor/tau2/src/tau2/domains/retail/tools.py": "34f4fe9702d36f0dd4697700fbcd63d0cf5386e6eb8e7499aaa336243bad8750",
+    "vendor/tau2/src/tau2/environment/tool.py": "6dd74021ba95a6f8dfa0971546b768b90e15b212f8f9051156ae6bcdd24b77d3",
+    "vendor/tau2/src/tau2/environment/toolkit.py": "3e897891e8878c3399aec72e42eb0eb5546642420c0c902b225421fc936b924a",
+    "vendor/tau2/src/tau2/orchestrator/orchestrator.py": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420"
+  },
+  "shared_policy": {
+    "text": "# Retail agent policy\n\nAs a retail agent, you can help users:\n\n- **cancel or modify pending orders**\n- **return or exchange delivered orders**\n- **modify their default user address**\n- **provide information about their own profile, orders, and related products**\n\nAt the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id.\n\nOnce the user has been authenticated, you can provide the user with information about order, product, profile information, e.g. help the user look up order id.\n\nYou can only help one user per conversation (but you can handle multiple requests from the same user), and must deny any requests for tasks related to any other user.\n\nBefore taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.\n\nYou should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments.\n\nYou should at most make one tool call at a time, and if you take a tool call, you should not respond to the user at the same time. If you respond to the user, you should not make a tool call at the same time.\n\nYou should deny user requests that are against this policy.\n\nYou should transfer the user to a human agent if and only if the request cannot be handled within the scope of your actions. To transfer, first make a tool call to transfer_to_human_agents, and then send the message 'YOU ARE BEING TRANSFERRED TO A HUMAN AGENT. PLEASE HOLD ON.' to the user.\n\n## Domain basic\n\n- All times in the database are EST and 24 hour based. For example \"02:30:00\" means 2:30 AM EST.\n\n### User\n\nEach user has a profile containing:\n\n- unique user id\n- email\n- default address\n- payment methods.\n\nThere are three types of payment methods: **gift card**, **paypal account**, **credit card**.\n\n### Product\n\nOur retail store has 50 types of products.\n\nFor each **type of product**, there are **variant items** of different **options**.\n\nFor example, for a 't-shirt' product, there could be a variant item with option 'color blue size M', and another variant item with option 'color red size L'.\n\nEach product has the following attributes:\n\n- unique product id\n- name\n- list of variants\n\nEach variant item has the following attributes:\n\n- unique item id\n- information about the value of the product options for this item.\n- availability\n- price\n\nNote: Product ID and Item ID have no relations and should not be confused!\n\n### Order\n\nEach order has the following attributes:\n\n- unique order id\n- user id\n- address\n- items ordered\n- status\n- fullfilments info (tracking id and item ids)\n- payment history\n\nThe status of an order can be: **pending**, **processed**, **delivered**, or **cancelled**.\n\nOrders can have other optional attributes based on the actions that have been taken (cancellation reason, which items have been exchanged, what was the exchane price difference etc)\n\n## Generic action rules\n\nGenerally, you can only take action on pending or delivered orders.\n\nExchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!\n\n## Cancel pending order\n\nAn order can only be cancelled if its status is 'pending', and you should check its status before taking the action.\n\nThe user needs to confirm the order id and the reason (either 'no longer needed' or 'ordered by mistake') for cancellation. Other reasons are not acceptable.\n\nAfter user confirmation, the order status will be changed to 'cancelled', and the total will be refunded via the original payment method immediately if it is gift card, otherwise in 5 to 7 business days.\n\n## Modify pending order\n\nAn order can only be modified if its status is 'pending', and you should check its status before taking the action.\n\nFor a pending order, you can take actions to modify its shipping address, payment method, or product item options, but nothing else.\n\n### Modify payment\n\nThe user can only choose a single payment method different from the original payment method.\n\nIf the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount.\n\nAfter user confirmation, the order status will be kept as 'pending'. The original payment method will be refunded immediately if it is a gift card, otherwise it will be refunded within 5 to 7 business days.\n\n### Modify items\n\nThis action can only be called once, and will change the order status to 'pending (items modifed)'. The agent will not be able to modify or cancel the order anymore. So you must confirm all the details are correct and be cautious before taking this action. In particular, remember to remind the customer to confirm they have provided all the items they want to modify.\n\nFor a pending order, each item can be modified to an available new item of the same product but of different product option. There cannot be any change of product types, e.g. modify shirt to shoe.\n\nThe user must provide a payment method to pay or receive refund of the price difference. If the user provides a gift card, it must have enough balance to cover the price difference.\n\n## Return delivered order\n\nAn order can only be returned if its status is 'delivered', and you should check its status before taking the action.\n\nThe user needs to confirm the order id and the list of items to be returned.\n\nThe user needs to provide a payment method to receive the refund.\n\nThe refund must either go to the original payment method, or an existing gift card.\n\nAfter user confirmation, the order status will be changed to 'return requested', and the user will receive an email regarding how to return items.\n\n## Exchange delivered order\n\nAn order can only be exchanged if its status is 'delivered', and you should check its status before taking the action. In particular, remember to remind the customer to confirm they have provided all items to be exchanged.\n\nFor a delivered order, each item can be exchanged to an available new item of the same product but of different product option. There cannot be any change of product types, e.g. modify shirt to shoe.\n\nThe user must provide a payment method to pay or receive refund of the price difference. If the user provides a gift card, it must have enough balance to cover the price difference.\n\nAfter user confirmation, the order status will be changed to 'exchange requested', and the user will receive an email regarding how to return items. There is no need to place a new order.\n",
+    "file_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467",
+    "canonical_text_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+    "anchors": {
+      "auth": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 10,
+        "quote": "At the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "confirm": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 16,
+        "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "no_invention": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 18,
+        "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "once": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 84,
+        "quote": "Exchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "gift_balance": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 104,
+        "quote": "If the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "return_payment": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 124,
+        "quote": "The refund must either go to the original payment method, or an existing gift card.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "cancel_status": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 88,
+        "quote": "An order can only be cancelled if its status is 'pending', and you should check its status before taking the action.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "cancel_confirm": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 90,
+        "quote": "The user needs to confirm the order id and the reason (either 'no longer needed' or 'ordered by mistake') for cancellation. Other reasons are not acceptable.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      },
+      "collect_modify": {
+        "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+        "line": 110,
+        "quote": "This action can only be called once, and will change the order status to 'pending (items modifed)'. The agent will not be able to modify or cancel the order anymore. So you must confirm all the details are correct and be cautious before taking this action. In particular, remember to remind the customer to confirm they have provided all the items they want to modify.",
+        "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+      }
+    }
+  },
+  "shared_tool_schemas": {
+    "schemas": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calculate",
+          "description": "Calculate the result of a mathematical expression.",
+          "parameters": {
+            "properties": {
+              "expression": {
+                "description": "The mathematical expression to calculate, such as '2 + 2'. The expression can contain numbers, operators (+, -, *, /), parentheses, and spaces.",
+                "title": "Expression",
+                "type": "string"
+              }
+            },
+            "required": [
+              "expression"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "cancel_pending_order",
+          "description": "Cancel a pending order. If the order is already processed or delivered,\n\nit cannot be cancelled. The agent needs to explain the cancellation detail\nand ask for explicit user confirmation (yes/no) to proceed. If the user confirms,\nthe order status will be changed to 'cancelled' and the payment will be refunded.\nThe refund will be added to the user's gift card balance immediately if the payment\nwas made using a gift card, otherwise the refund would take 5-7 business days to process.\nThe function returns the order details after the cancellation.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "reason": {
+                "description": "The reason for cancellation, which should be either 'no longer needed' or 'ordered by mistake'.",
+                "title": "Reason",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "reason"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "exchange_delivered_order_items",
+          "description": "Exchange items in a delivered order to new items of the same product type.\n\nFor a delivered order, return or exchange can be only done once by the agent.\nThe agent needs to explain the exchange detail and ask for explicit user confirmation (yes/no) to proceed.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "item_ids": {
+                "description": "The item ids to be exchanged, each such as '1008292230'. There could be duplicate items in the list.",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Item Ids",
+                "type": "array"
+              },
+              "new_item_ids": {
+                "description": "The item ids to be exchanged for, each such as '1008292230'.\nThere could be duplicate items in the list. Each new item id should match the item id\nin the same position and be of the same product.",
+                "items": {
+                  "type": "string"
+                },
+                "title": "New Item Ids",
+                "type": "array"
+              },
+              "payment_method_id": {
+                "description": "The payment method id to pay or receive refund for the item price difference,\nsuch as 'gift_card_0000000' or 'credit_card_0000000'. These can be looked up\nfrom the user or order details.",
+                "title": "Payment Method Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "item_ids",
+              "new_item_ids",
+              "payment_method_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "find_user_id_by_email",
+          "description": "Find user id by email. If the user is not found, the function will return an error message.",
+          "parameters": {
+            "properties": {
+              "email": {
+                "description": "The email of the user, such as 'something@example.com'.",
+                "title": "Email",
+                "type": "string"
+              }
+            },
+            "required": [
+              "email"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "find_user_id_by_name_zip",
+          "description": "Find user id by first name, last name, and zip code. If the user is not found, the function\n\nwill return an error message. By default, find user id by email, and only call this function\nif the user is not found by email or cannot remember email.",
+          "parameters": {
+            "properties": {
+              "first_name": {
+                "description": "The first name of the customer, such as 'John'.",
+                "title": "First Name",
+                "type": "string"
+              },
+              "last_name": {
+                "description": "The last name of the customer, such as 'Doe'.",
+                "title": "Last Name",
+                "type": "string"
+              },
+              "zip": {
+                "description": "The zip code of the customer, such as '12345'.",
+                "title": "Zip",
+                "type": "string"
+              }
+            },
+            "required": [
+              "first_name",
+              "last_name",
+              "zip"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_item_details",
+          "description": "Get the inventory details of an item.",
+          "parameters": {
+            "properties": {
+              "item_id": {
+                "description": "The item id, such as '6086499569'. Be careful the item id is different from the product id.",
+                "title": "Item Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "item_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_order_details",
+          "description": "Get the status and details of an order.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_product_details",
+          "description": "Get the inventory details of a product.",
+          "parameters": {
+            "properties": {
+              "product_id": {
+                "description": "The product id, such as '6086499569'. Be careful the product id is different from the item id.",
+                "title": "Product Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "product_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "get_user_details",
+          "description": "Get the details of a user, including their orders.",
+          "parameters": {
+            "properties": {
+              "user_id": {
+                "description": "The user id, such as 'sara_doe_496'.",
+                "title": "User Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "user_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "list_all_product_types",
+          "description": "List the name and product id of all product types.\n\nEach product type has a variety of different items with unique item ids and options.\nThere are only 50 product types in the store.",
+          "parameters": {
+            "properties": {},
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "modify_pending_order_address",
+          "description": "Modify the shipping address of a pending order. The agent needs to explain the modification detail and ask for explicit user confirmation (yes/no) to proceed.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "address1": {
+                "description": "The first line of the address, such as '123 Main St'.",
+                "title": "Address1",
+                "type": "string"
+              },
+              "address2": {
+                "description": "The second line of the address, such as 'Apt 1' or ''.",
+                "title": "Address2",
+                "type": "string"
+              },
+              "city": {
+                "description": "The city, such as 'San Francisco'.",
+                "title": "City",
+                "type": "string"
+              },
+              "state": {
+                "description": "The state, such as 'CA'.",
+                "title": "State",
+                "type": "string"
+              },
+              "country": {
+                "description": "The country, such as 'USA'.",
+                "title": "Country",
+                "type": "string"
+              },
+              "zip": {
+                "description": "The zip code, such as '12345'.",
+                "title": "Zip",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "address1",
+              "address2",
+              "city",
+              "state",
+              "country",
+              "zip"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "modify_pending_order_items",
+          "description": "Modify items in a pending order to new items of the same product type. For a pending order, this function can only be called once. The agent needs to explain the exchange detail and ask for explicit user confirmation (yes/no) to proceed.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "item_ids": {
+                "description": "The item ids to be modified, each such as '1008292230'. There could be duplicate items in the list.",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Item Ids",
+                "type": "array"
+              },
+              "new_item_ids": {
+                "description": "The item ids to be modified for, each such as '1008292230'. There could be duplicate items in the list. Each new item id should match the item id in the same position and be of the same product.",
+                "items": {
+                  "type": "string"
+                },
+                "title": "New Item Ids",
+                "type": "array"
+              },
+              "payment_method_id": {
+                "description": "The payment method id to pay or receive refund for the item price difference, such as 'gift_card_0000000' or 'credit_card_0000000'. These can be looked up from the user or order details.",
+                "title": "Payment Method Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "item_ids",
+              "new_item_ids",
+              "payment_method_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "modify_pending_order_payment",
+          "description": "Modify the payment method of a pending order. The agent needs to explain the modification detail and ask for explicit user confirmation (yes/no) to proceed.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "payment_method_id": {
+                "description": "The payment method id to pay or receive refund for the item price difference, such as 'gift_card_0000000' or 'credit_card_0000000'. These can be looked up from the user or order details.",
+                "title": "Payment Method Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "payment_method_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "modify_user_address",
+          "description": "Modify the default address of a user. The agent needs to explain the modification detail and ask for explicit user confirmation (yes/no) to proceed.",
+          "parameters": {
+            "properties": {
+              "user_id": {
+                "description": "The user id, such as 'sara_doe_496'.",
+                "title": "User Id",
+                "type": "string"
+              },
+              "address1": {
+                "description": "The first line of the address, such as '123 Main St'.",
+                "title": "Address1",
+                "type": "string"
+              },
+              "address2": {
+                "description": "The second line of the address, such as 'Apt 1' or ''.",
+                "title": "Address2",
+                "type": "string"
+              },
+              "city": {
+                "description": "The city, such as 'San Francisco'.",
+                "title": "City",
+                "type": "string"
+              },
+              "state": {
+                "description": "The state, such as 'CA'.",
+                "title": "State",
+                "type": "string"
+              },
+              "country": {
+                "description": "The country, such as 'USA'.",
+                "title": "Country",
+                "type": "string"
+              },
+              "zip": {
+                "description": "The zip code, such as '12345'.",
+                "title": "Zip",
+                "type": "string"
+              }
+            },
+            "required": [
+              "user_id",
+              "address1",
+              "address2",
+              "city",
+              "state",
+              "country",
+              "zip"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "return_delivered_order_items",
+          "description": "Return some items of a delivered order.\n\nThe order status will be changed to 'return requested'.\nThe agent needs to explain the return detail and ask for explicit user confirmation (yes/no) to proceed.\nThe user will receive follow-up email for how and where to return the item.",
+          "parameters": {
+            "properties": {
+              "order_id": {
+                "description": "The order id, such as '#W0000000'. Be careful there is a '#' symbol at the beginning of the order id.",
+                "title": "Order Id",
+                "type": "string"
+              },
+              "item_ids": {
+                "description": "The item ids to be returned, each such as '1008292230'. There could be duplicate items in the list.",
+                "items": {
+                  "type": "string"
+                },
+                "title": "Item Ids",
+                "type": "array"
+              },
+              "payment_method_id": {
+                "description": "The payment method id to pay or receive refund for the item price difference, such as 'gift_card_0000000' or 'credit_card_0000000'.\nThese can be looked up from the user or order details.",
+                "title": "Payment Method Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "order_id",
+              "item_ids",
+              "payment_method_id"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "transfer_to_human_agents",
+          "description": "Transfer the user to a human agent, with a summary of the user's issue.\n\nOnly transfer if\n -  the user explicitly asks for a human agent\n -  given the policy and the available tools, you cannot solve the user's issue.",
+          "parameters": {
+            "properties": {
+              "summary": {
+                "description": "A summary of the user's issue.",
+                "title": "Summary",
+                "type": "string"
+              }
+            },
+            "required": [
+              "summary"
+            ],
+            "title": "parameters",
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "canonical_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e",
+    "construction": "RetailTools(RetailDB(products={},users={},orders={})).get_tools(); tool.openai_schema; sorted by tool name. No DB loaded, tool called, or model invoked.",
+    "source_functions": {
+      "calculate": {
+        "start_line": 141,
+        "end_line": 156
+      },
+      "cancel_pending_order": {
+        "start_line": 159,
+        "end_line": 205
+      },
+      "exchange_delivered_order_items": {
+        "start_line": 208,
+        "end_line": 284
+      },
+      "find_user_id_by_name_zip": {
+        "start_line": 287,
+        "end_line": 312
+      },
+      "find_user_id_by_email": {
+        "start_line": 315,
+        "end_line": 330
+      },
+      "get_order_details": {
+        "start_line": 333,
+        "end_line": 346
+      },
+      "get_product_details": {
+        "start_line": 349,
+        "end_line": 362
+      },
+      "get_item_details": {
+        "start_line": 365,
+        "end_line": 378
+      },
+      "get_user_details": {
+        "start_line": 381,
+        "end_line": 394
+      },
+      "list_all_product_types": {
+        "start_line": 397,
+        "end_line": 408
+      },
+      "modify_pending_order_address": {
+        "start_line": 411,
+        "end_line": 452
+      },
+      "modify_pending_order_items": {
+        "start_line": 455,
+        "end_line": 542
+      },
+      "modify_pending_order_payment": {
+        "start_line": 545,
+        "end_line": 622
+      },
+      "modify_user_address": {
+        "start_line": 625,
+        "end_line": 661
+      },
+      "return_delivered_order_items": {
+        "start_line": 664,
+        "end_line": 714
+      },
+      "transfer_to_human_agents": {
+        "start_line": 732,
+        "end_line": 745
+      }
+    },
+    "response_limitation": "Tool contents are hand-authored minimal JSON records carrying the facts used in the fixture. They are not claimed to be complete upstream Pydantic return objects or actual environment outputs."
+  },
+  "admission_contract": {
+    "instruction_sha256": "930646e2b7c5e6a939f2559d9d36969ebdd569438c7db130929e8659e19b636e",
+    "output_schema": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": [
+            "accept",
+            "reject",
+            "abstain"
+          ]
+        },
+        "claim_supported": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "agent_responsible": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "correction_observable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "const": "policy"
+                  },
+                  "quote": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source",
+                  "quote"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "const": "history"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "message_index": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "source",
+                  "quote",
+                  "message_index"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "decision",
+        "claim_supported",
+        "agent_responsible",
+        "correction_observable",
+        "references",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "output_schema_sha256": "15d2539291d43f814c9050dec7d57db61bc7854ed6ab3b369c060a19cfa404ca",
+    "input_shape": "audit_diagnosis(diagnosis, messages, shared_policy.text, shared_tool_schemas.schemas, judge); wrapper builds action-view-v1. Only diagnosis reasoning/correct_behavior and actor-visible action view cross the model boundary.",
+    "forbidden_model_fields": [
+      "host_only_truth_proposal",
+      "host_only_annotations",
+      "synthetic_origin_fixture",
+      "pair_id",
+      "expected decisions",
+      "source hashes and this manifest"
+    ]
+  },
+  "pairs": [
+    {
+      "pair_id": "P1",
+      "cards": [
+        "C1-01",
+        "C1-02"
+      ],
+      "contrast": "Confirmation absent versus explicitly present",
+      "changed_fields": [
+        "stimulus.messages[7].content"
+      ],
+      "relationship": "Same diagnosis, same indexed mutation, one earlier user response differs."
+    },
+    {
+      "pair_id": "P2",
+      "cards": [
+        "C1-03",
+        "C1-04"
+      ],
+      "contrast": "Allowed refund correction versus saved-method overgeneralization",
+      "changed_fields": [
+        "stimulus.diagnosis.correct_behavior"
+      ],
+      "relationship": "Same factual fault and action view, only correction differs."
+    },
+    {
+      "pair_id": "P3",
+      "cards": [
+        "C1-05",
+        "C1-06"
+      ],
+      "contrast": "Fixed framework greeting versus same text in model-owned action",
+      "changed_fields": [
+        "prefix and turn_idx",
+        "synthetic origin ledger"
+      ],
+      "relationship": "Same disputed text and diagnosis wording, different prior context/turn/source; not a one-factor identical-view causal contrast."
+    },
+    {
+      "pair_id": "P4",
+      "cards": [
+        "C1-07",
+        "C1-08"
+      ],
+      "contrast": "Ask unresolved preference versus import later choice",
+      "changed_fields": [
+        "stimulus.diagnosis.correct_behavior"
+      ],
+      "relationship": "Same factual fault and action view, only correction differs; future message stays host-only."
+    },
+    {
+      "pair_id": "P5",
+      "cards": [
+        "C1-09",
+        "C1-10"
+      ],
+      "contrast": "Retrieve missing balance versus rely on hidden balance",
+      "changed_fields": [
+        "stimulus.diagnosis.correct_behavior"
+      ],
+      "relationship": "Same factual fault and action view, only correction differs; hidden fixture fact stays host-only."
+    },
+    {
+      "pair_id": "P6",
+      "cards": [
+        "C1-11",
+        "C1-12"
+      ],
+      "contrast": "Actual cancellation attempt versus read-only preparation",
+      "changed_fields": [
+        "indexed action and its synthetic ledger binding"
+      ],
+      "relationship": "Same prefix/diagnosis and correct general advice; the indexed operation determines whether the confirmation obligation was violated."
+    }
+  ],
+  "cards": [
+    {
+      "card_id": "C1-01",
+      "pair_id": "P1",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 8,
+          "reasoning": "The assistant attempted the shipping-address update before obtaining explicit confirmation of the stated change.",
+          "correct_behavior": "List the exact address and order, and wait for an explicit yes before calling the address-update tool."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Please change the address on order #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_f10264d5512119ec5c3f23b2_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "f10264d5512119ec5c3f23b2",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_f10264d5512119ec5c3f23b2_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_29015b5240a218b739add32f_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "29015b5240a218b739add32f",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_29015b5240a218b739add32f_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "3a2adebae552f644d2874aaf",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 7,
+            "content": "I have not confirmed this change yet."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_d811bdfb23870b975c9e20fa_0",
+                "name": "modify_pending_order_address",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "address1": "2 Pine Road",
+                  "address2": "Suite 1",
+                  "city": "Springfield",
+                  "state": "IL",
+                  "country": "USA",
+                  "zip": "62701"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "d811bdfb23870b975c9e20fa",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "modify_pending_order_address",
+                    "arguments_json": "{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "f10264d5512119ec5c3f23b2",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "29015b5240a218b739add32f",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "3a2adebae552f644d2874aaf",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "d811bdfb23870b975c9e20fa",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "modify_pending_order_address",
+                  "arguments_json": "{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "3a50f9607472a0235508134d43ca9331e8baf6df3342649af8df5e13b398568c",
+        "messages_sha256": "cac1218a7e87fd1f86afc8ba8d8cef4a791d91fa550ab91ed3a8a045b305e64e",
+        "view_sha256": "6483f808d60103a1786ed1bcb65a453d6eab30c5a6f3ad85cc469c526432c288",
+        "gate_payload_sha256": "303f86c46f276f423915cf15297cead6000381bb17c26e42b3f2c1df96149ff9",
+        "origin_fixture_sha256": "6efa47f54aaaefdf3d37bfc8fb7d5207198d8c742cfaa038e19c0462f8dd1c60",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "supported",
+        "expected_semantic_decision": "accept",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "d811bdfb23870b975c9e20fa",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "turn7明确未确认，turn8已尝试数据库写入。批评对象是已尝试动作，不假称更新已成功。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 16,
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "turn_idx": 7,
+            "quote": "I have not confirmed this change yet."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 8,
+            "turn_idx": 8,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"},\"id\":\"cli_d811bdfb23870b975c9e20fa_0\",\"name\":\"modify_pending_order_address\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed."
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "quote": "I have not confirmed this change yet."
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    },
+    {
+      "card_id": "C1-02",
+      "pair_id": "P1",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 8,
+          "reasoning": "The assistant attempted the shipping-address update before obtaining explicit confirmation of the stated change.",
+          "correct_behavior": "List the exact address and order, and wait for an explicit yes before calling the address-update tool."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Please change the address on order #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_f10264d5512119ec5c3f23b2_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "f10264d5512119ec5c3f23b2",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_f10264d5512119ec5c3f23b2_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_29015b5240a218b739add32f_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "29015b5240a218b739add32f",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_29015b5240a218b739add32f_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "3a2adebae552f644d2874aaf",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 7,
+            "content": "Yes, I explicitly confirm changing only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_d811bdfb23870b975c9e20fa_0",
+                "name": "modify_pending_order_address",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "address1": "2 Pine Road",
+                  "address2": "Suite 1",
+                  "city": "Springfield",
+                  "state": "IL",
+                  "country": "USA",
+                  "zip": "62701"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "d811bdfb23870b975c9e20fa",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "modify_pending_order_address",
+                    "arguments_json": "{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "f10264d5512119ec5c3f23b2",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "29015b5240a218b739add32f",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "3a2adebae552f644d2874aaf",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "d811bdfb23870b975c9e20fa",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "modify_pending_order_address",
+                  "arguments_json": "{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "3a50f9607472a0235508134d43ca9331e8baf6df3342649af8df5e13b398568c",
+        "messages_sha256": "4ac2f695edf6782cc21f60c22a312db013ff1413587618d7c0c4cb8c425f848c",
+        "view_sha256": "ebe6d1874302cdba0b880d31b392c59c0a938a90471ff65578394109c5268fc5",
+        "gate_payload_sha256": "cab0e77a9b2720abddf2ba688c84b640cf5a7530d1e6230413f96c0cc2b767e7",
+        "origin_fixture_sha256": "6efa47f54aaaefdf3d37bfc8fb7d5207198d8c742cfaa038e19c0462f8dd1c60",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "unsupported",
+        "expected_semantic_decision": "reject",
+        "dimensions": {
+          "claim_support": "unsupported",
+          "agent_responsibility": "unsupported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "d811bdfb23870b975c9e20fa",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "同一写动作之前已有完整变更说明和明确Yes；诊断事实被前缀反驳，建议本身仍是正确政策。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 16,
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 6,
+            "turn_idx": 6,
+            "quote": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm."
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "turn_idx": 7,
+            "quote": "Yes, I explicitly confirm changing only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 8,
+            "turn_idx": 8,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"address1\":\"2 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"order_id\":\"#W9100001\",\"state\":\"IL\",\"zip\":\"62701\"},\"id\":\"cli_d811bdfb23870b975c9e20fa_0\",\"name\":\"modify_pending_order_address\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed."
+          },
+          {
+            "source": "history",
+            "message_index": 6,
+            "quote": "I will change only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA. Please explicitly confirm."
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "quote": "Yes, I explicitly confirm changing only the shipping address on #W9100001 to 2 Pine Road, Suite 1, Springfield, IL 62701, USA."
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    },
+    {
+      "card_id": "C1-03",
+      "pair_id": "P2",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 10,
+          "reasoning": "The assistant attempted a delivered-order return refund to a saved credit card that was not the original payment method.",
+          "correct_behavior": "Explain that this return can refund only to the original payment method or an existing gift card, then obtain confirmation for an allowed route."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Return the desk lamp in #W9100001 and refund to my other saved card credit_card_9100002."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_31352fbac2da8cd808914814_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "31352fbac2da8cd808914814",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_31352fbac2da8cd808914814_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_30d5d2def601a38fa68a0da0_0",
+                "name": "get_user_details",
+                "arguments": {
+                  "user_id": "c1_casey_fixture_9100"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "30d5d2def601a38fa68a0da0",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_user_details",
+                    "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_30d5d2def601a38fa68a0da0_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"email\":\"casey.c1@example.invalid\",\"name\":{\"first_name\":\"Casey\",\"last_name\":\"Fixture\"},\"orders\":[\"#W9100001\"],\"payment_methods\":{\"credit_card_9100001\":{\"brand\":\"visa\",\"id\":\"credit_card_9100001\",\"last_four\":\"0001\",\"source\":\"credit_card\"},\"credit_card_9100002\":{\"brand\":\"mastercard\",\"id\":\"credit_card_9100002\",\"last_four\":\"0002\",\"source\":\"credit_card\"},\"gift_card_9100001\":{\"balance\":120.0,\"id\":\"gift_card_9100001\",\"source\":\"gift_card\"}},\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_734744894a3abb9d3d1ca7d1_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "734744894a3abb9d3d1ca7d1",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 7,
+            "id": "cli_734744894a3abb9d3d1ca7d1_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"delivered\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "225400f00c7b976c35e06dff",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 9,
+            "content": "Yes, I confirm that return and refund method."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 10,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_161295fec2377e699d989c17_0",
+                "name": "return_delivered_order_items",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "item_ids": [
+                    "9100000001"
+                  ],
+                  "payment_method_id": "credit_card_9100002"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "161295fec2377e699d989c17",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "return_delivered_order_items",
+                    "arguments_json": "{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "31352fbac2da8cd808914814",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "30d5d2def601a38fa68a0da0",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_user_details",
+                  "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "734744894a3abb9d3d1ca7d1",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "225400f00c7b976c35e06dff",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 5,
+            "cli_call_id": "161295fec2377e699d989c17",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "return_delivered_order_items",
+                  "arguments_json": "{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "f4a8abb1b30d6fc66f0f634b4cdc457b1b86b2ceb1a8c809227d7ac41e2bb1c6",
+        "messages_sha256": "aebe943f4463d136f4ded9d993f03a4c635ebb061daab4ed34cb29c6c0dd229e",
+        "view_sha256": "d6fc124c73de5b9048ecd800b3dddd55370eb602ac4d8f98c9d2ff8d50014f8a",
+        "gate_payload_sha256": "5e673efb3b57baf827783e94c6c9ad5b02745533a005cad64b7e567a7044ee9d",
+        "origin_fixture_sha256": "1f7ad0fcb0d176347af0e64b1244f87c0c0347354becbc4e2dc3937af7f1d790",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "supported",
+        "expected_semantic_decision": "accept",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "161295fec2377e699d989c17",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "订单payment_history为CARD，实际return参数为另一个credit card ALT；用户确认不能覆盖退款政策限制。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 124,
+            "quote": "The refund must either go to the original payment method, or an existing gift card.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 5,
+            "turn_idx": 5,
+            "quote": "\"credit_card_9100002\":"
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "turn_idx": 7,
+            "quote": "\"payment_method_id\":\"credit_card_9100001\""
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 10,
+            "turn_idx": 10,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"},\"id\":\"cli_161295fec2377e699d989c17_0\",\"name\":\"return_delivered_order_items\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "The refund must either go to the original payment method, or an existing gift card."
+          },
+          {
+            "source": "history",
+            "message_index": 5,
+            "quote": "\"credit_card_9100002\":"
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "quote": "\"payment_method_id\":\"credit_card_9100001\""
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    },
+    {
+      "card_id": "C1-04",
+      "pair_id": "P2",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 10,
+          "reasoning": "The assistant attempted a delivered-order return refund to a saved credit card that was not the original payment method.",
+          "correct_behavior": "Explain that this return can refund to any saved payment method, including another credit card or an existing gift card, then obtain confirmation for that route."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Return the desk lamp in #W9100001 and refund to my other saved card credit_card_9100002."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_31352fbac2da8cd808914814_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "31352fbac2da8cd808914814",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_31352fbac2da8cd808914814_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_30d5d2def601a38fa68a0da0_0",
+                "name": "get_user_details",
+                "arguments": {
+                  "user_id": "c1_casey_fixture_9100"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "30d5d2def601a38fa68a0da0",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_user_details",
+                    "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_30d5d2def601a38fa68a0da0_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"email\":\"casey.c1@example.invalid\",\"name\":{\"first_name\":\"Casey\",\"last_name\":\"Fixture\"},\"orders\":[\"#W9100001\"],\"payment_methods\":{\"credit_card_9100001\":{\"brand\":\"visa\",\"id\":\"credit_card_9100001\",\"last_four\":\"0001\",\"source\":\"credit_card\"},\"credit_card_9100002\":{\"brand\":\"mastercard\",\"id\":\"credit_card_9100002\",\"last_four\":\"0002\",\"source\":\"credit_card\"},\"gift_card_9100001\":{\"balance\":120.0,\"id\":\"gift_card_9100001\",\"source\":\"gift_card\"}},\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_734744894a3abb9d3d1ca7d1_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "734744894a3abb9d3d1ca7d1",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 7,
+            "id": "cli_734744894a3abb9d3d1ca7d1_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"delivered\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "225400f00c7b976c35e06dff",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 9,
+            "content": "Yes, I confirm that return and refund method."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 10,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_161295fec2377e699d989c17_0",
+                "name": "return_delivered_order_items",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "item_ids": [
+                    "9100000001"
+                  ],
+                  "payment_method_id": "credit_card_9100002"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "161295fec2377e699d989c17",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "return_delivered_order_items",
+                    "arguments_json": "{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "31352fbac2da8cd808914814",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "30d5d2def601a38fa68a0da0",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_user_details",
+                  "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "734744894a3abb9d3d1ca7d1",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "225400f00c7b976c35e06dff",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Please confirm returning desk lamp item 9100000001 from #W9100001 and refunding $100 to credit_card_9100002.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 5,
+            "cli_call_id": "161295fec2377e699d989c17",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "return_delivered_order_items",
+                  "arguments_json": "{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "c797889d7a22adfc9fb066f2ba99f318a6c437db95dcf5c610cb3183f2bb0199",
+        "messages_sha256": "aebe943f4463d136f4ded9d993f03a4c635ebb061daab4ed34cb29c6c0dd229e",
+        "view_sha256": "d6fc124c73de5b9048ecd800b3dddd55370eb602ac4d8f98c9d2ff8d50014f8a",
+        "gate_payload_sha256": "d508874df74410bd17ceec95131e4eb068e4313292623e288439a959ba4a7927",
+        "origin_fixture_sha256": "1f7ad0fcb0d176347af0e64b1244f87c0c0347354becbc4e2dc3937af7f1d790",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "unsupported",
+        "expected_semantic_decision": "reject",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "unsupported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "161295fec2377e699d989c17",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "事实诊断和责任不变，但把退货退款范围推广到任意已保存支付方式，明确违反原支付或现有礼品卡限制。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 124,
+            "quote": "The refund must either go to the original payment method, or an existing gift card.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "turn_idx": 7,
+            "quote": "\"payment_method_id\":\"credit_card_9100001\""
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 10,
+            "turn_idx": 10,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"item_ids\":[\"9100000001\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100002\"},\"id\":\"cli_161295fec2377e699d989c17_0\",\"name\":\"return_delivered_order_items\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "The refund must either go to the original payment method, or an existing gift card."
+          },
+          {
+            "source": "history",
+            "message_index": 7,
+            "quote": "\"payment_method_id\":\"credit_card_9100001\""
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    },
+    {
+      "card_id": "C1-05",
+      "pair_id": "P3",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 0,
+          "reasoning": "The assistant used a general greeting instead of authenticating the customer at the beginning of the conversation.",
+          "correct_behavior": "Ask for the customer email or name and ZIP, then locate the user ID before accessing profile or order information."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "730fe4a0408921902a4de9a734d4775abb75fd51e9d08afe4ba59562bf0dcdd2",
+        "messages_sha256": "63926ea0d831c13bd31cd9c2712c0c39095e73b34a203ace69d0d4321aa9496b",
+        "view_sha256": "37e1299cc73c126678ea3ad97bc909d6853e77d186fbfa68acd9e6589dfedc23",
+        "gate_payload_sha256": "06efcb1137dabeb9e05016f67aadf53f65bb6e91c00d987e52cda7122c204140",
+        "origin_fixture_sha256": "dcb0ce22b8383a17769b1a0459206f85174aebdab326a5313fb11014f07ab37f",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "insufficient",
+        "expected_semantic_decision": "abstain",
+        "dimensions": {
+          "claim_support": "insufficient",
+          "agent_responsibility": "insufficient",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "framework_seed",
+        "expected_strategy_eligibility": "route_to_harness_or_non_agent_review",
+        "origin_fixture_observation": {
+          "origin": "framework_seed",
+          "strategy_editable": false,
+          "reason": "pinned_fresh_non_solo_initializer_precedes_model_calls",
+          "cli_call_id": null,
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "仅一条问候，尚无资料访问、行动或明确放弃后续认证，不能从未立刻认证推定完整认证义务已被违反。来源另已由固定非solo初始化规则确定为framework_seed，system_prompt无法改该开场。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 10,
+            "quote": "At the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 0,
+            "turn_idx": 0,
+            "rendered_action_json": "{\"content\":\"Hi! How can I help you today?\",\"role\":\"assistant\",\"tool_calls\":null}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "At the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id."
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "provenance_source": {
+          "path": "vendor/tau2/src/tau2/orchestrator/orchestrator.py",
+          "constant_lines": [
+            47,
+            49
+          ],
+          "fresh_non_solo_lines": [
+            627,
+            642
+          ],
+          "sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420"
+        },
+        "semantic_responsibility_is_conditioned_on_visible_evidence_not_origin_fixture": true
+      }
+    },
+    {
+      "card_id": "C1-06",
+      "pair_id": "P3",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 2,
+          "reasoning": "The assistant used a general greeting instead of authenticating the customer at the beginning of the conversation.",
+          "correct_behavior": "Ask for the customer email or name and ZIP, then locate the user ID before accessing profile or order information."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "Hello, I need help with an order."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "df72264a2959eff63886179e",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Hi! How can I help you today?",
+                "tool_calls": []
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "df72264a2959eff63886179e",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Hi! How can I help you today?",
+              "tool_calls": []
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "89f172b95561f11f0019171875d5b0152f7eb4aa6f20abe69e89a902a2fa4822",
+        "messages_sha256": "0c1f3d10c0ee90adfe245f6c5d40a4335071b9906ee2ed5e378f6c27690a0c21",
+        "view_sha256": "f51c909c40b8d740636b3d4bbd5872b354072e46f39376575e34876dc128424b",
+        "gate_payload_sha256": "802bed4f4aa94b465a1b5f198f0ade75fc1dec681ed2d8c07ececdcadb42e0e8",
+        "origin_fixture_sha256": "b90c617905b14dffe3d278acf36272c1a2dbcff09ad8657f8f08374492815971",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "insufficient",
+        "expected_semantic_decision": "abstain",
+        "dimensions": {
+          "claim_support": "insufficient",
+          "agent_responsibility": "insufficient",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "df72264a2959eff63886179e",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "相同争议文本这次绑定合成model_agent输出，因此策略可修改；但仍未看到资料访问或事务动作，单凭问候不能证成诊断。它可能低效，不等于已证实认证绕过。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 10,
+            "quote": "At the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "Hello, I need help with an order."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 2,
+            "turn_idx": 2,
+            "rendered_action_json": "{\"content\":\"Hi! How can I help you today?\",\"role\":\"assistant\",\"tool_calls\":null}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "At the beginning of the conversation, you have to authenticate the user identity by locating their user id via email, or via name + zip code. This has to be done even when the user already provides the user id."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "Hello, I need help with an order."
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "semantic_responsibility_is_conditioned_on_visible_evidence_not_origin_fixture": true
+      }
+    },
+    {
+      "card_id": "C1-07",
+      "pair_id": "P4",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 14,
+          "reasoning": "The assistant submitted the once-only order modification even though the customer had already disclosed a second item whose requested change was still unresolved.",
+          "correct_behavior": "Ask the customer to choose the backpack variant, collect both changes, then obtain confirmation for the complete modification before submitting it once."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. In #W9100001, change the desk lamp to black. I also want to change the backpack, but I have not decided its new color yet; I will tell you before you submit all the changes."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_d6172129da3863e767ccf1aa_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "d6172129da3863e767ccf1aa",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_d6172129da3863e767ccf1aa_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_730020b40c95bdb7831ec0f5_0",
+                "name": "get_user_details",
+                "arguments": {
+                  "user_id": "c1_casey_fixture_9100"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "730020b40c95bdb7831ec0f5",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_user_details",
+                    "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_730020b40c95bdb7831ec0f5_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"email\":\"casey.c1@example.invalid\",\"name\":{\"first_name\":\"Casey\",\"last_name\":\"Fixture\"},\"orders\":[\"#W9100001\"],\"payment_methods\":{\"credit_card_9100001\":{\"brand\":\"visa\",\"id\":\"credit_card_9100001\",\"last_four\":\"0001\",\"source\":\"credit_card\"},\"credit_card_9100002\":{\"brand\":\"mastercard\",\"id\":\"credit_card_9100002\",\"last_four\":\"0002\",\"source\":\"credit_card\"},\"gift_card_9100001\":{\"balance\":120.0,\"id\":\"gift_card_9100001\",\"source\":\"gift_card\"}},\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_17c8c9dd25f8ea1e2140b704_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "17c8c9dd25f8ea1e2140b704",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 7,
+            "id": "cli_17c8c9dd25f8ea1e2140b704_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":50.0,\"product_id\":\"9100001001\"},{\"item_id\":\"9100000002\",\"name\":\"Backpack\",\"options\":{\"color\":\"green\"},\"price\":50.0,\"product_id\":\"9100001002\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_72ac2b9b18b210d8346606da_0",
+                "name": "get_product_details",
+                "arguments": {
+                  "product_id": "9100001001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "72ac2b9b18b210d8346606da",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_product_details",
+                    "arguments_json": "{\"product_id\":\"9100001001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 9,
+            "id": "cli_72ac2b9b18b210d8346606da_0",
+            "requestor": "assistant",
+            "content": "{\"name\":\"Desk Lamp\",\"product_id\":\"9100001001\",\"variants\":{\"9100000003\":{\"available\":true,\"item_id\":\"9100000003\",\"options\":{\"color\":\"black\"},\"price\":50.0}}}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 10,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_df63e100abea0a0e0fb5364e_0",
+                "name": "get_product_details",
+                "arguments": {
+                  "product_id": "9100001002"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "df63e100abea0a0e0fb5364e",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_product_details",
+                    "arguments_json": "{\"product_id\":\"9100001002\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 11,
+            "id": "cli_df63e100abea0a0e0fb5364e_0",
+            "requestor": "assistant",
+            "content": "{\"name\":\"Backpack\",\"product_id\":\"9100001002\",\"variants\":{\"9100000004\":{\"available\":true,\"item_id\":\"9100000004\",\"options\":{\"color\":\"red\"},\"price\":50.0},\"9100000005\":{\"available\":true,\"item_id\":\"9100000005\",\"options\":{\"color\":\"blue\"},\"price\":50.0}}}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 12,
+            "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "46a90d29daef17631efa8135",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 13,
+            "content": "I confirm the black lamp, but I still need to choose the backpack color before all changes are submitted."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 14,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_ac934f86058c62d89328a109_0",
+                "name": "modify_pending_order_items",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "item_ids": [
+                    "9100000001"
+                  ],
+                  "new_item_ids": [
+                    "9100000003"
+                  ],
+                  "payment_method_id": "credit_card_9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "ac934f86058c62d89328a109",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "modify_pending_order_items",
+                    "arguments_json": "{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "d6172129da3863e767ccf1aa",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "730020b40c95bdb7831ec0f5",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_user_details",
+                  "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "17c8c9dd25f8ea1e2140b704",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "72ac2b9b18b210d8346606da",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_product_details",
+                  "arguments_json": "{\"product_id\":\"9100001001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 5,
+            "cli_call_id": "df63e100abea0a0e0fb5364e",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_product_details",
+                  "arguments_json": "{\"product_id\":\"9100001002\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 6,
+            "cli_call_id": "46a90d29daef17631efa8135",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 7,
+            "cli_call_id": "ac934f86058c62d89328a109",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "modify_pending_order_items",
+                  "arguments_json": "{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "fda77adb5247ddff74cf1bc4444c16ae9843e6dcf97b56de953fe31eeede8cd5",
+        "messages_sha256": "5be69ae356c168429a1a7720a2cc9e76f6fc5632513816106023eb8ee4497348",
+        "view_sha256": "36063009e1f33787cbfe53a937d575684577a51c4d793d51ac4fd41d4d2307ea",
+        "gate_payload_sha256": "131b9f082a65505e5a596803c5c07ae0e817ec321e04412d8fb09a74d42942f5",
+        "origin_fixture_sha256": "8d081d9c4fc61739ce8f92fd19adb2f04ef02e278dd805a76b61aade987f32d9",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "supported",
+        "expected_semantic_decision": "accept",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "ac934f86058c62d89328a109",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "前缀已披露第二目标待定，工具和政策明确一次性提交；合理修正是继续询问并共同确认，而非猜测选择。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 84,
+            "quote": "Exchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 110,
+            "quote": "This action can only be called once, and will change the order status to 'pending (items modifed)'. The agent will not be able to modify or cancel the order anymore. So you must confirm all the details are correct and be cautious before taking this action. In particular, remember to remind the customer to confirm they have provided all the items they want to modify.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "I have not decided its new color yet"
+          },
+          {
+            "source": "history",
+            "message_index": 13,
+            "turn_idx": 13,
+            "quote": "I still need to choose the backpack color"
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 14,
+            "turn_idx": 14,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"},\"id\":\"cli_ac934f86058c62d89328a109_0\",\"name\":\"modify_pending_order_items\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Exchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!"
+          },
+          {
+            "source": "policy",
+            "quote": "This action can only be called once, and will change the order status to 'pending (items modifed)'. The agent will not be able to modify or cancel the order anymore. So you must confirm all the details are correct and be cautious before taking this action. In particular, remember to remind the customer to confirm they have provided all the items they want to modify."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "I have not decided its new color yet"
+          },
+          {
+            "source": "history",
+            "message_index": 13,
+            "quote": "I still need to choose the backpack color"
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "excluded_future_user_message": {
+          "role": "user",
+          "turn_idx": 16,
+          "content": "For the backpack, choose the red variant 9100000004."
+        },
+        "future_note": "This hand-authored later preference is a host-only construction fact. It is absent from stimulus.messages and the action-time view; it is not gold available to the acting agent."
+      }
+    },
+    {
+      "card_id": "C1-08",
+      "pair_id": "P4",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 14,
+          "reasoning": "The assistant submitted the once-only order modification even though the customer had already disclosed a second item whose requested change was still unresolved.",
+          "correct_behavior": "Include the red backpack variant 9100000004 with the black lamp, then obtain confirmation for that complete modification before submitting it once."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. In #W9100001, change the desk lamp to black. I also want to change the backpack, but I have not decided its new color yet; I will tell you before you submit all the changes."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_d6172129da3863e767ccf1aa_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "d6172129da3863e767ccf1aa",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_d6172129da3863e767ccf1aa_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_730020b40c95bdb7831ec0f5_0",
+                "name": "get_user_details",
+                "arguments": {
+                  "user_id": "c1_casey_fixture_9100"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "730020b40c95bdb7831ec0f5",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_user_details",
+                    "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_730020b40c95bdb7831ec0f5_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"email\":\"casey.c1@example.invalid\",\"name\":{\"first_name\":\"Casey\",\"last_name\":\"Fixture\"},\"orders\":[\"#W9100001\"],\"payment_methods\":{\"credit_card_9100001\":{\"brand\":\"visa\",\"id\":\"credit_card_9100001\",\"last_four\":\"0001\",\"source\":\"credit_card\"},\"credit_card_9100002\":{\"brand\":\"mastercard\",\"id\":\"credit_card_9100002\",\"last_four\":\"0002\",\"source\":\"credit_card\"},\"gift_card_9100001\":{\"balance\":120.0,\"id\":\"gift_card_9100001\",\"source\":\"gift_card\"}},\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_17c8c9dd25f8ea1e2140b704_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "17c8c9dd25f8ea1e2140b704",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 7,
+            "id": "cli_17c8c9dd25f8ea1e2140b704_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":50.0,\"product_id\":\"9100001001\"},{\"item_id\":\"9100000002\",\"name\":\"Backpack\",\"options\":{\"color\":\"green\"},\"price\":50.0,\"product_id\":\"9100001002\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 8,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_72ac2b9b18b210d8346606da_0",
+                "name": "get_product_details",
+                "arguments": {
+                  "product_id": "9100001001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "72ac2b9b18b210d8346606da",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_product_details",
+                    "arguments_json": "{\"product_id\":\"9100001001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 9,
+            "id": "cli_72ac2b9b18b210d8346606da_0",
+            "requestor": "assistant",
+            "content": "{\"name\":\"Desk Lamp\",\"product_id\":\"9100001001\",\"variants\":{\"9100000003\":{\"available\":true,\"item_id\":\"9100000003\",\"options\":{\"color\":\"black\"},\"price\":50.0}}}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 10,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_df63e100abea0a0e0fb5364e_0",
+                "name": "get_product_details",
+                "arguments": {
+                  "product_id": "9100001002"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "df63e100abea0a0e0fb5364e",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_product_details",
+                    "arguments_json": "{\"product_id\":\"9100001002\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 11,
+            "id": "cli_df63e100abea0a0e0fb5364e_0",
+            "requestor": "assistant",
+            "content": "{\"name\":\"Backpack\",\"product_id\":\"9100001002\",\"variants\":{\"9100000004\":{\"available\":true,\"item_id\":\"9100000004\",\"options\":{\"color\":\"red\"},\"price\":50.0},\"9100000005\":{\"available\":true,\"item_id\":\"9100000005\",\"options\":{\"color\":\"blue\"},\"price\":50.0}}}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 12,
+            "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "46a90d29daef17631efa8135",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+                "tool_calls": []
+              }
+            }
+          },
+          {
+            "role": "user",
+            "turn_idx": 13,
+            "content": "I confirm the black lamp, but I still need to choose the backpack color before all changes are submitted."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 14,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_ac934f86058c62d89328a109_0",
+                "name": "modify_pending_order_items",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "item_ids": [
+                    "9100000001"
+                  ],
+                  "new_item_ids": [
+                    "9100000003"
+                  ],
+                  "payment_method_id": "credit_card_9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "ac934f86058c62d89328a109",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "modify_pending_order_items",
+                    "arguments_json": "{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "d6172129da3863e767ccf1aa",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "730020b40c95bdb7831ec0f5",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_user_details",
+                  "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "17c8c9dd25f8ea1e2140b704",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 4,
+            "cli_call_id": "72ac2b9b18b210d8346606da",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_product_details",
+                  "arguments_json": "{\"product_id\":\"9100001001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 5,
+            "cli_call_id": "df63e100abea0a0e0fb5364e",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_product_details",
+                  "arguments_json": "{\"product_id\":\"9100001002\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 6,
+            "cli_call_id": "46a90d29daef17631efa8135",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Please confirm changing the lamp to black at no price difference, using credit_card_9100001.",
+              "tool_calls": []
+            }
+          },
+          {
+            "call_index": 7,
+            "cli_call_id": "ac934f86058c62d89328a109",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "modify_pending_order_items",
+                  "arguments_json": "{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "421e53877cd9a5adb006403e58c27f002841e21d04ed99128f6b8c87b75d7ebb",
+        "messages_sha256": "5be69ae356c168429a1a7720a2cc9e76f6fc5632513816106023eb8ee4497348",
+        "view_sha256": "36063009e1f33787cbfe53a937d575684577a51c4d793d51ac4fd41d4d2307ea",
+        "gate_payload_sha256": "cd42b2dc93d70c3b2f6f7a7b020c052583aac88ec612a1c50b5a9777321fe51e",
+        "origin_fixture_sha256": "8d081d9c4fc61739ce8f92fd19adb2f04ef02e278dd805a76b61aade987f32d9",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "insufficient",
+        "expected_semantic_decision": "abstain",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "insufficient"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "ac934f86058c62d89328a109",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "事实诊断仍成立，但红色偏好只在宿主的后续用户消息才出现。当前虽可见红蓝库存，不能从可用性推用户选择；不足以准入该精确修正。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 84,
+            "quote": "Exchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 18,
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 13,
+            "turn_idx": 13,
+            "quote": "I still need to choose the backpack color"
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 14,
+            "turn_idx": 14,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"item_ids\":[\"9100000001\"],\"new_item_ids\":[\"9100000003\"],\"order_id\":\"#W9100001\",\"payment_method_id\":\"credit_card_9100001\"},\"id\":\"cli_ac934f86058c62d89328a109_0\",\"name\":\"modify_pending_order_items\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Exchange or modify order tools can only be called once per order. Be sure that all items to be changed are collected into a list before making the tool call!!!"
+          },
+          {
+            "source": "policy",
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments."
+          },
+          {
+            "source": "history",
+            "message_index": 13,
+            "quote": "I still need to choose the backpack color"
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "excluded_future_user_message": {
+          "role": "user",
+          "turn_idx": 16,
+          "content": "For the backpack, choose the red variant 9100000004."
+        },
+        "future_note": "This hand-authored later preference is a host-only construction fact. It is absent from stimulus.messages and the action-time view; it is not gold available to the acting agent."
+      }
+    },
+    {
+      "card_id": "C1-09",
+      "pair_id": "P5",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 6,
+          "reasoning": "The assistant stated a specific gift-card balance although neither the customer nor any prior tool response supplied that balance.",
+          "correct_behavior": "Look up the saved gift card and its current balance before stating whether it covers the full order total, then confirm any payment change with the customer."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. For #W9100001, use my gift card gift_card_9100001 if it covers the full order total. I do not know its balance."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_6af35fb9b3eabcc6ac790055_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "6af35fb9b3eabcc6ac790055",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_6af35fb9b3eabcc6ac790055_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_e12cf6ecf0b6ab22308cd34d_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "e12cf6ecf0b6ab22308cd34d",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_e12cf6ecf0b6ab22308cd34d_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "4210cae1a72cb9e07837bb03",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+                "tool_calls": []
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "6af35fb9b3eabcc6ac790055",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "e12cf6ecf0b6ab22308cd34d",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "4210cae1a72cb9e07837bb03",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+              "tool_calls": []
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "59c06785104e41c92f7cf1d948f95ea2fb8f7141130805f5a177b98774447eba",
+        "messages_sha256": "d47cff4f36d203608ad421a7972948220aa489eca8671931daa34e62c2fdf655",
+        "view_sha256": "3e723a27cd4497b6e3576c74bcb0fac6c2f4c534735c28e50e2df5832d2f9640",
+        "gate_payload_sha256": "34d8a31eea39b9388d192599920607bd5c8d34558a27dc1fa753deae59c2ba52",
+        "origin_fixture_sha256": "3c062b5940532c3ba7943a3b21245171bd02f9200f68599f8c9a4a9a054d03b4",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "supported",
+        "expected_semantic_decision": "accept",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "4210cae1a72cb9e07837bb03",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "用户明确不知余额，唯一资料查询是订单，不能提供gift-card余额；先读取余额的建议可由当前工具和政策选择。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 18,
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 104,
+            "quote": "If the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "I do not know its balance."
+          },
+          {
+            "source": "history",
+            "message_index": 5,
+            "turn_idx": 5,
+            "quote": "\"amount\":100.0"
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 6,
+            "turn_idx": 6,
+            "rendered_action_json": "{\"content\":\"Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.\",\"role\":\"assistant\",\"tool_calls\":null}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments."
+          },
+          {
+            "source": "policy",
+            "quote": "If the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "I do not know its balance."
+          },
+          {
+            "source": "history",
+            "message_index": 5,
+            "quote": "\"amount\":100.0"
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "hidden_fixture_fact": {
+          "synthetic_only": true,
+          "payment_method_id": "gift_card_9100001",
+          "balance": 120.0
+        },
+        "hidden_fact_visibility": "Host construction note only; no get_user_details response exists in this visible prefix. Even a fact that is true in a hidden fixture is not actor-visible support."
+      }
+    },
+    {
+      "card_id": "C1-10",
+      "pair_id": "P5",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 6,
+          "reasoning": "The assistant stated a specific gift-card balance although neither the customer nor any prior tool response supplied that balance.",
+          "correct_behavior": "Use the saved gift card with the $120 balance to cover the full $100 order total, then confirm this payment change with the customer."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. For #W9100001, use my gift card gift_card_9100001 if it covers the full order total. I do not know its balance."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_6af35fb9b3eabcc6ac790055_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "6af35fb9b3eabcc6ac790055",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_6af35fb9b3eabcc6ac790055_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_e12cf6ecf0b6ab22308cd34d_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "e12cf6ecf0b6ab22308cd34d",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_e12cf6ecf0b6ab22308cd34d_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+            "tool_calls": null,
+            "raw_data": {
+              "cli_call_id": "4210cae1a72cb9e07837bb03",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "message",
+                "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+                "tool_calls": []
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "6af35fb9b3eabcc6ac790055",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "e12cf6ecf0b6ab22308cd34d",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "4210cae1a72cb9e07837bb03",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "message",
+              "content": "Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.",
+              "tool_calls": []
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "6623beb2ef8a9f64b9c46102dca61709ad00688216b5cca7a8bf83ea978d119c",
+        "messages_sha256": "d47cff4f36d203608ad421a7972948220aa489eca8671931daa34e62c2fdf655",
+        "view_sha256": "3e723a27cd4497b6e3576c74bcb0fac6c2f4c534735c28e50e2df5832d2f9640",
+        "gate_payload_sha256": "9aff4eb9a07c8e47dadfc53d302abb0fb62ca606f9174aa4051e3eb9b06d386f",
+        "origin_fixture_sha256": "3c062b5940532c3ba7943a3b21245171bd02f9200f68599f8c9a4a9a054d03b4",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "insufficient",
+        "expected_semantic_decision": "abstain",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "insufficient"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "4210cae1a72cb9e07837bb03",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "余额在合成隐藏事实恰好为120，但该事实没有进入任何用户/工具前缀；诊断不能用行动本身的无依据声称给自己补证，直接指定这条支付路线的修正证据不足。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 18,
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 104,
+            "quote": "If the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "I do not know its balance."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 6,
+            "turn_idx": 6,
+            "rendered_action_json": "{\"content\":\"Your gift card gift_card_9100001 has a $120 balance, so it covers this $100 order.\",\"role\":\"assistant\",\"tool_calls\":null}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "You should not make up any information or knowledge or procedures not provided by the user or the tools, or give subjective recommendations or comments."
+          },
+          {
+            "source": "policy",
+            "quote": "If the user wants the modify the payment method to gift card, it must have enough balance to cover the total amount."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "I do not know its balance."
+          }
+        ]
+      },
+      "host_only_annotations": {
+        "hidden_fixture_fact": {
+          "synthetic_only": true,
+          "payment_method_id": "gift_card_9100001",
+          "balance": 120.0
+        },
+        "hidden_fact_visibility": "Host construction note only; no get_user_details response exists in this visible prefix. Even a fact that is true in a hidden fixture is not actor-visible support."
+      }
+    },
+    {
+      "card_id": "C1-11",
+      "pair_id": "P6",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 6,
+          "reasoning": "The assistant continued handling the cancellation request without obtaining explicit confirmation; this violates the confirmation requirement.",
+          "correct_behavior": "Summarize the order ID and cancellation reason, and obtain an explicit yes before issuing the cancellation tool call."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Cancel order #W9100001 because I no longer need it."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_f6797e25523837581040dddb_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "f6797e25523837581040dddb",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_f6797e25523837581040dddb_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_e0c2a581a8dfd2ef9c82b39f_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "e0c2a581a8dfd2ef9c82b39f",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_e0c2a581a8dfd2ef9c82b39f_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_37db7b988fdae9353bb8f3b4_0",
+                "name": "cancel_pending_order",
+                "arguments": {
+                  "order_id": "#W9100001",
+                  "reason": "no longer needed"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "37db7b988fdae9353bb8f3b4",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "cancel_pending_order",
+                    "arguments_json": "{\"order_id\":\"#W9100001\",\"reason\":\"no longer needed\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "f6797e25523837581040dddb",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "e0c2a581a8dfd2ef9c82b39f",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "37db7b988fdae9353bb8f3b4",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "cancel_pending_order",
+                  "arguments_json": "{\"order_id\":\"#W9100001\",\"reason\":\"no longer needed\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "0ecbb370673cbe5d9f3a0939badce577615c93a8e31811e74fd28f07ac430f8a",
+        "messages_sha256": "55f582f009f0ca619c04ce368834865171d2d01823f6860c1384204bd9c8f990",
+        "view_sha256": "cb87aac9a82c1b101c5cd826f0d51650bba540f1ecbd607b918b40193d183acd",
+        "gate_payload_sha256": "e4f3fb4e1fa42d9fc14c899b345616312129eb830b2630eac038581db833515d",
+        "origin_fixture_sha256": "5b279555821b85d57c361e78c2b3a8e113ca44a1574571fb9081a92cf7d17b07",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "supported",
+        "expected_semantic_decision": "accept",
+        "dimensions": {
+          "claim_support": "supported",
+          "agent_responsibility": "supported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "37db7b988fdae9353bb8f3b4",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "用户最初表达取消意愿不是agent列明细节后的明确确认；本卡索引动作已是cancel写请求，确认义务已触发。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 16,
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 90,
+            "quote": "The user needs to confirm the order id and the reason (either 'no longer needed' or 'ordered by mistake') for cancellation. Other reasons are not acceptable.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "Cancel order #W9100001 because I no longer need it."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 6,
+            "turn_idx": 6,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"order_id\":\"#W9100001\",\"reason\":\"no longer needed\"},\"id\":\"cli_37db7b988fdae9353bb8f3b4_0\",\"name\":\"cancel_pending_order\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed."
+          },
+          {
+            "source": "policy",
+            "quote": "The user needs to confirm the order id and the reason (either 'no longer needed' or 'ordered by mistake') for cancellation. Other reasons are not acceptable."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "Cancel order #W9100001 because I no longer need it."
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    },
+    {
+      "card_id": "C1-12",
+      "pair_id": "P6",
+      "source_kind": "hand_authored_synthetic_trajectory_and_diagnosis",
+      "native_reviewer_called": false,
+      "native_call_id": null,
+      "stimulus": {
+        "diagnosis": {
+          "source": "agent",
+          "error_tags": [
+            "guideline_violation"
+          ],
+          "severity": "minor",
+          "turn_idx": 6,
+          "reasoning": "The assistant continued handling the cancellation request without obtaining explicit confirmation; this violates the confirmation requirement.",
+          "correct_behavior": "Summarize the order ID and cancellation reason, and obtain an explicit yes before issuing the cancellation tool call."
+        },
+        "messages": [
+          {
+            "role": "assistant",
+            "turn_idx": 0,
+            "content": "Hi! How can I help you today?",
+            "tool_calls": null,
+            "raw_data": null,
+            "usage": null,
+            "cost": 0.0
+          },
+          {
+            "role": "user",
+            "turn_idx": 1,
+            "content": "My email is casey.c1@example.invalid. Cancel order #W9100001 because I no longer need it."
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 2,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_f6797e25523837581040dddb_0",
+                "name": "find_user_id_by_email",
+                "arguments": {
+                  "email": "casey.c1@example.invalid"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "f6797e25523837581040dddb",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "find_user_id_by_email",
+                    "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 3,
+            "id": "cli_f6797e25523837581040dddb_0",
+            "requestor": "assistant",
+            "content": "\"c1_casey_fixture_9100\""
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 4,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_e0c2a581a8dfd2ef9c82b39f_0",
+                "name": "get_order_details",
+                "arguments": {
+                  "order_id": "#W9100001"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "e0c2a581a8dfd2ef9c82b39f",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_order_details",
+                    "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "role": "tool",
+            "turn_idx": 5,
+            "id": "cli_e0c2a581a8dfd2ef9c82b39f_0",
+            "requestor": "assistant",
+            "content": "{\"address\":{\"address1\":\"1 Pine Road\",\"address2\":\"Suite 1\",\"city\":\"Springfield\",\"country\":\"USA\",\"state\":\"IL\",\"zip\":\"62701\"},\"items\":[{\"item_id\":\"9100000001\",\"name\":\"Desk Lamp\",\"options\":{\"color\":\"white\"},\"price\":100.0,\"product_id\":\"9100001001\"}],\"order_id\":\"#W9100001\",\"payment_history\":[{\"amount\":100.0,\"payment_method_id\":\"credit_card_9100001\"}],\"status\":\"pending\",\"user_id\":\"c1_casey_fixture_9100\"}"
+          },
+          {
+            "role": "assistant",
+            "turn_idx": 6,
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "cli_37db7b988fdae9353bb8f3b4_0",
+                "name": "get_user_details",
+                "arguments": {
+                  "user_id": "c1_casey_fixture_9100"
+                },
+                "requestor": "assistant"
+              }
+            ],
+            "raw_data": {
+              "cli_call_id": "37db7b988fdae9353bb8f3b4",
+              "transport": "codex_cli_structured_action",
+              "output": {
+                "kind": "tool_calls",
+                "content": null,
+                "tool_calls": [
+                  {
+                    "name": "get_user_details",
+                    "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "policy_asset": "shared_policy",
+        "tool_schema_asset": "shared_tool_schemas"
+      },
+      "synthetic_origin_fixture": {
+        "fabricated_ledger_not_real_calls": true,
+        "context": {
+          "orchestrator_sha256": "ff6c2631a02b68a3341b1ca3d9a6122bb43ab872ee6acc960379c78015eca420",
+          "solo_mode": false,
+          "initial_history_count": 0,
+          "intervention": "agent_system_prompt_only"
+        },
+        "calls": [
+          {
+            "call_index": 0,
+            "role": "user_simulator_response",
+            "request": {
+              "participant": "user_simulator_response",
+              "messages": [
+                {
+                  "role": "user",
+                  "content": "Hi! How can I help you today?"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 1,
+            "cli_call_id": "f6797e25523837581040dddb",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "find_user_id_by_email",
+                  "arguments_json": "{\"email\":\"casey.c1@example.invalid\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 2,
+            "cli_call_id": "e0c2a581a8dfd2ef9c82b39f",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_order_details",
+                  "arguments_json": "{\"order_id\":\"#W9100001\"}"
+                }
+              ]
+            }
+          },
+          {
+            "call_index": 3,
+            "cli_call_id": "37db7b988fdae9353bb8f3b4",
+            "role": "agent_response",
+            "transport": "codex_cli_structured_action",
+            "structured_output": {
+              "kind": "tool_calls",
+              "content": null,
+              "tool_calls": [
+                {
+                  "name": "get_user_details",
+                  "arguments_json": "{\"user_id\":\"c1_casey_fixture_9100\"}"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "bindings": {
+        "diagnosis_sha256": "0ecbb370673cbe5d9f3a0939badce577615c93a8e31811e74fd28f07ac430f8a",
+        "messages_sha256": "e7d0ffb4a09854d0c7a997d3f8452814218f896c6220c00bf6922ec3604020d9",
+        "view_sha256": "eed69a09a989e0b08010583329c38f54ae52df33576aabe61574befb6b319751",
+        "gate_payload_sha256": "f7ffa8e1a8188a6f8a0dca0314079379e39bfeed73ad294d10bb6ebad94497ec",
+        "origin_fixture_sha256": "4a4bede3adb33ae01cace2164591306b619fbecb544b808872eb7991f7392a14",
+        "policy_sha256": "8a80a07edc5d308465f1435af8a01a56f1e4a37409e2b2fe6e679046e19d3f23",
+        "tools_sha256": "669f1a85b06f19543db913f1ee455bac9cda2f57ff96c66c58d8ad795480813e"
+      },
+      "host_only_truth_proposal": {
+        "status": "author_proposal_requires_independent_pre_gate_label_lock",
+        "semantic_truth": "unsupported",
+        "expected_semantic_decision": "reject",
+        "dimensions": {
+          "claim_support": "unsupported",
+          "agent_responsibility": "unsupported",
+          "correction_observability": "supported"
+        },
+        "expected_origin": "model_agent",
+        "expected_strategy_eligibility": "continue_semantic_review",
+        "origin_fixture_observation": {
+          "origin": "model_agent",
+          "strategy_editable": true,
+          "reason": "unique_recorded_agent_generation_matches_action",
+          "cli_call_id": "37db7b988fdae9353bb8f3b4",
+          "intervention": "agent_system_prompt_only"
+        },
+        "truth_reason": "建议本身正确，但当前索引仅为认证后的只读资料查询；政策要求写入前确认，不要求每一次读取前确认。无取消尝试，不能把合理的下一步建议包装为已发生错误。",
+        "evidence": [
+          {
+            "source": "policy",
+            "path": "vendor/tau2/data/tau2/domains/retail/policy.md",
+            "line": 16,
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed.",
+            "source_sha256": "2c9652afbce57d6e087768d37cda64d31c53d50b3e3225cfdb791bac66466467"
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "turn_idx": 1,
+            "quote": "Cancel order #W9100001 because I no longer need it."
+          },
+          {
+            "source": "indexed_action",
+            "message_index": 6,
+            "turn_idx": 6,
+            "rendered_action_json": "{\"content\":null,\"role\":\"assistant\",\"tool_calls\":[{\"arguments\":{\"user_id\":\"c1_casey_fixture_9100\"},\"id\":\"cli_37db7b988fdae9353bb8f3b4_0\",\"name\":\"get_user_details\",\"requestor\":\"assistant\"}]}",
+            "note": "Host truth trace only. Existing gate reference schema permits policy/history, not an action reference item."
+          }
+        ],
+        "gate_reference_candidates": [
+          {
+            "source": "policy",
+            "quote": "Before taking any action that updates the database (cancel, modify, return, exchange), you must list the action details and obtain explicit user confirmation (yes) to proceed."
+          },
+          {
+            "source": "history",
+            "message_index": 1,
+            "quote": "Cancel order #W9100001 because I no longer need it."
+          }
+        ]
+      },
+      "host_only_annotations": {}
+    }
+  ],
+  "proposed_label_counts": {
+    "supported": 5,
+    "unsupported": 3,
+    "insufficient": 4
+  },
+  "proposed_origin_counts": {
+    "model_agent": 11,
+    "framework_seed": 1
+  },
+  "preflight": {
+    "cards_with_valid_action_projection": 12,
+    "cards_reaching_gate_input_contract": 12,
+    "all_tool_arguments_match_official_schemas": true,
+    "all_policy_history_quotes_locate": true,
+    "origin_checks_on_fabricated_ledgers_pass": true,
+    "real_judge_invocations": 0,
+    "semantic_accuracy_measured": false
+  },
+  "label_lock_requirement": "Before any model gate call, a separate reviewer labels an anonymous projection without pair IDs, proposed labels or future/hidden host annotations; origin evidence is supplied in a separately marked synthetic provenance section. Retain first labels, disagreements and final lock. These are AI research labels, not human gold or calibrated probabilistic truth.",
+  "planned_estimands": "Descriptive counts: eligible supported retention (5 proposed cards), unsupported acceptance (3), insufficient acceptance/abstention (4); semantic decisions separate from origin routing. Framework card is not credited as a semantic rejection if routed before judging.",
+  "default_future_execution_plan": "New registration may run one semantic gate per all 12 cards to measure semantic-only behavior, plus deterministic origin routing on all 12; composite treatment would skip framework card. Report actually invoked counts separately. No call is authorized by this draft.",
+  "boundaries": [
+    "Twelve related cards form six synthetic scenario pairs, not twelve independent natural samples.",
+    "No natural error frequency, population recall, Agent uplift, GEPA efficacy or generalization estimate follows.",
+    "No threshold or prompt tuning based on these cards followed by reporting them as untouched validation.",
+    "No C1-B GEPA run, native reviewer call, or G4 dependency is created.",
+    "Semantic insufficiency is not proof of non-agent origin; model origin eligibility is not proof a diagnosis is correct."
+  ]
+}

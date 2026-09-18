@@ -1,0 +1,39 @@
+{
+  "repository": "sierra-research/tau2-bench",
+  "commit": "2174a603f6d014ef94473ffa95957f6ce27100db",
+  "retrieval_plan": "All four published retail result files at pinned commit; no outcome-based selection.",
+  "files": [
+    {
+      "path": "data/tau2/results/final/claude-3-7-sonnet-20250219_retail_default_gpt-4.1-2025-04-14_4trials.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1b0e345db5bd9ae5cecfc70ff399f590be70c4f8",
+      "size": 24908843,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1b0e345db5bd9ae5cecfc70ff399f590be70c4f8"
+    },
+    {
+      "path": "data/tau2/results/final/gpt-4.1-2025-04-14_retail_default_gpt-4.1-2025-04-14_4trials.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b30d695834f16ddbb114e254e9fc35376d819f6b",
+      "size": 22044059,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b30d695834f16ddbb114e254e9fc35376d819f6b"
+    },
+    {
+      "path": "data/tau2/results/final/gpt-4.1-mini-2025-04-14_retail_base_gpt-4.1-2025-04-14_4trials.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a55836aa5e9ed735c9900c0e357b1dd80f71c28",
+      "size": 23697012,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8a55836aa5e9ed735c9900c0e357b1dd80f71c28"
+    },
+    {
+      "path": "data/tau2/results/final/o4-mini-2025-04-16_retail_default_gpt-4.1-2025-04-14_4trials.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfd1be3546169e95d47f49c8b6fdf59e93a20188",
+      "size": 22066527,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/bfd1be3546169e95d47f49c8b6fdf59e93a20188"
+    }
+  ]
+}
