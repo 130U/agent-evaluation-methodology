@@ -1,0 +1,491 @@
+{
+  "schema_version": "c1-synthetic-report-v1",
+  "manifest_sha256": "b48e5d7d7935b13c77469c38c104caf8764644af7cb9778eb11b43a7cf3feac3",
+  "implementation_sha256": "0cd491875b67e4d5bc5cb534238326645336b7f1d06a0b72e76891f0c6293151",
+  "implementation_timing": "read_only_reporting",
+  "execution_seal_sha256": "b575c5ea0f16f67e9d03e7c53d4576f034d0b108b0965107605bab6f39971b23",
+  "synthetic_only": true,
+  "planned_cards": 12,
+  "complete_cards": 12,
+  "native_reviewer_calls": 0,
+  "environment_episodes": 0,
+  "reference_strata": {
+    "insufficient": {
+      "assigned": 4,
+      "abstain": 1,
+      "accept": 2,
+      "reject": 1
+    },
+    "unsupported": {
+      "assigned": 3,
+      "reject": 3
+    },
+    "supported": {
+      "assigned": 5,
+      "accept": 5
+    }
+  },
+  "decision_sources": {
+    "semantic_judge": 12
+  },
+  "editable_supported_retention": {
+    "assigned": 5,
+    "retained": 5,
+    "complete_rate": 1.0
+  },
+  "rows": [
+    {
+      "opaque_id": "card-2d74a86e11ed",
+      "card_id": "C1-10",
+      "author_semantic_truth": "insufficient",
+      "independent_semantic_truth": "insufficient",
+      "reference_semantic_truth": "insufficient",
+      "author_expected_decision": "abstain",
+      "independent_expected_decision": "abstain",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "abstain",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "4210cae1a72cb9e07837bb03",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-7b30b327da8a",
+      "card_id": "C1-04",
+      "author_semantic_truth": "unsupported",
+      "independent_semantic_truth": "unsupported",
+      "reference_semantic_truth": "unsupported",
+      "author_expected_decision": "reject",
+      "independent_expected_decision": "reject",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "reject",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "161295fec2377e699d989c17",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-6570683ffa0d",
+      "card_id": "C1-02",
+      "author_semantic_truth": "unsupported",
+      "independent_semantic_truth": "unsupported",
+      "reference_semantic_truth": "unsupported",
+      "author_expected_decision": "reject",
+      "independent_expected_decision": "reject",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "reject",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "d811bdfb23870b975c9e20fa",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-6131d4a6f3d3",
+      "card_id": "C1-03",
+      "author_semantic_truth": "supported",
+      "independent_semantic_truth": "supported",
+      "reference_semantic_truth": "supported",
+      "author_expected_decision": "accept",
+      "independent_expected_decision": "accept",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "161295fec2377e699d989c17",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-98fbed5fb9c4",
+      "card_id": "C1-01",
+      "author_semantic_truth": "supported",
+      "independent_semantic_truth": "supported",
+      "reference_semantic_truth": "supported",
+      "author_expected_decision": "accept",
+      "independent_expected_decision": "accept",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "d811bdfb23870b975c9e20fa",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-5f91ebdd5c0b",
+      "card_id": "C1-09",
+      "author_semantic_truth": "supported",
+      "independent_semantic_truth": "supported",
+      "reference_semantic_truth": "supported",
+      "author_expected_decision": "accept",
+      "independent_expected_decision": "accept",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "4210cae1a72cb9e07837bb03",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-8da8790053d0",
+      "card_id": "C1-07",
+      "author_semantic_truth": "supported",
+      "independent_semantic_truth": "supported",
+      "reference_semantic_truth": "supported",
+      "author_expected_decision": "accept",
+      "independent_expected_decision": "accept",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "ac934f86058c62d89328a109",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-7fe8091bfb07",
+      "card_id": "C1-05",
+      "author_semantic_truth": "insufficient",
+      "independent_semantic_truth": "insufficient",
+      "reference_semantic_truth": "insufficient",
+      "author_expected_decision": "abstain",
+      "independent_expected_decision": "abstain",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "route_to_harness_or_non_agent_review",
+      "synthetic_origin": {
+        "origin": "framework_seed",
+        "strategy_editable": false,
+        "reason": "pinned_fresh_non_solo_initializer_precedes_model_calls",
+        "cli_call_id": null,
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": false,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-395de45dcefa",
+      "card_id": "C1-08",
+      "author_semantic_truth": "insufficient",
+      "independent_semantic_truth": "insufficient",
+      "reference_semantic_truth": "insufficient",
+      "author_expected_decision": "abstain",
+      "independent_expected_decision": "abstain",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "reject",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "ac934f86058c62d89328a109",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-302bf6d37ae4",
+      "card_id": "C1-12",
+      "author_semantic_truth": "unsupported",
+      "independent_semantic_truth": "unsupported",
+      "reference_semantic_truth": "unsupported",
+      "author_expected_decision": "reject",
+      "independent_expected_decision": "reject",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "reject",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "37db7b988fdae9353bb8f3b4",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": false,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-39c21630642e",
+      "card_id": "C1-06",
+      "author_semantic_truth": "insufficient",
+      "independent_semantic_truth": "insufficient",
+      "reference_semantic_truth": "insufficient",
+      "author_expected_decision": "abstain",
+      "independent_expected_decision": "abstain",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "df72264a2959eff63886179e",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    },
+    {
+      "opaque_id": "card-7e0812d938c7",
+      "card_id": "C1-11",
+      "author_semantic_truth": "supported",
+      "independent_semantic_truth": "supported",
+      "reference_semantic_truth": "supported",
+      "author_expected_decision": "accept",
+      "independent_expected_decision": "accept",
+      "origin_reference_agrees": true,
+      "eligibility_reference_agrees": true,
+      "state": "complete",
+      "semantic_decision": "accept",
+      "actual_strategy_eligibility": "continue_semantic_review",
+      "synthetic_origin": {
+        "origin": "model_agent",
+        "strategy_editable": true,
+        "reason": "unique_recorded_agent_generation_matches_action",
+        "cli_call_id": "37db7b988fdae9353bb8f3b4",
+        "intervention": "agent_system_prompt_only"
+      },
+      "compound_admitted": true,
+      "decision_source": "semantic_judge",
+      "expected_editable": true,
+      "actual_gate_calls": 1
+    }
+  ],
+  "transport_audit": {
+    "client_directory": "LOCAL_RESEARCH\\results\\c1\\c1-synthetic-admission-calibration-v1\\client",
+    "calls": 12,
+    "roles": {
+      "feedback_admission": 12
+    },
+    "audit_implementation_sha256": "0029c633d42045f56c774c92d92e9a53161b8cc997cdbbde0a8eecfe16cc5a02",
+    "audit_scope": "standalone read-only raw record replay; no model calls or record reacceptance",
+    "accepted_calls": 12,
+    "rejected_or_timeout_calls": 0,
+    "observed_reconnect_notices": 0,
+    "accepted_reconnect_notices": 0,
+    "known_usage": {
+      "input_tokens": 182910,
+      "output_tokens": 4128
+    },
+    "rows": [
+      {
+        "call_id": "000001-ed60630b414b4f04829bea0ee930efdc",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "a0fc4dcff0c6de815598508f57c05ad1bf40f63f6d2752638b9a198c597089a3",
+        "events_sha256": "3490e36e9430e2987f04677c6a6611a0866b23144c7ba4c0c05d858fa8f15be5"
+      },
+      {
+        "call_id": "000002-9de0c397b98e43ba90740f8e270e0fc9",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "d109ac35712b68ff6eed836a9dc39b830f9ee51293ca24a486dac586f0f353ce",
+        "events_sha256": "7216e35970bb4c50945df22c049ddb504c438ffd7318b98c0f350d85a4ff1826"
+      },
+      {
+        "call_id": "000003-c24f0fe77a984027ba53a56b6030eca5",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "e189724e76cadaa16b4fad0cb69aa2edd1600d046b96afbebe8578ea588b7bf0",
+        "events_sha256": "08f945e758276df35dddf71b823786a2df5045870763624f284abbd4df08f1df"
+      },
+      {
+        "call_id": "000004-379673db53c44a35a830395b57e5c8cd",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "d4edf02a0955bfa2103473c1762dd00888bed0bc401c1b77265c32ca2f814952",
+        "events_sha256": "b7c170815879f46547701cec069f66555c4a560236a8a44aad5ee557870eee27"
+      },
+      {
+        "call_id": "000005-5efe4d76cb414c42b129e790fa48a897",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "ff85ab8941762ae4759746801e00283474deefffd00b335b580a18de1a507fb8",
+        "events_sha256": "68ea10293c9149a6ad661792e217186b0f8c7203fc10b40fde7a63f4a362b434"
+      },
+      {
+        "call_id": "000006-6c6744addfd844a996a12a74296d311f",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "17c501e9f6ad9bdaeb9f8b1386bb5269bec2b105cb51763994b5430294955013",
+        "events_sha256": "9ffe9f0b5de474ad6acfa8ff23d89b6dc9f820490e7e265d49dd91b0bc875cd0"
+      },
+      {
+        "call_id": "000007-9ef0ce5de7fe40a58be02b2c929f68a2",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "51d714ae74e82fa1acb2476fd5fd9534b4df0c940cb6c25e2c481da4d99fbe5f",
+        "events_sha256": "7058ffefca6467391bdaf17a2171aa28fa71d0de03ea7fffe82520d0daa1bde4"
+      },
+      {
+        "call_id": "000008-ae4ab035fc6b41d48de8b51a91fc68e8",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "41862d1d5027b0ad3894e3f4cbd9233968fd7df2700e57063706c45a5dc51174",
+        "events_sha256": "873e1510f35f8208d07f7b99d077c3a8171a6eab73d60929a1fc2f19d650b3c5"
+      },
+      {
+        "call_id": "000009-0d482b03ad7b425c96351fd505fdf432",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "90b392999970f5a3e4cf753a1153d47e7e49a920bea61b0cd1b40480947c80ef",
+        "events_sha256": "da01eee224c730779bdae985b799c1444faa2f405cc932e810f4783838c45f18"
+      },
+      {
+        "call_id": "000010-3c7b84fd2d8b461f8d31e0ca6cf01ead",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "235827666c3a89f146573fb084ad6092027d15fbc14e592eea0d82f9a0fb2731",
+        "events_sha256": "2af06d249382b533e7c5c38a880596307f4a960de3d1cbb0b755603296d17911"
+      },
+      {
+        "call_id": "000011-c77c1ca6261c4708809ab95ec3a4543b",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "dde3b8827083859b0ce17ea5fd3f703bb29f9ba6c73afc7978f1994c4296e616",
+        "events_sha256": "2b5c9ceafcbd70f114b970d7686843190f554509acef8c1c6ac857a985a51421"
+      },
+      {
+        "call_id": "000012-1b5f5797e7e64e25bcb7a54832345eff",
+        "role": "feedback_admission",
+        "status": "complete",
+        "usage_complete": true,
+        "observed_reconnect_notices": 0,
+        "accepted_reconnect_notices": 0,
+        "request_sha256": "430fd96a7635f7023a9f697cf58b7f243683be2a7d870ca694325b0d8a7777d2",
+        "events_sha256": "bb6399ab327c7339b35eb75244d1df38acdd0fe62710286a0ec33ee334cc394e"
+      }
+    ],
+    "boundary": "CLI reported usage and observed notifications only; no provider-request/reconnect cost visibility"
+  },
+  "limits": [
+    "AI-authored fixed synthetic cases and AI reference labels; no human gold standard",
+    "No natural diagnosis prevalence, natural retention or Agent/GEPA improvement estimate",
+    "Origin labels describe synthetic fixture provenance, not real model-generated actions",
+    "All planned cards retained; structural abstention, semantic abstention, failure and unrun are separate"
+  ],
+  "public_derivation": {
+    "original_sha256": "e512db7b14e10491a877ac54df67531de4c1853da4bb2d68116480281810b91c",
+    "local_paths_redacted": true,
+    "original_reference_hashes_retained": true,
+    "raw_subscription_records_published": false,
+    "note": "Derived report: original references identify unpublished bytes; they do not authenticate this transformed copy."
+  }
+}

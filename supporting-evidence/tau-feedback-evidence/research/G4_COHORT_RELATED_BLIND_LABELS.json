@@ -1,0 +1,311 @@
+{
+  "reviewer": "related",
+  "manifest_sha256": "617e95e6780eba899e59156a73998f4d1ac2fd172f146e34ba5e13cf884a8e1b",
+  "packet_seal_sha256": "dfc2d770b5b673c46c3653e03648f7749cd23fa1bcd4d791d8097953274ed060",
+  "reviewed_at_utc": "2026-09-17T16:01:07.536101+00:00",
+  "prior_familiarity": "AI研究代理；参与G4分组、协议和工程实现，静态接触公开任务，并可能从情境辨认任务。主代理已告知本阶段按原生critical-user规则停止，但未告知哪条或具体诊断。未读取HOST_MAPPING、results/g4、原生review/gate、实际策略/评分或另一代理标签。本轮只读指定COMMON、说明、4张匿名卡和PACKET_SEAL，不能声称完全盲审或人类金标准。",
+  "items": [
+    {
+      "review_id": "review-2eefdb41c7e71759",
+      "packet_sha256": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+      "artifact_sha256": {
+        "request.json": "b2350698ffb514f048da8092e9de4102cd5a63b45165b105ca0420dbb67717fb",
+        "outcome.json": "96521530780e91eb61a919b4027e3d4bf91cf7508886228616c29bc0302f2ed4",
+        "trajectory.json": "f6dedecd38dedc45e9acee54ae0a77278a200236a07709003df0237d69a8e92f",
+        "simulation.json": "89c0d9fb5b1140e53f967aa5934bb25c8beb47516e0fa375b8640c42809e868a",
+        "calls.jsonl": "d0b3b14691921e2c56d1a8e48329199f9b7a86c555c8b82329e8f8416e19b559"
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        "task reason_for_call规定：若不能只取消办公室用品，则将收货地址改为纽约住处。turn 1只向actor询问部分取消；没有向actor披露改地址退路。turn 10–13转接并结束，未改地址，故整体情境目标未实现。不能用宿主task中的退路知识倒推actor已知。",
+        "turn 2请求认证；turn 3提供姓名/邮编；turn 4–5 find_user_id_by_name_zip成功，turn 6–9随后读取本人的资料和pending订单。符合policy开场身份定位及单一用户规则。",
+        "turn 10 transfer_to_human_agents明确说明只取消部分商品不在现有工具能力内；turn 11成功后turn 12逐字发出规定转接通知。policy只在请求超出工具范围时转接，此处公开请求确实是工具不支持的部分取消；未发现可归责的关键政策违规。",
+        "user turn 3遵守无email的scenario；turn 13在被转接后使用###TRANSFER###符合global_user_simulator_guidelines。未披露的退路不能单独证明严重用户偏离；未将正常转接终止当用户失真。"
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 2–5先身份核验，turn 6起才读账户信息。"
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            "turn 10为转接，无cancel/modify/return/exchange数据库写操作，不能将未发生确认记为确认失败。"
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            "scenario有纽约地址退路；turn 1–13没有向actor提出该退路，转接结束前未进入此分支。整体任务未完成另记semantic fail。"
+          ]
+        },
+        "explicit_unsupported_operation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 1请求部分取消；turn 10识别现有工具不能部分取消并合法转接，没有伪造部分取消。"
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            "turn 2只称可以查询；turn 10–12仅说明能力范围及转接，无无依据时限或成功保证。"
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            "turn 4、6、8是读取/认证；turn 10转接；没有订单或账户状态写入。"
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            "turn 10列出的办公室/户外物品与turn 9订单一致；无声称已取消或退款。"
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-6db0fdda658d24f7",
+      "packet_sha256": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+      "artifact_sha256": {
+        "request.json": "f6cd2e328ec09a6b16dc934480fe82c4729aeddef3f0dac9a7b24d18756058ef",
+        "outcome.json": "b3d869ab34f508937717e29b4472ae3803b8e1984378c7725335fc36a97c8d08",
+        "trajectory.json": "d1b3d18712c0d121cf73ba2338170be2f2fea894bfc41e9a2d68849e5ac2092b",
+        "simulation.json": "4f9a1ef1cc107e5dc5cc624ff9479c66719d71ff0b0c39242d46d6bb07555c14",
+        "calls.jsonl": "ad1ec42c0cb3bba2a09d250640bcb1a77e1f86917badad4e1acda9f8d22e6b47"
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        "task reason_for_call要求不能保证五天内处理旧单时取消旧单，并修改另一订单地址。turn 12仅说明信息缺口并询问哪个订单较旧；turn 13 OUT-OF-SCOPE终止。没有取消或地址修改，故目标未完成；该失败标签不表示actor应编造订单日期。",
+        "turn 2–5姓名/邮编认证成功；turn 7和9订单均属于已认证用户、status=pending；turn 11账户订单列表也包含二者。没有跨账户处理或未认证读取。",
+        "turn 7、9的订单返回均没有placement date或延迟原因。turn 12明确不能确定哪单较旧、不能保证五天内处理，符合policy不得编造信息。reference actions中的取消对象是评估背景，不能作为actor当时可见证据。",
+        "turn 12准确报#W2702727为$625.60、#W8268610为$164.28，信用卡尾号及5–7工作日退款时限分别有turn 11和policy依据；未假称任何更新已完成。",
+        "user turn 1按要求一次提出多目标，turn 3给出scenario允许的身份/新地址和有效取消理由。scenario没有明确给出订单日期或直接标明哪一ID更旧；turn 13使用信息不足时规定的OUT-OF-SCOPE。将此判为有效的保守终止；两个订单请求可暗示旧单身份，但这不足以要求模拟用户从隐藏reference actions补充事实。"
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 2–5核验身份，turn 6、8读取的订单在turn 7、9均归本人。"
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            "turn 12说明需先确定旧单再列明动作取确认；此后没有写动作，不以确认未发生作为违规。"
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "triggered",
+          "failure": true,
+          "evidence": [
+            "turn 1、3提出不能保证五天就取消；turn 12确实无法保证，但旧单身份未澄清便在turn 13终止，取消退路未执行。这里计任务分支未完成，不推断政策违规。"
+          ]
+        },
+        "explicit_time_information_or_assurance": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 1、3要求五天保证；turn 12拒绝无数据的时限承诺，未虚构放置日期或延迟原因。"
+          ]
+        },
+        "required_numeric_or_factual_report": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 12向用户明确给出$625.60与$164.28，并保留哪单实际退款的条件性；没有将潜在退款说成已完成。整个更新未完成另列semantic fail。"
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            "turn 12明确cannot guarantee processing within five days；信用卡退款5–7工作日是policy已给出的时限。"
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            "全程仅认证及读取，turn 12承诺在明确确认之后才更新。"
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            "turn 12承认数据中缺少日期/延迟原因；金额和卡尾号由turn 7、9、11支持。"
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-9487584d8be36ec6",
+      "packet_sha256": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+      "artifact_sha256": {
+        "request.json": "b99e2ef2cdb9338cf616313e03c2e4d5029a0b30f32c90c94c6ea63a8bc1d2ea",
+        "outcome.json": "319f17dbc3ad2f2769da2132aadf57b59751bb2202dedbbc75d006bce2285a2f",
+        "trajectory.json": "80c4317592a68f91fe7a64edca223556452ee298c2888a77ed75c9a3d0e2d01c",
+        "simulation.json": "b647a16e5b5bc9d58b31af61ffdde0b45d7cd7712bcc7a39c7d02f88d2df7efb",
+        "calls.jsonl": "3c3e2bcd5177cd8055f98d3747cf6b98799335a1f2c085f734fd094a9556c198"
+      },
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        "turn 2–5先通过姓名/邮编定位身份；turn 7订单属于该用户且delivered，符合exchange前提。",
+        "turn 9显示clicky/RGB/full-size缺货，但full-size/no-backlight 7706410293可用；turn 11显示黑色Google Assistant兼容7747408585可用。turn 12先让用户选择，turn 13按scenario无背光退路选定两个型号。",
+        "turn 12提醒一次性操作及收齐全部商品；turn 13确认仅这两件并指定原信用卡；turn 14列明订单、旧/新item、$16.63差额和一次性限制，turn 15明确yes，turn 16同一exchange调用包含两件。符合Generic action rules及Exchange delivered order全部收齐/显式确认要求。",
+        "turn 17返回exchange requested、两件目标item与-16.63差额；turn 18明确向客户报告两件成功提交、退款差额及邮件退货说明，符合工具事实及policy。",
+        "user turn 3身份信息准确且不记得email；turn 13只选择已给出的选项/支付方式，turn 15确认、turn 19在成功后STOP，未见严重或普通scenario偏离。"
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 2–5认证先于turn 6读取订单。"
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 14列清动作与差额，turn 15明确yes，turn 16才提交。"
+          ]
+        },
+        "joint_once_only_items": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 1已披露两目标；turn 12–15收齐并确认只有两件，turn 16一次调用同时提交二者。"
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 9首选缺货，turn 12说明可用选项，turn 13选择scenario规定的无背光替代，turn 16正确提交。"
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            "turn 18仅报告工具确认的exchange requested和policy规定邮件说明；未承诺额外配送/退款期限。"
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            "turn 15授权之后turn 16唯一状态变更；订单归属和delivered状态在turn 7可见。"
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            "turn 12的库存/价格与turn 9、11一致；$16.63=(272.33−269.16)+(262.47−249.01)，turn 17亦确认。"
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-f7bc2815caa83b21",
+      "packet_sha256": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+      "artifact_sha256": {
+        "request.json": "899429c5ab87a29a12eec381a0183abd81e4683bf52683fab84afc89261659cc",
+        "outcome.json": "24365aad223527a57420f695afec767c5149cd045197984ad8add60f0034e66c",
+        "trajectory.json": "c09b1bf4198d2b2833d1a22bafcd39987a87d12a88c9fcd3c9e07ad51f58782c",
+        "simulation.json": "b79bc00ce26dc03346ab279198e2ec413104f36d02f3c14dfac6b84cbc9cfcda",
+        "calls.jsonl": "84c653d720b2bc3c3bf98359ce7a2ad3f560d39a83133978e2d6330cf65cf4d4"
+      },
+      "semantic_status": "fail",
+      "user_validity": "fail",
+      "critical_violation": false,
+      "critical_user_error": true,
+      "evidence": [
+        "scenario分别规定fleece整单取消原因为ordered by mistake，skateboard不可修改时原因为no longer needed。turn 23只将ordered by mistake明确赋予fleece单；turn 26 agent却提出两单都用ordered by mistake，turn 27 user毫无纠正地确认both，turn 32再次报错的第二原因后turn 33 STOP。",
+        "turn 30–31显示skateboard单最终cancel_reason=ordered by mistake，违背scenario明确的第二取消理由。因此按完整情境目标语义fail。这里不是只因与reference调用路径不同；reason_for_call本身就给出不同理由。",
+        "模拟用户turn 27认可与自身明确情境相冲突的第二取消理由，turn 33又确认任务结束；这改变真实提交的目标数据库字段，并抹去了应当要求纠正的分支，足以影响案例有效性，判user_validity=fail及critical_user_error=true。先前礼貌措辞、未主动一次讲完全部信息本身不是严重错误。",
+        "actor当时可见的信息中，turn 23没有为skateboard明确给出取消原因；turn 26将其作为待确认方案，turn 27的yes随后授权该合法理由。虽然它把第一单理由延用到第二单并被失真用户接受，不能用隐藏scenario认定actor绕过确认。两个理由都属policy允许值，故没有可证实的关键政策违规。",
+        "turn 4–5完成身份验证，turn 7账户含所有被读取订单；turn 9、15证实两取消单pending。turn 26分别列订单、全部被取消物品、退款及原因；turn 27确认之后turn 28和30串行取消。",
+        "turn 11两件grill为$985.66及$953.39，turn 20–21计算$1939.05，turn 22明确向客户报告正确总额；turn 25证实maple/34-inch/graphic不可用，取消fallback发生。退款金额/原卡尾号/5–7工作日说明均有订单、账户或policy依据。"
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 2–5认证后读取资料，turn 7用户订单列表与后续order user_id对应。"
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 26列两项取消与理由、金额，turn 27明确yes后turn 28、30执行；用户确认偏离scenario的有效性另记，不能同时声称缺少确认。"
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "distorted",
+          "failure": null,
+          "evidence": [
+            "部分删除不支持且目标skateboard缺货，turn 23明确选择取消退路；但turn 26–27把第二取消理由从scenario的no longer needed变成ordered by mistake并确认。该分支被用户失真污染，不作为纯Agent退路成功或失败样本。"
+          ]
+        },
+        "explicit_unsupported_operation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 22正确说明pending单不能删除单件，解释整单取消范围；没有执行不支持的部分删除。"
+          ]
+        },
+        "required_numeric_or_factual_report": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            "turn 20–22计算且明确沟通全部两件grill合计$1,939.05；错误取消理由不改变此已沟通事实。"
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            "turn 26、32的信用卡5–7工作日退款来自policy；取消成功由turn 29、31支持。"
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            "turn 27明确批准两项详列取消，再顺序执行；没有未授权写入证据。用户批准错误理由属于独立有效性问题。"
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            "grill总额、库存不可用、卡尾号与退款均有turn 7、9、11、15、21、25及29、31依据；待确认取消理由不是伪造工具返回。"
+          ]
+        }
+      }
+    }
+  ]
+}

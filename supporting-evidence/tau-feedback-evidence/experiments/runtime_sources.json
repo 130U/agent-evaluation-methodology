@@ -1,0 +1,2175 @@
+{
+  "repository": "sierra-research/tau2-bench",
+  "commit": "2174a603f6d014ef94473ffa95957f6ce27100db",
+  "scope": "complete src/tau2 Python source and text retail data; excludes archive logs, voice data and other domain data",
+  "files": [
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f0323a32227c1327820da33d2fb9d3338a27ac84",
+      "size": 1072,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f0323a32227c1327820da33d2fb9d3338a27ac84"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9fe658afdd54e83f923bbfc6d77e556ecdbe45f1",
+      "size": 10443,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9fe658afdd54e83f923bbfc6d77e556ecdbe45f1"
+    },
+    {
+      "path": "data/tau2/domains/retail/db.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d67b03b2d39ade5a7ab6facb2edd7ab3e013d48",
+      "size": 2811616,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4d67b03b2d39ade5a7ab6facb2edd7ab3e013d48"
+    },
+    {
+      "path": "data/tau2/domains/retail/policy.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d127e6b074654926f337d0d98b0e669ebe90d19e",
+      "size": 6699,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d127e6b074654926f337d0d98b0e669ebe90d19e"
+    },
+    {
+      "path": "data/tau2/domains/retail/split_tasks.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b20704a17aa1940b1e58668f89dcef2ddaeeea3",
+      "size": 3263,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8b20704a17aa1940b1e58668f89dcef2ddaeeea3"
+    },
+    {
+      "path": "data/tau2/domains/retail/tasks.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e95a9f898b2d1f6568ea8faec78edc3767ce747d",
+      "size": 345982,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e95a9f898b2d1f6568ea8faec78edc3767ce747d"
+    },
+    {
+      "path": "data/tau2/user_simulator/simulation_guidelines.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b55a28a1d5eaf81e72bdc263307d9f512fe49a99",
+      "size": 1449,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b55a28a1d5eaf81e72bdc263307d9f512fe49a99"
+    },
+    {
+      "path": "data/tau2/user_simulator/simulation_guidelines_tools.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7235b1ddf8d0d1e2edc9b1708916f37b0aac045",
+      "size": 2747,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a7235b1ddf8d0d1e2edc9b1708916f37b0aac045"
+    },
+    {
+      "path": "data/tau2/user_simulator/simulation_guidelines_voice.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0fddef3ec6e14ed5c22c685ea417268f91b8db73",
+      "size": 6540,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0fddef3ec6e14ed5c22c685ea417268f91b8db73"
+    },
+    {
+      "path": "data/tau2/user_simulator/simulation_guidelines_voice_tools.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "344f00b6b368eff7277edded7afd0fecdfbb8e59",
+      "size": 7912,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/344f00b6b368eff7277edded7afd0fecdfbb8e59"
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7782f304a08379e532b39f616ce8a3a318c4d8b9",
+      "size": 2502,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7782f304a08379e532b39f616ce8a3a318c4d8b9"
+    },
+    {
+      "path": "src/tau2/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69d9272e12e4298daddfb58897ed5c98f43b09f",
+      "size": 3615,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69d9272e12e4298daddfb58897ed5c98f43b09f"
+    },
+    {
+      "path": "src/tau2/agent/AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "539ce7123ca470e597a40999f482e1865f78e475",
+      "size": 2642,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/539ce7123ca470e597a40999f482e1865f78e475"
+    },
+    {
+      "path": "src/tau2/agent/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f299f699f83acc446b2d522a64f1856bffc754c6",
+      "size": 9576,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f299f699f83acc446b2d522a64f1856bffc754c6"
+    },
+    {
+      "path": "src/tau2/agent/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02b731e5b6f0c775132862fad9241995a38a01fb",
+      "size": 3177,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/02b731e5b6f0c775132862fad9241995a38a01fb"
+    },
+    {
+      "path": "src/tau2/agent/base/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "418ebd075fc82dcda0e4285893289942b6f2d679",
+      "size": 17100,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/418ebd075fc82dcda0e4285893289942b6f2d679"
+    },
+    {
+      "path": "src/tau2/agent/base/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a894933a59b2323b83c4eff1cf55676ec9207f7a",
+      "size": 2584,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a894933a59b2323b83c4eff1cf55676ec9207f7a"
+    },
+    {
+      "path": "src/tau2/agent/base/llm_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "433c7236a4c39333252926fd5294b2ad5cf13a98",
+      "size": 1276,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/433c7236a4c39333252926fd5294b2ad5cf13a98"
+    },
+    {
+      "path": "src/tau2/agent/base/participant.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8265b72046edfa7c9db2929a4705d47f35a7300",
+      "size": 8137,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b8265b72046edfa7c9db2929a4705d47f35a7300"
+    },
+    {
+      "path": "src/tau2/agent/base/streaming.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b5f1e0a2c1b0c3b4f01582ff143a653dad610f28",
+      "size": 107718,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b5f1e0a2c1b0c3b4f01582ff143a653dad610f28"
+    },
+    {
+      "path": "src/tau2/agent/base/streaming_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2567bd60feeef5ad6a1864cc44b9ca6c30d58a73",
+      "size": 7656,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/2567bd60feeef5ad6a1864cc44b9ca6c30d58a73"
+    },
+    {
+      "path": "src/tau2/agent/base/voice.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6127f38713d987f611e311d6b204286455ac440d",
+      "size": 7691,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/6127f38713d987f611e311d6b204286455ac440d"
+    },
+    {
+      "path": "src/tau2/agent/base_agent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47f95ccb77e59ddd9ed0a7d1774932ce3d6c7de2",
+      "size": 6331,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/47f95ccb77e59ddd9ed0a7d1774932ce3d6c7de2"
+    },
+    {
+      "path": "src/tau2/agent/discrete_time_audio_native_agent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9456198f85c6c57962deb18bb316a3cb5edad3e4",
+      "size": 34790,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9456198f85c6c57962deb18bb316a3cb5edad3e4"
+    },
+    {
+      "path": "src/tau2/agent/llm_agent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "652974ff98edb652c582453687977cff1742b7bd",
+      "size": 18019,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/652974ff98edb652c582453687977cff1742b7bd"
+    },
+    {
+      "path": "src/tau2/api_service/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fca0cd456af18fe57ff5338962704bdb2eb7b701",
+      "size": 19,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fca0cd456af18fe57ff5338962704bdb2eb7b701"
+    },
+    {
+      "path": "src/tau2/api_service/api_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "832fd04658a874222d7fdff26b1bc4d7d8730aae",
+      "size": 1033,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/832fd04658a874222d7fdff26b1bc4d7d8730aae"
+    },
+    {
+      "path": "src/tau2/api_service/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfe8ea1a14b4d0c558231b4defad7823c61d2e4d",
+      "size": 277,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/bfe8ea1a14b4d0c558231b4defad7823c61d2e4d"
+    },
+    {
+      "path": "src/tau2/api_service/simulation_service.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "423659944fef8623624986221f1cdaa11ca6f6ea",
+      "size": 1307,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/423659944fef8623624986221f1cdaa11ca6f6ea"
+    },
+    {
+      "path": "src/tau2/cli.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6193854646ce5454bde5250ea53aac56ca816d3d",
+      "size": 45311,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/6193854646ce5454bde5250ea53aac56ca816d3d"
+    },
+    {
+      "path": "src/tau2/config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "388f7a90772a0fe5e6f5659d97e81a733bef1527",
+      "size": 10862,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/388f7a90772a0fe5e6f5659d97e81a733bef1527"
+    },
+    {
+      "path": "src/tau2/data_model/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/data_model/audio.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "11b2217dd9c22288801335d3e2f0fe7b999c799e",
+      "size": 6148,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/11b2217dd9c22288801335d3e2f0fe7b999c799e"
+    },
+    {
+      "path": "src/tau2/data_model/audio_effects.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f919488769f9391891cc7d2750460d3e10a2c615",
+      "size": 9102,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f919488769f9391891cc7d2750460d3e10a2c615"
+    },
+    {
+      "path": "src/tau2/data_model/message.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0449e2f2ce82cc03dd351520549eb9e24eb70bf9",
+      "size": 32440,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0449e2f2ce82cc03dd351520549eb9e24eb70bf9"
+    },
+    {
+      "path": "src/tau2/data_model/persona.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac5aa3e5f10e9c230148abd2d41b28f250f6afb2",
+      "size": 5854,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ac5aa3e5f10e9c230148abd2d41b28f250f6afb2"
+    },
+    {
+      "path": "src/tau2/data_model/simulation.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c23c353ec48209d70554bcfe46c36e2415c7e85",
+      "size": 60834,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8c23c353ec48209d70554bcfe46c36e2415c7e85"
+    },
+    {
+      "path": "src/tau2/data_model/tasks.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28f37885f0282bd3b82eed18bfe8aa2350fba2b7",
+      "size": 22764,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/28f37885f0282bd3b82eed18bfe8aa2350fba2b7"
+    },
+    {
+      "path": "src/tau2/data_model/usage.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e0635b79cf20bf93ed9571ec24241ae3bcbb018",
+      "size": 11967,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8e0635b79cf20bf93ed9571ec24241ae3bcbb018"
+    },
+    {
+      "path": "src/tau2/data_model/voice.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "753a340f0bf71634fcfa9d85260a5769be51d96e",
+      "size": 13369,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/753a340f0bf71634fcfa9d85260a5769be51d96e"
+    },
+    {
+      "path": "src/tau2/data_model/voice_personas.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1422cababaddb3de4c800129bf7c47a9f74dd8a4",
+      "size": 9862,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1422cababaddb3de4c800129bf7c47a9f74dd8a4"
+    },
+    {
+      "path": "src/tau2/domains/AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "70706b07d189d47be9edbee3aa1fadc022456d9e",
+      "size": 3670,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/70706b07d189d47be9edbee3aa1fadc022456d9e"
+    },
+    {
+      "path": "src/tau2/domains/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14d2d70503852616097079ed0aa2494add876342",
+      "size": 5060,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/14d2d70503852616097079ed0aa2494add876342"
+    },
+    {
+      "path": "src/tau2/domains/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/domains/airline/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fca0cd456af18fe57ff5338962704bdb2eb7b701",
+      "size": 19,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fca0cd456af18fe57ff5338962704bdb2eb7b701"
+    },
+    {
+      "path": "src/tau2/domains/airline/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1b65884c10349950a1fc31c8ad96a8d804e093a1",
+      "size": 10402,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1b65884c10349950a1fc31c8ad96a8d804e093a1"
+    },
+    {
+      "path": "src/tau2/domains/airline/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1cabffe7ed4ad895904aa5248319dd307e77a97",
+      "size": 1612,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e1cabffe7ed4ad895904aa5248319dd307e77a97"
+    },
+    {
+      "path": "src/tau2/domains/airline/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "adc5c09a155d82d91e2f0647682023419eaca2ea",
+      "size": 28123,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/adc5c09a155d82d91e2f0647682023419eaca2ea"
+    },
+    {
+      "path": "src/tau2/domains/airline/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "055548ffd07f82343645c79e6ea9bacf08501047",
+      "size": 256,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/055548ffd07f82343645c79e6ea9bacf08501047"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/DATABASE_GUIDE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be5b864d0d41cc7317980ebec69b70dca9829545",
+      "size": 1831,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/be5b864d0d41cc7317980ebec69b70dca9829545"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93f8ac0e4942a7629d794262d5807d6e2c2259d3",
+      "size": 613,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/93f8ac0e4942a7629d794262d5807d6e2c2259d3"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4498d1eb5e8529faef0300d8503d45a2f960e37",
+      "size": 7735,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d4498d1eb5e8529faef0300d8503d45a2f960e37"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/db_query.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1d2ef653b9488c1cf340d669fbc102e467fa46cd",
+      "size": 17039,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1d2ef653b9488c1cf340d669fbc102e467fa46cd"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "032f0014ebc6be586f8bb1ae2df7a4362ee46102",
+      "size": 4034,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/032f0014ebc6be586f8bb1ae2df7a4362ee46102"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/retrieval.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f727fa2f22107208c9224cec7bffca8232065964",
+      "size": 27979,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f727fa2f22107208c9224cec7bffca8232065964"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/retrieval_mixins.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "edd7c246eb582e8005357fb0b0bd670aa1c93f19",
+      "size": 7032,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/edd7c246eb582e8005357fb0b0bd670aa1c93f19"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/retrieval_toolkits.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f52732b4d00552234fa6b3fdbf5c5548891fd7e4",
+      "size": 3393,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f52732b4d00552234fa6b3fdbf5c5548891fd7e4"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60ed2208905a8cd42c03e6e4a4cc7227f6062d4c",
+      "size": 189257,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/60ed2208905a8cd42c03e6e4a4cc7227f6062d4c"
+    },
+    {
+      "path": "src/tau2/domains/banking_knowledge/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6ecbb0cef4632dc456136404ebeb2c0272f8575",
+      "size": 11497,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e6ecbb0cef4632dc456136404ebeb2c0272f8575"
+    },
+    {
+      "path": "src/tau2/domains/mock/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fca0cd456af18fe57ff5338962704bdb2eb7b701",
+      "size": 19,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fca0cd456af18fe57ff5338962704bdb2eb7b701"
+    },
+    {
+      "path": "src/tau2/domains/mock/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e66200599b8d4681d4bcfd5a6f5f35b00ac08157",
+      "size": 1089,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e66200599b8d4681d4bcfd5a6f5f35b00ac08157"
+    },
+    {
+      "path": "src/tau2/domains/mock/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a1a79d729043265319d1302116c7918792901fa",
+      "size": 2294,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7a1a79d729043265319d1302116c7918792901fa"
+    },
+    {
+      "path": "src/tau2/domains/mock/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4430b1e1c4d037ab2ad8c701a56f8f491a33457",
+      "size": 3806,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a4430b1e1c4d037ab2ad8c701a56f8f491a33457"
+    },
+    {
+      "path": "src/tau2/domains/mock/user_data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "807b3e838939a2ea54d7fb2d80cf38cc6f1f3923",
+      "size": 927,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/807b3e838939a2ea54d7fb2d80cf38cc6f1f3923"
+    },
+    {
+      "path": "src/tau2/domains/mock/user_tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "22dc2fee3abd6a5f75dfe18e49098fdde0e729ee",
+      "size": 2286,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/22dc2fee3abd6a5f75dfe18e49098fdde0e729ee"
+    },
+    {
+      "path": "src/tau2/domains/mock/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cba218b2aa8b37a2c6d771188651609c5097c5c8",
+      "size": 340,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/cba218b2aa8b37a2c6d771188651609c5097c5c8"
+    },
+    {
+      "path": "src/tau2/domains/retail/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fca0cd456af18fe57ff5338962704bdb2eb7b701",
+      "size": 19,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fca0cd456af18fe57ff5338962704bdb2eb7b701"
+    },
+    {
+      "path": "src/tau2/domains/retail/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e8cedd4c73c3c3865e86ef7dd9202ad2468d685b",
+      "size": 8799,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e8cedd4c73c3c3865e86ef7dd9202ad2468d685b"
+    },
+    {
+      "path": "src/tau2/domains/retail/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a403300c800a06c314260c6215b0c39e175b4cdc",
+      "size": 1615,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a403300c800a06c314260c6215b0c39e175b4cdc"
+    },
+    {
+      "path": "src/tau2/domains/retail/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eba01ab32dca0d4ef33328c22358b794d859f2b6",
+      "size": 29202,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/eba01ab32dca0d4ef33328c22358b794d859f2b6"
+    },
+    {
+      "path": "src/tau2/domains/retail/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4d0fa552bab03a2a3c2b4c6dbd66c77f7845c49",
+      "size": 248,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f4d0fa552bab03a2a3c2b4c6dbd66c77f7845c49"
+    },
+    {
+      "path": "src/tau2/domains/telecom/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fca0cd456af18fe57ff5338962704bdb2eb7b701",
+      "size": 19,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fca0cd456af18fe57ff5338962704bdb2eb7b701"
+    },
+    {
+      "path": "src/tau2/domains/telecom/data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54e95d47c9e73da268bc7ac4d7969d4f8a03f013",
+      "size": 9418,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/54e95d47c9e73da268bc7ac4d7969d4f8a03f013"
+    },
+    {
+      "path": "src/tau2/domains/telecom/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a408c9bd5cdfb0c09eeeb438301459356b51d088",
+      "size": 7286,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a408c9bd5cdfb0c09eeeb438301459356b51d088"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/const.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c41d7dcd61287c38156244017e9d9315e003614",
+      "size": 2204,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8c41d7dcd61287c38156244017e9d9315e003614"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/create_tasks.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1c62bfaf1ba2b07cc531e4ae25d07ca6b83de8ef",
+      "size": 3639,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1c62bfaf1ba2b07cc531e4ae25d07ca6b83de8ef"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/manager.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fdedb7d963c7d11f810de17ab729ff6cd56af492",
+      "size": 8836,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fdedb7d963c7d11f810de17ab729ff6cd56af492"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/mms_issues.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4e084c1bbbbd9c3cb7888f2eafd11cb240405e0",
+      "size": 10313,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d4e084c1bbbbd9c3cb7888f2eafd11cb240405e0"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/mobile_data_issues.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c74f6c419d22b9c57ae4d913f39e0be9765af3ed",
+      "size": 16347,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/c74f6c419d22b9c57ae4d913f39e0be9765af3ed"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/service_issues.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bc3dbc7cf056824cfa8e30b262909f0bcfce91e",
+      "size": 14396,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8bc3dbc7cf056824cfa8e30b262909f0bcfce91e"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tasks/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "803c6466e2c1322e0952a474efe584efb5f9e57b",
+      "size": 4162,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/803c6466e2c1322e0952a474efe584efb5f9e57b"
+    },
+    {
+      "path": "src/tau2/domains/telecom/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c531b4c717233285271f3c4039961a6a8e562ed6",
+      "size": 26442,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/c531b4c717233285271f3c4039961a6a8e562ed6"
+    },
+    {
+      "path": "src/tau2/domains/telecom/user_data_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78288cfc3f27cef39b4f7016d6b4646480338ecf",
+      "size": 15172,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/78288cfc3f27cef39b4f7016d6b4646480338ecf"
+    },
+    {
+      "path": "src/tau2/domains/telecom/user_tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a79447b0af1abbe23caeaaefa79b34432279f942",
+      "size": 48531,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a79447b0af1abbe23caeaaefa79b34432279f942"
+    },
+    {
+      "path": "src/tau2/domains/telecom/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "15ddf884b4592f290c3a7ab5396398956c45582e",
+      "size": 1260,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/15ddf884b4592f290c3a7ab5396398956c45582e"
+    },
+    {
+      "path": "src/tau2/environment/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/environment/db.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a4122a575449d2e8f531399f77391a237b6d958",
+      "size": 1267,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/5a4122a575449d2e8f531399f77391a237b6d958"
+    },
+    {
+      "path": "src/tau2/environment/environment.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0dce3d21826273e789eb25fa167b95ab148fa4f4",
+      "size": 18486,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0dce3d21826273e789eb25fa167b95ab148fa4f4"
+    },
+    {
+      "path": "src/tau2/environment/server.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "233ab8ec4acb4321f63065317a6ff1a1aae80369",
+      "size": 7918,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/233ab8ec4acb4321f63065317a6ff1a1aae80369"
+    },
+    {
+      "path": "src/tau2/environment/tool.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf55463cbac9286f36f5b01f5c799d5b0b50da88",
+      "size": 8092,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/cf55463cbac9286f36f5b01f5c799d5b0b50da88"
+    },
+    {
+      "path": "src/tau2/environment/toolkit.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6ccc92f4b4d7d692a7b7db10197ce3630fadaae",
+      "size": 11313,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b6ccc92f4b4d7d692a7b7db10197ce3630fadaae"
+    },
+    {
+      "path": "src/tau2/environment/utils/interface_agent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28e44f92838d9bc580b31f97f7b175ba2b87d368",
+      "size": 9563,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/28e44f92838d9bc580b31f97f7b175ba2b87d368"
+    },
+    {
+      "path": "src/tau2/evaluator/AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "acc80f3341bb78355306f76d398326641e69eca1",
+      "size": 4684,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/acc80f3341bb78355306f76d398326641e69eca1"
+    },
+    {
+      "path": "src/tau2/evaluator/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b137891791fe96927ad78e64b0aad7bded08bdc",
+      "size": 1,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8b137891791fe96927ad78e64b0aad7bded08bdc"
+    },
+    {
+      "path": "src/tau2/evaluator/auth_classifier.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f5eb42f8d91f5d0c3d7d794ec2a41aa27fd7896",
+      "size": 7884,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4f5eb42f8d91f5d0c3d7d794ec2a41aa27fd7896"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "76c95a83e9049d70a5570b93989797c0626974b6",
+      "size": 14218,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/76c95a83e9049d70a5570b93989797c0626974b6"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator_action.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "861784876aab7f0f2bf16685b8607b50f9873fd5",
+      "size": 8150,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/861784876aab7f0f2bf16685b8607b50f9873fd5"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator_base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4dc118ddf10549fa6b2a1017aba2251991024af4",
+      "size": 665,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4dc118ddf10549fa6b2a1017aba2251991024af4"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator_communicate.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1bac18fd8830304894da767d2e6b7efe6e779e89",
+      "size": 7462,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1bac18fd8830304894da767d2e6b7efe6e779e89"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator_env.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2e0a1a07cffd9394cc462376799289b1e9fbedd",
+      "size": 14100,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a2e0a1a07cffd9394cc462376799289b1e9fbedd"
+    },
+    {
+      "path": "src/tau2/evaluator/evaluator_nl_assertions.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f5397c5b8f8b105bf3d76027518d3bc3eb3e0f7",
+      "size": 8843,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1f5397c5b8f8b105bf3d76027518d3bc3eb3e0f7"
+    },
+    {
+      "path": "src/tau2/evaluator/hallucination_reviewer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3583f16700ca7fdebdfcccc5e2d217c9859b0dd9",
+      "size": 8618,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3583f16700ca7fdebdfcccc5e2d217c9859b0dd9"
+    },
+    {
+      "path": "src/tau2/evaluator/review_llm_judge.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b3e0d5d274b28cfc4449bd5f2b686754daac99fc",
+      "size": 29158,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b3e0d5d274b28cfc4449bd5f2b686754daac99fc"
+    },
+    {
+      "path": "src/tau2/evaluator/review_llm_judge_user_only.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4618d11966d7ec61ced5afa0f8316a5f83593f1c",
+      "size": 24065,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4618d11966d7ec61ced5afa0f8316a5f83593f1c"
+    },
+    {
+      "path": "src/tau2/evaluator/reviewer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "086a4a4b12bde2c06eae329f078466ff30ba9ad2",
+      "size": 7466,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/086a4a4b12bde2c06eae329f078466ff30ba9ad2"
+    },
+    {
+      "path": "src/tau2/gym/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1df4c51cdc59ab15b06d9bd31bed2959694f93f3",
+      "size": 17545,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1df4c51cdc59ab15b06d9bd31bed2959694f93f3"
+    },
+    {
+      "path": "src/tau2/gym/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a9295a15fe8c4cb4d0bef5792c03efc547a4990",
+      "size": 330,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3a9295a15fe8c4cb4d0bef5792c03efc547a4990"
+    },
+    {
+      "path": "src/tau2/gym/gym_agent.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7cd1e21255f60ed2b8dc41e8957330ca09beae7",
+      "size": 60236,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e7cd1e21255f60ed2b8dc41e8957330ca09beae7"
+    },
+    {
+      "path": "src/tau2/knowledge/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf86f1615e3baf3b295fe649833c59893d8eefcc",
+      "size": 4424,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/bf86f1615e3baf3b295fe649833c59893d8eefcc"
+    },
+    {
+      "path": "src/tau2/knowledge/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df5e1b123c3b77ce644c2e20625706a85dbc3613",
+      "size": 1034,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/df5e1b123c3b77ce644c2e20625706a85dbc3613"
+    },
+    {
+      "path": "src/tau2/knowledge/config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "612be74dac282d271992a7357863dfd3bbce0d2f",
+      "size": 4551,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/612be74dac282d271992a7357863dfd3bbce0d2f"
+    },
+    {
+      "path": "src/tau2/knowledge/document_preprocessors/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/knowledge/document_preprocessors/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "788512abd64f4eb00758ea5386479a57b3bde42f",
+      "size": 1355,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/788512abd64f4eb00758ea5386479a57b3bde42f"
+    },
+    {
+      "path": "src/tau2/knowledge/document_preprocessors/bm25_indexer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "73e8d67492203f30bfbb6775d2157c34c931abc2",
+      "size": 1359,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/73e8d67492203f30bfbb6775d2157c34c931abc2"
+    },
+    {
+      "path": "src/tau2/knowledge/document_preprocessors/embedding_indexer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b68fb2fa5ba85f23f31736da18bac42cee4d5b7",
+      "size": 4197,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4b68fb2fa5ba85f23f31736da18bac42cee4d5b7"
+    },
+    {
+      "path": "src/tau2/knowledge/embedders/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6efd2c7809ff8f026d9162c596985615c3e1482b",
+      "size": 267,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/6efd2c7809ff8f026d9162c596985615c3e1482b"
+    },
+    {
+      "path": "src/tau2/knowledge/embedders/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5e5ede5cb08e7a8ce00ed678b9eaadf55c2a96d",
+      "size": 595,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e5e5ede5cb08e7a8ce00ed678b9eaadf55c2a96d"
+    },
+    {
+      "path": "src/tau2/knowledge/embedders/openai_embedder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f8cb46f7a8e9ce5b68c8bffcd31c7647870daf9",
+      "size": 1519,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4f8cb46f7a8e9ce5b68c8bffcd31c7647870daf9"
+    },
+    {
+      "path": "src/tau2/knowledge/embedders/openrouter_embedder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3de45c837a829e72fddd691f8f61c8a6e1e2da67",
+      "size": 7524,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3de45c837a829e72fddd691f8f61c8a6e1e2da67"
+    },
+    {
+      "path": "src/tau2/knowledge/embeddings_cache.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4c89759857efa1009f31387ce084bff650e98e74",
+      "size": 22614,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4c89759857efa1009f31387ce084bff650e98e74"
+    },
+    {
+      "path": "src/tau2/knowledge/input_preprocessors/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3cca444861004b6b38e0a4509c567d9c9ff044da",
+      "size": 242,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3cca444861004b6b38e0a4509c567d9c9ff044da"
+    },
+    {
+      "path": "src/tau2/knowledge/input_preprocessors/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02365339ed180bccc6cb3643a5bf442e348e6fa5",
+      "size": 1481,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/02365339ed180bccc6cb3643a5bf442e348e6fa5"
+    },
+    {
+      "path": "src/tau2/knowledge/input_preprocessors/embedding_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5363695ad77d20da6171a1909de51673e119cd60",
+      "size": 4873,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/5363695ad77d20da6171a1909de51673e119cd60"
+    },
+    {
+      "path": "src/tau2/knowledge/pipeline.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29d013b083aa293cd8dce9600362e7e67e842397",
+      "size": 10143,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/29d013b083aa293cd8dce9600362e7e67e842397"
+    },
+    {
+      "path": "src/tau2/knowledge/postprocessors/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1734d83a4251a5e2760b2cd1144e9d8b29185bb9",
+      "size": 421,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1734d83a4251a5e2760b2cd1144e9d8b29185bb9"
+    },
+    {
+      "path": "src/tau2/knowledge/postprocessors/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "25dd5b9e2ecd2518b58b791f48d679ddd789f3f3",
+      "size": 1861,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/25dd5b9e2ecd2518b58b791f48d679ddd789f3f3"
+    },
+    {
+      "path": "src/tau2/knowledge/postprocessors/bge_reranker.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e84665fbf02bf0ea23dd52d6fd1a2845bebdd10",
+      "size": 7219,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7e84665fbf02bf0ea23dd52d6fd1a2845bebdd10"
+    },
+    {
+      "path": "src/tau2/knowledge/postprocessors/pointwise_llm_reranker.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7bf3a8d9fc87435a972417b4fec2feb0b1a92b2c",
+      "size": 4054,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7bf3a8d9fc87435a972417b4fec2feb0b1a92b2c"
+    },
+    {
+      "path": "src/tau2/knowledge/postprocessors/qwen_reranker.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "efb3019b045cea37bb9b73300330f1cc60acb04e",
+      "size": 9532,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/efb3019b045cea37bb9b73300330f1cc60acb04e"
+    },
+    {
+      "path": "src/tau2/knowledge/registry.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6ce760155698033e4b57db55045fe59dd586817",
+      "size": 1914,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f6ce760155698033e4b57db55045fe59dd586817"
+    },
+    {
+      "path": "src/tau2/knowledge/retrievers/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a102abdc174d28b81a079af00dac7a3fcb373df1",
+      "size": 363,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a102abdc174d28b81a079af00dac7a3fcb373df1"
+    },
+    {
+      "path": "src/tau2/knowledge/retrievers/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10412f6e16e77c0c6a067e5cbe266ad1e846477b",
+      "size": 1560,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/10412f6e16e77c0c6a067e5cbe266ad1e846477b"
+    },
+    {
+      "path": "src/tau2/knowledge/retrievers/bm25_retriever.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ad81fc105dc19784e3e65e043ac9a8eb27f93e1",
+      "size": 2267,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8ad81fc105dc19784e3e65e043ac9a8eb27f93e1"
+    },
+    {
+      "path": "src/tau2/knowledge/retrievers/cosine_retriever.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4365098b91ed96692abe01f38867ea4f4361b2b8",
+      "size": 3154,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4365098b91ed96692abe01f38867ea4f4361b2b8"
+    },
+    {
+      "path": "src/tau2/knowledge/retrievers/grep_retriever.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eba550dbec9ab71220d85fa303e3bf0279fbde27",
+      "size": 1835,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/eba550dbec9ab71220d85fa303e3bf0279fbde27"
+    },
+    {
+      "path": "src/tau2/knowledge/sandbox_manager.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "723ea9e903833d811c53b2f7b8e35855b0266038",
+      "size": 21268,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/723ea9e903833d811c53b2f7b8e35855b0266038"
+    },
+    {
+      "path": "src/tau2/metrics/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/metrics/agent_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6959b005e9653f1858f463d4c73c321d6d26eef",
+      "size": 18374,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f6959b005e9653f1858f463d4c73c321d6d26eef"
+    },
+    {
+      "path": "src/tau2/metrics/break_down_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "308357872910493ab32a47eedd1e80d6c071c9d8",
+      "size": 5582,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/308357872910493ab32a47eedd1e80d6c071c9d8"
+    },
+    {
+      "path": "src/tau2/metrics/voice_interaction_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b8c88936a04188868810fed5bc1b9b680fa7818",
+      "size": 89594,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9b8c88936a04188868810fed5bc1b9b680fa7818"
+    },
+    {
+      "path": "src/tau2/orchestrator/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebe5f9f1f0b07595eb71f3484ae2529f20e21a3d",
+      "size": 5201,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ebe5f9f1f0b07595eb71f3484ae2529f20e21a3d"
+    },
+    {
+      "path": "src/tau2/orchestrator/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a57beb001a2a57f4008fc504d7e1bab102c2e81e",
+      "size": 500,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a57beb001a2a57f4008fc504d7e1bab102c2e81e"
+    },
+    {
+      "path": "src/tau2/orchestrator/environment_manager.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "73fd07accd913403b4abcbcf49e155b48f56dae3",
+      "size": 8876,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/73fd07accd913403b4abcbcf49e155b48f56dae3"
+    },
+    {
+      "path": "src/tau2/orchestrator/full_duplex_orchestrator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e3d8b01c367826ec4b0158fc5999ae34b1952e1",
+      "size": 24960,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3e3d8b01c367826ec4b0158fc5999ae34b1952e1"
+    },
+    {
+      "path": "src/tau2/orchestrator/modes.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c14599db0624a714a183f625c0a3d08cd0cfe100",
+      "size": 808,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/c14599db0624a714a183f625c0a3d08cd0cfe100"
+    },
+    {
+      "path": "src/tau2/orchestrator/orchestrator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da030140af392038aef48b149cd22607e600269d",
+      "size": 40736,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/da030140af392038aef48b149cd22607e600269d"
+    },
+    {
+      "path": "src/tau2/orchestrator/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9fbd2aa2b5a0c2da2f54c544f20532a7ab874626",
+      "size": 319,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9fbd2aa2b5a0c2da2f54c544f20532a7ab874626"
+    },
+    {
+      "path": "src/tau2/registry.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86a97a1deeea8a8e09cafeac4dfcff171b6454d4",
+      "size": 13109,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/86a97a1deeea8a8e09cafeac4dfcff171b6454d4"
+    },
+    {
+      "path": "src/tau2/run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a15803220eb9e44a598cc9aa330ce51c83d52eb",
+      "size": 10098,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7a15803220eb9e44a598cc9aa330ce51c83d52eb"
+    },
+    {
+      "path": "src/tau2/runner/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "00a7ed2a1809da3e9856c049017230c97537184f",
+      "size": 4443,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/00a7ed2a1809da3e9856c049017230c97537184f"
+    },
+    {
+      "path": "src/tau2/runner/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e46c8cb4918c1862e8d874d2c702d925b8ca933a",
+      "size": 1564,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e46c8cb4918c1862e8d874d2c702d925b8ca933a"
+    },
+    {
+      "path": "src/tau2/runner/batch.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e31dc2cc417cb08e9abe34cc2bbfb03fb0c860b",
+      "size": 42078,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3e31dc2cc417cb08e9abe34cc2bbfb03fb0c860b"
+    },
+    {
+      "path": "src/tau2/runner/build.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d3e02b3e22281189a534e4f336daf5c88a50534b",
+      "size": 21502,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d3e02b3e22281189a534e4f336daf5c88a50534b"
+    },
+    {
+      "path": "src/tau2/runner/checkpoint.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2b4f04bba8efac46d0bf0f8197f3f05decfa8cf6",
+      "size": 16355,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/2b4f04bba8efac46d0bf0f8197f3f05decfa8cf6"
+    },
+    {
+      "path": "src/tau2/runner/controller.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb4ab0c5b42dfca71f96b73b6180342cf804fb32",
+      "size": 17171,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fb4ab0c5b42dfca71f96b73b6180342cf804fb32"
+    },
+    {
+      "path": "src/tau2/runner/helpers.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd15027ddbab10368c7f0e34764ea69702d30265",
+      "size": 6851,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fd15027ddbab10368c7f0e34764ea69702d30265"
+    },
+    {
+      "path": "src/tau2/runner/progress.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "464548a60d38fccae732f3b93b4eb3dac8a8ac2e",
+      "size": 7868,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/464548a60d38fccae732f3b93b4eb3dac8a8ac2e"
+    },
+    {
+      "path": "src/tau2/runner/simulation.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "25330c9d831f548b72edfd959757faefb901da9a",
+      "size": 3240,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/25330c9d831f548b72edfd959757faefb901da9a"
+    },
+    {
+      "path": "src/tau2/runner/work.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "82269abcc7e6489c45f2b0aab1e9046baf4fcb9f",
+      "size": 8617,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/82269abcc7e6489c45f2b0aab1e9046baf4fcb9f"
+    },
+    {
+      "path": "src/tau2/runner/worker.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "613733780073d535dd167700ed948ab13658b83b",
+      "size": 11791,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/613733780073d535dd167700ed948ab13658b83b"
+    },
+    {
+      "path": "src/tau2/scripts/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/scripts/analyze_vad_silence.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5e541a83144e556d150d8a7f0df21ae20608a51a",
+      "size": 7779,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/5e541a83144e556d150d8a7f0df21ae20608a51a"
+    },
+    {
+      "path": "src/tau2/scripts/check_data.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c04ba3f79940c17ca3614a4efcba7bd58e965d6",
+      "size": 812,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9c04ba3f79940c17ca3614a4efcba7bd58e965d6"
+    },
+    {
+      "path": "src/tau2/scripts/evaluate_trajectories.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a354080eea8ca8052fc8b8dc0f959893aafb6f96",
+      "size": 10468,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a354080eea8ca8052fc8b8dc0f959893aafb6f96"
+    },
+    {
+      "path": "src/tau2/scripts/get_experiment_results.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af623bbf698769c3d205fc801aac2dc137008444",
+      "size": 3994,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/af623bbf698769c3d205fc801aac2dc137008444"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/MAINTAINER.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bdf4376117c56bc31b263ad99dcb8a8bfa6c4e24",
+      "size": 5580,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/bdf4376117c56bc31b263ad99dcb8a8bfa6c4e24"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e01905f80b6aa20ad09a55077b07caa2e36d652",
+      "size": 2540,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0e01905f80b6aa20ad09a55077b07caa2e36d652"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/backfill_interaction_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9a14933330df62228d480ef1e7801b3742d1cfbe",
+      "size": 4897,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9a14933330df62228d480ef1e7801b3742d1cfbe"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/compute_interaction_metrics.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2823458ec22bae942221f522600f38951c5974e",
+      "size": 8234,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e2823458ec22bae942221f522600f38951c5974e"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/generate_schema.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "663100368e35803462bb0c328d8496eb4e700474",
+      "size": 2300,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/663100368e35803462bb0c328d8496eb4e700474"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/leaderboard.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d5cfa5e36b2e0366413ca364d18da7a46f501a48",
+      "size": 17996,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d5cfa5e36b2e0366413ca364d18da7a46f501a48"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/prepare_submission.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6174e07f606668a66cd05e2431297e0a0c4b46fe",
+      "size": 36574,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/6174e07f606668a66cd05e2431297e0a0c4b46fe"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/review_submission.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e580f785541991f8446e8a6ae786727ad4f582e",
+      "size": 17385,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0e580f785541991f8446e8a6ae786727ad4f582e"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/submission.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ba5486659f2d8b429486431686c24b647dd24b51",
+      "size": 20240,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ba5486659f2d8b429486431686c24b647dd24b51"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/trim_trajectories.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f7c1166cf8c373984e748bdebde78522e0cb66c8",
+      "size": 8896,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f7c1166cf8c373984e748bdebde78522e0cb66c8"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/verify_trajectories.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d74ba40a85d99ff2065288212e4b66af8781ea78",
+      "size": 3482,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/d74ba40a85d99ff2065288212e4b66af8781ea78"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/verify_trajectories_private.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8104c4380ab96a38657a76250dbc5e479bbfcbaf",
+      "size": 243,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8104c4380ab96a38657a76250dbc5e479bbfcbaf"
+    },
+    {
+      "path": "src/tau2/scripts/leaderboard/verify_trajectories_public.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ad325e50f61229a96fe903910d080b44dbf41c85",
+      "size": 2607,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ad325e50f61229a96fe903910d080b44dbf41c85"
+    },
+    {
+      "path": "src/tau2/scripts/manual_mode.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "3ce64e0cef9da31c07b108a460eaf78a0a803a2e",
+      "size": 27665,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3ce64e0cef9da31c07b108a460eaf78a0a803a2e"
+    },
+    {
+      "path": "src/tau2/scripts/per_task_summary.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0afe0f9487cc1f50cd71b68d83450c1dfb9d1a61",
+      "size": 14203,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0afe0f9487cc1f50cd71b68d83450c1dfb9d1a61"
+    },
+    {
+      "path": "src/tau2/scripts/recombine_rewards.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f76b802f89d559c201e308891e63c19e3fccac45",
+      "size": 9763,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f76b802f89d559c201e308891e63c19e3fccac45"
+    },
+    {
+      "path": "src/tau2/scripts/review_conversation.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aa02b188bca77033c293c1373b9997dfa97894da",
+      "size": 43714,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/aa02b188bca77033c293c1373b9997dfa97894da"
+    },
+    {
+      "path": "src/tau2/scripts/show_domain_doc.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "3c8093a56e95943c6a6568bc33956517d7ef1240",
+      "size": 2122,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3c8093a56e95943c6a6568bc33956517d7ef1240"
+    },
+    {
+      "path": "src/tau2/scripts/start_servers.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "7a7596be5114e0492ec9103e07b68bfde4909a29",
+      "size": 3462,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7a7596be5114e0492ec9103e07b68bfde4909a29"
+    },
+    {
+      "path": "src/tau2/scripts/view_simulations.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb174242cad1a1fb80f68d15b9b92acd001168aa",
+      "size": 42733,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/cb174242cad1a1fb80f68d15b9b92acd001168aa"
+    },
+    {
+      "path": "src/tau2/user/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b880bd721f27843f58506b041710ea96979324e1",
+      "size": 2240,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b880bd721f27843f58506b041710ea96979324e1"
+    },
+    {
+      "path": "src/tau2/user/user_simulator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51ef4bba88e2565532ce02da1f36ab3021028178",
+      "size": 9350,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/51ef4bba88e2565532ce02da1f36ab3021028178"
+    },
+    {
+      "path": "src/tau2/user/user_simulator_base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1daa1f6d8aa630f73c744dd44a5888ff6700239e",
+      "size": 6622,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1daa1f6d8aa630f73c744dd44a5888ff6700239e"
+    },
+    {
+      "path": "src/tau2/user/user_simulator_streaming.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "400103d565e1e825652f6564dd458b2fea7d23da",
+      "size": 68103,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/400103d565e1e825652f6564dd458b2fea7d23da"
+    },
+    {
+      "path": "src/tau2/user/user_simulator_voice.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1961a4a41a19519a500df653ece78e7021fbb57c",
+      "size": 4357,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1961a4a41a19519a500df653ece78e7021fbb57c"
+    },
+    {
+      "path": "src/tau2/user_simulation_voice_presets.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4e1ad1912c961ffbb0ff8d65ac66a02c1b6e12e5",
+      "size": 35426,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4e1ad1912c961ffbb0ff8d65ac66a02c1b6e12e5"
+    },
+    {
+      "path": "src/tau2/utils/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42a638ed754506b85e80f714bddde9c7883e38c6",
+      "size": 353,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/42a638ed754506b85e80f714bddde9c7883e38c6"
+    },
+    {
+      "path": "src/tau2/utils/display.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4da01e45b35a3dc2d79395cb87f98fc9528d74a",
+      "size": 116837,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f4da01e45b35a3dc2d79395cb87f98fc9528d74a"
+    },
+    {
+      "path": "src/tau2/utils/io_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16edf0e8af54adee8118206cb64baeb6058795b0",
+      "size": 5890,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/16edf0e8af54adee8118206cb64baeb6058795b0"
+    },
+    {
+      "path": "src/tau2/utils/llm_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc704825a14d1a81a791b9ca2a08aa2eb8989f8c",
+      "size": 17314,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/cc704825a14d1a81a791b9ca2a08aa2eb8989f8c"
+    },
+    {
+      "path": "src/tau2/utils/pydantic_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "adc02cb8db38d1b55340ead43207f3ff0ecf7c76",
+      "size": 994,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/adc02cb8db38d1b55340ead43207f3ff0ecf7c76"
+    },
+    {
+      "path": "src/tau2/utils/retry.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a77c363ec980f5c91a409d8f57bfa09f8cdd78e",
+      "size": 4875,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8a77c363ec980f5c91a409d8f57bfa09f8cdd78e"
+    },
+    {
+      "path": "src/tau2/utils/tools.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc9823d3c930da558baa808104782072ca541a38",
+      "size": 10589,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/dc9823d3c930da558baa808104782072ca541a38"
+    },
+    {
+      "path": "src/tau2/utils/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e6878e34c3c1c18aa5789d0ab278c64cacbf51e",
+      "size": 2957,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0e6878e34c3c1c18aa5789d0ab278c64cacbf51e"
+    },
+    {
+      "path": "src/tau2/voice/AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c614e6a39a349fca57d520adf4044f3a3597fcd",
+      "size": 5747,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3c614e6a39a349fca57d520adf4044f3a3597fcd"
+    },
+    {
+      "path": "src/tau2/voice/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "168765d6a4807b505fdff8002000b790a2c62506",
+      "size": 5864,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/168765d6a4807b505fdff8002000b790a2c62506"
+    },
+    {
+      "path": "src/tau2/voice/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4055c915da9573e4502e7bdf8f0eecaa9f6951d2",
+      "size": 59,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4055c915da9573e4502e7bdf8f0eecaa9f6951d2"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93f67385638707faa7a4e25ab734131b84405ed7",
+      "size": 1974,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/93f67385638707faa7a4e25ab734131b84405ed7"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3894b4514a20c198cfdddca5f892676a4d51a40",
+      "size": 3081,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a3894b4514a20c198cfdddca5f892676a4d51a40"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "162f3296de2e9f69b25b39999d052e8658ed16a5",
+      "size": 160,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/162f3296de2e9f69b25b39999d052e8658ed16a5"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3996add7b59e00fe2fe34852c303086397dd0f8f",
+      "size": 20208,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3996add7b59e00fe2fe34852c303086397dd0f8f"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/async_loop.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da27125e8935fd6e6ff1c47bc8852f5ed04d80cc",
+      "size": 3433,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/da27125e8935fd6e6ff1c47bc8852f5ed04d80cc"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/audio_converter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bb8746567e56a5178e4b0adf5b9e4ae8d8bd1f97",
+      "size": 3955,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/bb8746567e56a5178e4b0adf5b9e4ae8d8bd1f97"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/gemini/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87bb26d7beb76cabefd97f17bdb10e6e22d09608",
+      "size": 1771,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/87bb26d7beb76cabefd97f17bdb10e6e22d09608"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/gemini/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe03c2936e2daed9e69e0c6857c9faa951ed8c95",
+      "size": 1151,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fe03c2936e2daed9e69e0c6857c9faa951ed8c95"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/gemini/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d36b14267ad893a0edc9f13c520894513be1e50",
+      "size": 19948,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8d36b14267ad893a0edc9f13c520894513be1e50"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/gemini/events.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a59d3cf08958ec0163bc413e28ead8155b505a5c",
+      "size": 6147,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a59d3cf08958ec0163bc413e28ead8155b505a5c"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/gemini/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9062516045ce466576aeef3fc565b044b4f181a2",
+      "size": 55625,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9062516045ce466576aeef3fc565b044b4f181a2"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/livekit/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ff8a8b2c872a7be60644707a3a20047ecc97f8b",
+      "size": 5505,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/4ff8a8b2c872a7be60644707a3a20047ecc97f8b"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/livekit/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8162bc882b63b72d6ba8eec36b1950a5ee6b93ae",
+      "size": 3342,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8162bc882b63b72d6ba8eec36b1950a5ee6b93ae"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/livekit/config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "396785ac5a638f03d712498366049cb43e808341",
+      "size": 7550,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/396785ac5a638f03d712498366049cb43e808341"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/livekit/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0431ab8eab0bca7b5efc89cd3b36ca860969c7a7",
+      "size": 27788,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0431ab8eab0bca7b5efc89cd3b36ca860969c7a7"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/livekit/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ffc9a85187ee16fa0b444f5516b4a8a8e4566728",
+      "size": 44323,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ffc9a85187ee16fa0b444f5516b4a8a8e4566728"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/nova/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f0d78ea7e1a6bdafedef7dbe2ca76e7ae4a3b44",
+      "size": 1027,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8f0d78ea7e1a6bdafedef7dbe2ca76e7ae4a3b44"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/nova/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e2a0e3a4cd2cd39f0248d1ea64083e483edfd05",
+      "size": 22129,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1e2a0e3a4cd2cd39f0248d1ea64083e483edfd05"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/nova/events.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "127b35ad29a1d2de7466ff0b73e03e59328736c2",
+      "size": 12800,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/127b35ad29a1d2de7466ff0b73e03e59328736c2"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/nova/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "531bacb067a79eb02ad85c558cf01ec7c8558d82",
+      "size": 31331,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/531bacb067a79eb02ad85c558cf01ec7c8558d82"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/nova/test_provider_standalone.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6f68f482b35b498aa01b56f44280412150014f2",
+      "size": 8247,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b6f68f482b35b498aa01b56f44280412150014f2"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e503bc3fde59f8e6349dc0a86d308030d3e25177",
+      "size": 1643,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e503bc3fde59f8e6349dc0a86d308030d3e25177"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d9dc9aa4b9d9ad5372c2e6c816cd43e4c5422ad",
+      "size": 12465,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8d9dc9aa4b9d9ad5372c2e6c816cd43e4c5422ad"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/events.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98991907afaaaf0d9c1f0717f333d5e5ac5cb873",
+      "size": 9733,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/98991907afaaaf0d9c1f0717f333d5e5ac5cb873"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/live_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b793a7cb7b9af4bc107c205624fc18d731696ad7",
+      "size": 7344,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b793a7cb7b9af4bc107c205624fc18d731696ad7"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/live_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f0c75a62465f0265ee6271ef75562f0c65dbdc33",
+      "size": 2102,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f0c75a62465f0265ee6271ef75562f0c65dbdc33"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/live_provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "41cb936f6258671361dccb6658f60c2d029fa4f4",
+      "size": 21723,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/41cb936f6258671361dccb6658f60c2d029fa4f4"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/openai/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "03eb2bb40fefbf360e021b295d5927a81f78b4b9",
+      "size": 18770,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/03eb2bb40fefbf360e021b295d5927a81f78b4b9"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/qwen/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a933817d5b86ded2f0773febd020bb0e7967a81e",
+      "size": 2124,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a933817d5b86ded2f0773febd020bb0e7967a81e"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/qwen/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14b40871150dae2120041b325a91f15c4bea5096",
+      "size": 14981,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/14b40871150dae2120041b325a91f15c4bea5096"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/qwen/events.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3310e1cd8a9ba1ecf5ba1c0b09c7a49db33a5fca",
+      "size": 12970,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3310e1cd8a9ba1ecf5ba1c0b09c7a49db33a5fca"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/qwen/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81942a6aedd0b15c13f2e023503ddb541ee89e48",
+      "size": 15804,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/81942a6aedd0b15c13f2e023503ddb541ee89e48"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/tick_result.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b4b3d6ff345f7e6305cdb27839ceddb150f2c465",
+      "size": 20470,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b4b3d6ff345f7e6305cdb27839ceddb150f2c465"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/xai/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62c3cd041e8ae8c411cbb11fa57278c436045d34",
+      "size": 2340,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/62c3cd041e8ae8c411cbb11fa57278c436045d34"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/xai/discrete_time_adapter.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "139679d437f9e080f29c87d2622b3efcaaf877f4",
+      "size": 15763,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/139679d437f9e080f29c87d2622b3efcaaf877f4"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/xai/events.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa66d9452a986d4ed3e3e6ae463961b18ca8d1fa",
+      "size": 12733,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fa66d9452a986d4ed3e3e6ae463961b18ca8d1fa"
+    },
+    {
+      "path": "src/tau2/voice/audio_native/xai/provider.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b98b580359065f85e4cc67f57add82d4cbf2f1eb",
+      "size": 14739,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b98b580359065f85e4cc67f57add82d4cbf2f1eb"
+    },
+    {
+      "path": "src/tau2/voice/pricing.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7687f601e19bf07a3999253d060ec51bd671da63",
+      "size": 12753,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7687f601e19bf07a3999253d060ec51bd671da63"
+    },
+    {
+      "path": "src/tau2/voice/scripts/elevenlabs.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "76850eb24bee11226e0716d0645e16c97034af41",
+      "size": 4551,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/76850eb24bee11226e0716d0645e16c97034af41"
+    },
+    {
+      "path": "src/tau2/voice/scripts/setup_voices.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b256ba99713eca03eaa9c05b7e19be6ecaa6d39",
+      "size": 13369,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/8b256ba99713eca03eaa9c05b7e19be6ecaa6d39"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e9cf6010adeaf61f6000d10a9f205a1d589d95d",
+      "size": 49,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9e9cf6010adeaf61f6000d10a9f205a1d589d95d"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1de3b424f446575602045b28da60ffd219895978",
+      "size": 8464,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1de3b424f446575602045b28da60ffd219895978"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7b002816a950c2d8e33e91f2678a18e2170add1d",
+      "size": 71,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/7b002816a950c2d8e33e91f2678a18e2170add1d"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/effects.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ce3752a7832788a72e1fc38f6fbb51ea458c06f4",
+      "size": 14217,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/ce3752a7832788a72e1fc38f6fbb51ea458c06f4"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/noise_generator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dbe78efee3ce1c5cc322154aad47fadac1a9e90d",
+      "size": 14407,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/dbe78efee3ce1c5cc322154aad47fadac1a9e90d"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/processor.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "426862bc8d3dbefd5a509173674dc080a3d1efa7",
+      "size": 11692,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/426862bc8d3dbefd5a509173674dc080a3d1efa7"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/scheduler.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a050cf5abc756ce269a720db70eb514c08d52f19",
+      "size": 13901,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/a050cf5abc756ce269a720db70eb514c08d52f19"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/audio_effects/speech_generator.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b67d1331f83f759b9dabd656cc6e3093a616f6c8",
+      "size": 5280,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/b67d1331f83f759b9dabd656cc6e3093a616f6c8"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/cli.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db9108a6687f4fe639d463ed801fa73c9ef32d49",
+      "size": 9491,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/db9108a6687f4fe639d463ed801fa73c9ef32d49"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/conversation_builder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0fdeac0dd5fffa49c771afd2bacaba1c2d9f1446",
+      "size": 26802,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0fdeac0dd5fffa49c771afd2bacaba1c2d9f1446"
+    },
+    {
+      "path": "src/tau2/voice/synthesis/synthesize.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9a7ab98a35340b9283d6eb63d6578af18784dc2",
+      "size": 947,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e9a7ab98a35340b9283d6eb63d6578af18784dc2"
+    },
+    {
+      "path": "src/tau2/voice/transcription/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "432c2b8c7f2e45b2f502f7ea2f12641c7c1ef348",
+      "size": 247,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/432c2b8c7f2e45b2f502f7ea2f12641c7c1ef348"
+    },
+    {
+      "path": "src/tau2/voice/transcription/transcribe.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b9752c25deacdc3b407b795b22abc95d257fec0",
+      "size": 8827,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/3b9752c25deacdc3b407b795b22abc95d257fec0"
+    },
+    {
+      "path": "src/tau2/voice/transcription/transcription_test.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be4ceb4ae68bb70ea6ea8d5e7db49206200d286e",
+      "size": 3692,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/be4ceb4ae68bb70ea6ea8d5e7db49206200d286e"
+    },
+    {
+      "path": "src/tau2/voice/utils/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "src/tau2/voice/utils/audio_debug.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fbee0ffd4a1e9442f060e95f40b46a5adbd2e704",
+      "size": 17189,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/fbee0ffd4a1e9442f060e95f40b46a5adbd2e704"
+    },
+    {
+      "path": "src/tau2/voice/utils/audio_io.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1cc62ba50f8d493c13f77d109be7bf8fbbcdf1aa",
+      "size": 3869,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/1cc62ba50f8d493c13f77d109be7bf8fbbcdf1aa"
+    },
+    {
+      "path": "src/tau2/voice/utils/audio_preprocessing.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "230d84bfdf5faee5941a4b0179ed1ba5b653d091",
+      "size": 22153,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/230d84bfdf5faee5941a4b0179ed1ba5b653d091"
+    },
+    {
+      "path": "src/tau2/voice/utils/audio_tap.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8714579bed7afafca00a83d81c2ec6bfe3352e9",
+      "size": 3566,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f8714579bed7afafca00a83d81c2ec6bfe3352e9"
+    },
+    {
+      "path": "src/tau2/voice/utils/conversation_builder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "32f6d5b073c46d87a91be7cab415e528f2fe0ebb",
+      "size": 8984,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/32f6d5b073c46d87a91be7cab415e528f2fe0ebb"
+    },
+    {
+      "path": "src/tau2/voice/utils/convert_audio_files.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9774c7ab7cc190d13a811c2be0b9cc6a6e5bb574",
+      "size": 5254,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/9774c7ab7cc190d13a811c2be0b9cc6a6e5bb574"
+    },
+    {
+      "path": "src/tau2/voice/utils/elevenlabs_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f944b1f5567578ed325a2ede39d8baa94e31c89e",
+      "size": 3797,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f944b1f5567578ed325a2ede39d8baa94e31c89e"
+    },
+    {
+      "path": "src/tau2/voice/utils/openai_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05b0803db581cb260b11165f952fd076de7a8d53",
+      "size": 3097,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/05b0803db581cb260b11165f952fd076de7a8d53"
+    },
+    {
+      "path": "src/tau2/voice/utils/probability.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "900414f5dbd663e5ef031ff90ebc35232dd746f8",
+      "size": 5030,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/900414f5dbd663e5ef031ff90ebc35232dd746f8"
+    },
+    {
+      "path": "src/tau2/voice/utils/text_effects.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c0237429cd5f538e410fbab89c1ba836e92b883d",
+      "size": 1129,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/c0237429cd5f538e410fbab89c1ba836e92b883d"
+    },
+    {
+      "path": "src/tau2/voice/utils/transcript_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f0645744c1006da633ae5d84d2220674bc74a43",
+      "size": 9893,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/0f0645744c1006da633ae5d84d2220674bc74a43"
+    },
+    {
+      "path": "src/tau2/voice/utils/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f09e5a5d18780f1b28c98f01772e7d4d7383d4d1",
+      "size": 1121,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/f09e5a5d18780f1b28c98f01772e7d4d7383d4d1"
+    },
+    {
+      "path": "src/tau2/voice_config.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2c4bdb3ffcb908b381ecc00d2a1a205ac1bd99f4",
+      "size": 4071,
+      "url": "https://api.github.com/repos/sierra-research/tau2-bench/git/blobs/2c4bdb3ffcb908b381ecc00d2a1a205ac1bd99f4"
+    }
+  ]
+}

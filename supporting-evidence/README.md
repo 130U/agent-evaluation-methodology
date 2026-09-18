@@ -1,8 +1,7 @@
-# Supporting evidence
+# 支撑证据
 
-这里保存完整研究包、来源转写、构建脚本、渲染/QA 归档和辅助研究。默认阅读应从仓库根目录和 `core/` 开始。
+当前研究的证据入口为[τ-bench 公开复现包](tau-feedback-evidence/README.md)，包含固定来源、研究协议、代码、测试及公开结果。阅读结论请先查看[当前文字报告](../core/04-icfa-report/README.md)。
 
-- `full-research-packages/`：按原研究目录打包，保留 findings、sources、results、QA 和工作过程。
-- `interview-and-video-source-material/`：hook 所依赖的双语稿与字幕。
-- `auxiliary-interface-research/`：与核心 benchmark 交付无直接依赖、但可支持 UniPat 作品表达的研究。
-- `UPLOAD_MANIFEST.md`：逐类说明上传状态与公开边界。
+`auxiliary-interface-research/` 保留两份此前的界面辅助资料，与本次 Agent 实验无关。旧 ALE 报告包、字幕和采访专题已从当前版本移除。
+
+文件范围及版本说明见[发布清单](UPLOAD_MANIFEST.md)。

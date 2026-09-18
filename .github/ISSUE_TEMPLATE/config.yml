@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security or confidential disclosure
-    url: https://github.com/130U/agents-last-exam/security
+    url: https://github.com/130U/agent-evaluation-methodology/security
     about: Do not place secrets, personal data, or confidential benchmark material in a public issue.

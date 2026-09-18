@@ -1,0 +1,414 @@
+{
+  "schema_version": "g2-public-summary-v1",
+  "study_id": "g2-retail-subscription-http-case-v1",
+  "scope": "Exploratory known-development-case execution, not causal benefit comparison",
+  "registration": {
+    "manifest_sha256": "14fa8867386ff781ab3d749fa91790c4515922368186c6dbe4600e12d0c66b42",
+    "task_selection": {
+      "train": {
+        "task_id": "85",
+        "structural_group": "structural_43"
+      },
+      "dev_validation": {
+        "task_id": "75",
+        "structural_group": "structural_35"
+      }
+    },
+    "selection_disclosure": "Selected after G1 outcomes were known; both tasks previously used in development; no blind/held-out claim",
+    "model": "gpt-5.6-sol",
+    "effort": "low",
+    "transport": "HttpCliTextClient",
+    "model_seed_controlled": false,
+    "simulation_seed": 43,
+    "optimizer_seed": 0,
+    "arm_order": [
+      "B1",
+      "B2"
+    ],
+    "client_limits_per_arm": {
+      "max_calls": 160,
+      "max_input_tokens": 2000000,
+      "max_output_tokens": 20000,
+      "max_seconds": 2400,
+      "request_timeout": 120
+    },
+    "proposal_opportunities_per_arm": 1,
+    "skip_perfect_score": true,
+    "acceptance_criterion": "strict_improvement",
+    "retries": 0
+  },
+  "strategy": {
+    "label": "S0",
+    "text": "Follow the retail policy. Help the authenticated customer complete their request using the available tools, and accurately communicate the outcome.",
+    "utf8_sha256": "86aa62048c4845c3564aba229035c6bab5cbe20057b36108abbb5c8407ac0961"
+  },
+  "arms": [
+    {
+      "arm": "B1",
+      "status": "complete",
+      "completion": {
+        "schema_version": "gepa-milestones-v1",
+        "endpoint": "skipped_all_perfect",
+        "optimizer_iterations": 1,
+        "proposal_starts": 0,
+        "generated_candidates": 0,
+        "accepted_candidates": 0,
+        "rejected_candidates": 0,
+        "skip_reasons": [
+          "all_scores_perfect"
+        ],
+        "total_metric_calls": 2,
+        "best_candidate_idx": 0,
+        "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+      },
+      "episodes": [
+        {
+          "task_id": "75",
+          "role": "seed_dev_validation",
+          "official_reward": 1,
+          "db_match": true,
+          "reference_write_action_match": true,
+          "nl_assertions": "not_applicable",
+          "qualified_status": "pass",
+          "user_validity": "pass",
+          "agent_editable_failure": false,
+          "cli_calls": 11,
+          "input_tokens": 148779,
+          "output_tokens": 787,
+          "messages": 16,
+          "evidence_turns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "result_hashes": {
+            "request.json": "53bc7314d8c231b55cb81b8922333f480770d79202fe0fa05bb2d77c0ce640d7",
+            "outcome.json": "c1cff634f016afe17b4ac6deceb75c184b79dd8bde797b8e613902e962d1ef37",
+            "trajectory.json": "14477d894dfe79c4cab7f30b714dcb0cdd700acd043f8a3f8cf9dad0d9a0e75b",
+            "simulation.json": "83e4743ed423185608e741e27f2bab4bf5a965e6e22aee094058fad1736dab26",
+            "calls.jsonl": "4de9f3ebee8f92819190b265be453c4c7e52f3ed1f8477191615398a2bbe5c98"
+          }
+        },
+        {
+          "task_id": "85",
+          "role": "parent_seed_train",
+          "official_reward": 1,
+          "db_match": true,
+          "reference_write_action_match": true,
+          "nl_assertions": "not_applicable",
+          "qualified_status": "pass",
+          "user_validity": "pass",
+          "agent_editable_failure": false,
+          "cli_calls": 14,
+          "input_tokens": 197619,
+          "output_tokens": 1050,
+          "messages": 22,
+          "evidence_turns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
+          ],
+          "result_hashes": {
+            "request.json": "81f24d861a60d0cc382920af2f12240d29e3cea80407543fd49610645dcc9133",
+            "outcome.json": "25450e72facc8b4812541d3c009ec3357a29af3f8f1aa90409915f39cb343771",
+            "trajectory.json": "867016f12e41d670464c4e986a9ea308dcd06e4eed4581f8955edf9f442fb320",
+            "simulation.json": "4ae56b63bd59cf6a48df4f8088470a9b6f98d1692eeaec901fdec31266b7bc14",
+            "calls.jsonl": "00db9f680e587e149e4818f5beba0f8f9e3e657105e867d2e908236ab2312332"
+          }
+        }
+      ],
+      "usage": {
+        "cli_invocations": 26,
+        "input_tokens": 362053,
+        "output_tokens": 2081,
+        "unknown_usage_calls": 0,
+        "client_seconds": 301.06200000000536,
+        "ledger_available": true,
+        "halt_reason": null
+      },
+      "role_usage": {
+        "user_simulator_response": {
+          "calls": 8,
+          "input_tokens": 81033,
+          "output_tokens": 317
+        },
+        "agent_response": {
+          "calls": 17,
+          "input_tokens": 265365,
+          "output_tokens": 1520
+        },
+        "llm_judge_review": {
+          "calls": 1,
+          "input_tokens": 15655,
+          "output_tokens": 244
+        }
+      },
+      "feedback": {
+        "native_review_calls": 1,
+        "native_agent_diagnoses": 0,
+        "selected_diagnoses": 0,
+        "diagnoses": [],
+        "gate_calls": 0,
+        "reflection_calls": 0
+      },
+      "final_strategy": "S0",
+      "final_strategy_unchanged": true,
+      "result_hashes": {
+        "seal.json": "3ad19c5a84593a0f6b5d96d87d232fdfe211003c45153c61f9b69a8e961957df",
+        "arm_outcome.json": "66fbfe8c6c0052dcec8e1cc65cf4f284288a41e036c5c850b5328c46a02f86b5",
+        "budget.json": "ee01e6a9d6acd0e2e15abf223df2a766acf53041634cd5cc0f7488821823197f",
+        "execution.json": "8b5b2f821ffb33dbaaa3575e5d907290c3e4aeb05089abfe919ce25914b65c18",
+        "best_candidate.json": "ae3b98dc9895dd185856ccbff3d54423adaa681da4f673c6dee9f11b52e5589a",
+        "events.jsonl": "3c5621373ac02a13125854df9f25356b7508445535e1c3ff397ad0ecfe755bde",
+        "classification.json": "cdca48cf38afd70dfead00dec38985091098c7b9ffc59be1e653e29db3d392d1",
+        "run_log.txt": "107421cfa6345e21b418fd0e1eff0e7022d55dc1c70250d02659ef2d4e6d901d",
+        "sampling.json": "aaaef5a677b288e71e1d53b8c015d77ede1545568ae9f80a99d62d3b60f10020",
+        "native_review.json": "e7777c20003fd80e9169defdb1f613fe2e976a4101769de200b62a2728f87fcb",
+        "outcome.json": "b317b30f71f6b881458320539811141b8249f812f2f5dc73432de1d27966ed41"
+      }
+    },
+    {
+      "arm": "B2",
+      "status": "complete",
+      "completion": {
+        "schema_version": "gepa-milestones-v1",
+        "endpoint": "skipped_all_perfect",
+        "optimizer_iterations": 1,
+        "proposal_starts": 0,
+        "generated_candidates": 0,
+        "accepted_candidates": 0,
+        "rejected_candidates": 0,
+        "skip_reasons": [
+          "all_scores_perfect"
+        ],
+        "total_metric_calls": 2,
+        "best_candidate_idx": 0,
+        "evidence_scope": "Official callback metadata; not model-call counts or research benefit"
+      },
+      "episodes": [
+        {
+          "task_id": "75",
+          "role": "seed_dev_validation",
+          "official_reward": 1,
+          "db_match": true,
+          "reference_write_action_match": true,
+          "nl_assertions": "not_applicable",
+          "qualified_status": "pass",
+          "user_validity": "pass",
+          "agent_editable_failure": false,
+          "cli_calls": 11,
+          "input_tokens": 148794,
+          "output_tokens": 835,
+          "messages": 16,
+          "evidence_turns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "result_hashes": {
+            "request.json": "591faa862a9b15500c9284dc91871fe7e5b6b98444c95c66f0289ce4a7655bcf",
+            "outcome.json": "c67c1d7593d7c5b4d818ca1f2370604af5fe9bd6d35380b82769c2af9a352d34",
+            "trajectory.json": "01aa355a06663712c2400049fd3ebb159c1274426d75b1e74ce357ba224bccd2",
+            "simulation.json": "70a88a4105daa97730e87b13eaf8c6e03034a4c80241c048d7335d1abcfaaafb",
+            "calls.jsonl": "d02a3ca247c98c1fb8b2c1cdc818d6f10617abaf32ebacb7cddedf0bc3eeb465"
+          }
+        },
+        {
+          "task_id": "85",
+          "role": "parent_seed_train",
+          "official_reward": 1,
+          "db_match": true,
+          "reference_write_action_match": true,
+          "nl_assertions": "not_applicable",
+          "qualified_status": "pass",
+          "user_validity": "pass",
+          "agent_editable_failure": false,
+          "cli_calls": 13,
+          "input_tokens": 180509,
+          "output_tokens": 956,
+          "messages": 20,
+          "evidence_turns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "result_hashes": {
+            "request.json": "fc50f41224cf0324077111463ddc43733b310f66ad397e4330a0bdaa88199681",
+            "outcome.json": "dbf5a27c18c663766bb5c83d9ec51b76481bb4fc14235a8f903bc58d9e5484bf",
+            "trajectory.json": "fdce11fd210da8f450ca65374ac7906f7c296c0917ac688ac68e914a64a8e29d",
+            "simulation.json": "9ddf79df3cda2029f386c196bb9d5d8601ea3f5223c2b7bbd4e29421f5ae6d66",
+            "calls.jsonl": "f87b16eb1b18d3a3a6c125f9b990dd2cc972f5c2ee4e19543e57ae525b256881"
+          }
+        }
+      ],
+      "usage": {
+        "cli_invocations": 25,
+        "input_tokens": 344846,
+        "output_tokens": 2038,
+        "unknown_usage_calls": 0,
+        "client_seconds": 280.39100000000326,
+        "ledger_available": true,
+        "halt_reason": null
+      },
+      "role_usage": {
+        "user_simulator_response": {
+          "calls": 8,
+          "input_tokens": 81013,
+          "output_tokens": 348
+        },
+        "agent_response": {
+          "calls": 16,
+          "input_tokens": 248290,
+          "output_tokens": 1443
+        },
+        "llm_judge_review": {
+          "calls": 1,
+          "input_tokens": 15543,
+          "output_tokens": 247
+        }
+      },
+      "feedback": {
+        "native_review_calls": 1,
+        "native_agent_diagnoses": 0,
+        "selected_diagnoses": 0,
+        "diagnoses": [],
+        "gate_calls": 0,
+        "reflection_calls": 0
+      },
+      "final_strategy": "S0",
+      "final_strategy_unchanged": true,
+      "result_hashes": {
+        "seal.json": "8d8c770a21c942f326b1890de864d189128f744c0d2e1c6d27914928d6484a8f",
+        "arm_outcome.json": "ad65c328e9474653251dfd1a14d1a298f6b4fdbfbf609b748a1b224a3a3492c3",
+        "budget.json": "8aa3f07753b9815d0313ec92d562e693970b9154b8e7b35a4901117e5a6545e9",
+        "execution.json": "beaf5a19fa87d753ef8e56cba2007da37ed764c9f706666bc70e45b0c5d3574c",
+        "best_candidate.json": "ae3b98dc9895dd185856ccbff3d54423adaa681da4f673c6dee9f11b52e5589a",
+        "events.jsonl": "3c5621373ac02a13125854df9f25356b7508445535e1c3ff397ad0ecfe755bde",
+        "classification.json": "cdca48cf38afd70dfead00dec38985091098c7b9ffc59be1e653e29db3d392d1",
+        "run_log.txt": "107421cfa6345e21b418fd0e1eff0e7022d55dc1c70250d02659ef2d4e6d901d",
+        "sampling.json": "aaaef5a677b288e71e1d53b8c015d77ede1545568ae9f80a99d62d3b60f10020",
+        "native_review.json": "e301b697b58c2980a3f923d180fe5777a701ad0ca9a6b836315e68408f247227",
+        "outcome.json": "017111dd55be5cba9ea538a42d230c421e4300ac32349060dba40d67e981bad9"
+      }
+    }
+  ],
+  "totals": {
+    "cli_invocations": 51,
+    "input_tokens": 706899,
+    "output_tokens": 4119,
+    "unknown_usage_calls": 0,
+    "episodes": 4,
+    "distinct_tasks": 2,
+    "qualified_passes": 4,
+    "user_validity_passes": 4,
+    "native_review_calls": 2,
+    "native_agent_diagnoses": 0,
+    "selected_diagnoses": 0,
+    "gate_calls": 0,
+    "reflection_calls": 0,
+    "generated_candidates": 0,
+    "candidate_evaluations": 0
+  },
+  "role_usage": {
+    "user_simulator_response": {
+      "calls": 16,
+      "input_tokens": 162046,
+      "output_tokens": 665
+    },
+    "agent_response": {
+      "calls": 33,
+      "input_tokens": 513655,
+      "output_tokens": 2963
+    },
+    "llm_judge_review": {
+      "calls": 2,
+      "input_tokens": 31198,
+      "output_tokens": 491
+    }
+  },
+  "review_provenance": "Research-agent review of original local evidence; not a human gold standard.",
+  "conclusion": "Both arms reached skipped_all_perfect with unchanged S0; no real reflection/candidate generation and no optimization or admission benefit established.",
+  "limitations": [
+    "Research-agent review, not human annotation or a gold standard.",
+    "Two known development tasks, selected after prior G1 outcomes; no holdout or generalization claim.",
+    "Fresh unmatched stochastic baselines and diagnosis pools; no paired causal effect or average uplift.",
+    "Both arms completed skipped_all_perfect with unchanged S0. Reflection and candidate-generation routes have no real execution evidence in this case.",
+    "Both native reviewers returned zero Agent diagnoses; gate never invoked. No admission benefit, rejection performance or useful-feedback loss measured.",
+    "Four successful seed-policy episodes do not demonstrate GEPA optimization or gate gains.",
+    "Both tasks lack NL assertions; official NL=1 is not an executed NL-judge success.",
+    "Prior G1, N1, component probes and research-agent costs are excluded. Reported token usage is not monetary expense.",
+    "Raw CLI requests/events are not publicly released. Hash commitments alone cannot independently authenticate unpublished raw calls.",
+    "B2 has one fewer calculate call and lower realized cost on a different trajectory; the difference cannot be attributed to a gate that never ran."
+  ],
+  "source_versions": {
+    "tau2": "2174a603f6d014ef94473ffa95957f6ce27100db",
+    "gepa": "15ee314f9c7d34ec153b809d401f42f55c4dcd76",
+    "codex_cli": "b5bffd3ec4db487e7e3dec59663875b0ef7b72ca"
+  },
+  "source_hashes": {
+    "G2_SUBSCRIPTION_MANIFEST.json": "14fa8867386ff781ab3d749fa91790c4515922368186c6dbe4600e12d0c66b42",
+    "G2_EXPLORATORY_CASE_PROTOCOL.md": "05ca433a217a18f8ddac90463ee1d54e82495c00758e66ba7346172fd8ffb246",
+    "subscription_optimization.py": "3f7c820a7889a2fc6c492b775d20fcc5404b005d31e2efa1238c26ea4667a8c2",
+    "pre_admission_adapter.py": "1663f5434dd1be042a65bd189c25a6849f24fb8cd6338a9d6f64274f0ed9901b",
+    "subscription_http_client.py": "157ef64b7311ea2fed19f6dba9a6e2dae5167da983ef31362bdf288981380211",
+    "gepa_milestones.py": "8844c3edc24d995d106fccaaa452a6daecaf3b95d9007126d17939867bd3627a",
+    "run_subscription_g2.py": "63d0ded8eb27db335ac2f7b1084a6bb9c5473885ef3e91d9d6170894ef024adf",
+    "register_subscription_g2.py": "9a2918a0cb7eb28d64324dd38f915a9a32a870690a8db114cae5d6527004ef65",
+    "cli_model_catalog_sol.json": "cb9176ce010cff15088dbb99147cb46379de5941400ff62368d73594734d35ad"
+  },
+  "result_commitments": {
+    "stage_summary_sha256": "5568fa6c64ce086b3a33273f163a0f481e1fce549f75a9f52896caed91ceed54",
+    "independent_review_sha256": "a9892ca3d2c2ae34895d638fa6fb5e5e49bcad78334190eb9aa71fcc06bbd2fb",
+    "b1_sealed_file_count": 272,
+    "b2_sealed_file_count": 263
+  }
+}

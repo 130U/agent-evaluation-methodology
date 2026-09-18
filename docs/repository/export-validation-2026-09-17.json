@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "overlay_unchanged": true,
+  "isolated_public_copy_unchanged": true,
+  "tests_passed": 373,
+  "tests_run": 373,
+  "new_model_calls": 0,
+  "public_export_manifest_sha256": "992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db",
+  "source_import_path_verified": true,
+  "clean_install": false,
+  "exit_code": 0,
+  "elapsed_seconds": 83.92200000002049,
+  "limitations": [
+    "Uses the existing installed dependency environment; not a fresh internet install.",
+    "Public tau2/GEPA sources and archived inputs are hash-verified copies from existing local downloads.",
+    "Runs the exported public test suite with network/process guards; not the original private full suite or whole-repository CI.",
+    "No online model rerun; historical subscription CLI logs and cloud weights remain unavailable in the public package.",
+    "E0-E3 and the E4 initialization pipeline were not rerun; prior evidence is scoped to explicitly compared identical code and inputs.",
+    "This delivery check does not complete the stopped G3/G4 research cohorts."
+  ],
+  "source_report_sha256": "fc99b615a43cf26622661627f0f859058364523f2bfb043cf0f9877c10adb0dc",
+  "source_report": "PUBLIC_REPRODUCTION_FINAL.json, sealed public-export verification",
+  "publication_note": "Selected fields from the prior verification report; this repository publication did not rerun the model experiments."
+}

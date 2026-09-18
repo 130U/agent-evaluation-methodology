@@ -1,0 +1,22 @@
+{
+  "purpose": "Third bounded engineering candidate after two user-simulator configurations failed; not a benchmark gain",
+  "runtime": {
+    "project": "ggml-org/llama.cpp",
+    "release": "b10964",
+    "stable_version": "v0.4.1",
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b10964/llama-b10964-bin-win-cpu-x64.zip",
+    "size": 18427629,
+    "sha256": "917f39c076402c421224824607397af20f53625a60defc20e8dd22446bf4c5d7"
+  },
+  "model": {
+    "label": "lfm2.5-1.2B-instruct_Q8_0",
+    "repository": "LiquidAI/LFM2.5-1.2B-Instruct-GGUF",
+    "revision": "3afb0cbc238a225ee3dd0b11aeffdaaf16a17ca9",
+    "file": "LFM2.5-1.2B-Instruct-Q8_0.gguf",
+    "size": 1246253888,
+    "sha256": "f6b981dcb86917fa463f78a362320bd5e2dc45445df147287eedb85e5a30d26a",
+    "license": "LFM Open License v1.0",
+    "base_model": "LiquidAI/LFM2.5-1.2B-Instruct",
+    "quantization_producer": "LiquidAI official GGUF"
+  }
+}

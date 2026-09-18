@@ -1,0 +1,452 @@
+[
+  {
+    "group_id": "structural_01",
+    "task_ids": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_02",
+    "task_ids": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_03",
+    "task_ids": [
+      "10",
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_04",
+    "task_ids": [
+      "15",
+      "16",
+      "17"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_05",
+    "task_ids": [
+      "18",
+      "19"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_06",
+    "task_ids": [
+      "20",
+      "21",
+      "22"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_07",
+    "task_ids": [
+      "23",
+      "70"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_08",
+    "task_ids": [
+      "24"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_09",
+    "task_ids": [
+      "25",
+      "26",
+      "27",
+      "28",
+      "29"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_10",
+    "task_ids": [
+      "30",
+      "31",
+      "32"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_11",
+    "task_ids": [
+      "33",
+      "34"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_12",
+    "task_ids": [
+      "35"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_13",
+    "task_ids": [
+      "36",
+      "37",
+      "38"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_14",
+    "task_ids": [
+      "39"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_15",
+    "task_ids": [
+      "40"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_16",
+    "task_ids": [
+      "41",
+      "42"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_17",
+    "task_ids": [
+      "43"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_18",
+    "task_ids": [
+      "44",
+      "49",
+      "105"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_19",
+    "task_ids": [
+      "45",
+      "46",
+      "47",
+      "48"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_20",
+    "task_ids": [
+      "50"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_21",
+    "task_ids": [
+      "51",
+      "52",
+      "53",
+      "98",
+      "99"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_22",
+    "task_ids": [
+      "54",
+      "55"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_23",
+    "task_ids": [
+      "56",
+      "58"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_24",
+    "task_ids": [
+      "57"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_25",
+    "task_ids": [
+      "59"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_26",
+    "task_ids": [
+      "60",
+      "61",
+      "62",
+      "63"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_27",
+    "task_ids": [
+      "64"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_28",
+    "task_ids": [
+      "65"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_29",
+    "task_ids": [
+      "66"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_30",
+    "task_ids": [
+      "67",
+      "68",
+      "101",
+      "102"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_31",
+    "task_ids": [
+      "69"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_32",
+    "task_ids": [
+      "71",
+      "72"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_33",
+    "task_ids": [
+      "73"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_34",
+    "task_ids": [
+      "74"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_35",
+    "task_ids": [
+      "75"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_36",
+    "task_ids": [
+      "76"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_37",
+    "task_ids": [
+      "77"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_38",
+    "task_ids": [
+      "78",
+      "113"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_39",
+    "task_ids": [
+      "79"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_40",
+    "task_ids": [
+      "80"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_41",
+    "task_ids": [
+      "81"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_42",
+    "task_ids": [
+      "82",
+      "83",
+      "84"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_43",
+    "task_ids": [
+      "85",
+      "86",
+      "87"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_44",
+    "task_ids": [
+      "88"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_45",
+    "task_ids": [
+      "89"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_46",
+    "task_ids": [
+      "90"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_47",
+    "task_ids": [
+      "91",
+      "92"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_48",
+    "task_ids": [
+      "93",
+      "94",
+      "95"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_49",
+    "task_ids": [
+      "96",
+      "97"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_50",
+    "task_ids": [
+      "100"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_51",
+    "task_ids": [
+      "103",
+      "104"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_52",
+    "task_ids": [
+      "106"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_53",
+    "task_ids": [
+      "107"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_54",
+    "task_ids": [
+      "108"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_55",
+    "task_ids": [
+      "109",
+      "110"
+    ],
+    "status": "candidate_requires_semantic_review"
+  },
+  {
+    "group_id": "structural_56",
+    "task_ids": [
+      "111",
+      "112"
+    ],
+    "status": "candidate_requires_semantic_review"
+  }
+]

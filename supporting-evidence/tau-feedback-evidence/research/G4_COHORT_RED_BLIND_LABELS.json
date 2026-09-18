@@ -1,0 +1,773 @@
+{
+  "reviewer": "red",
+  "manifest_sha256": "617e95e6780eba899e59156a73998f4d1ac2fd172f146e34ba5e13cf884a8e1b",
+  "packet_seal_sha256": "dfc2d770b5b673c46c3653e03648f7749cd23fa1bcd4d791d8097953274ed060",
+  "prior_familiarity": "本复核者为 AI research agent，参与过 G4 方法和实现边界审查，也审阅过此前 G1/G3 的部分零售案例，因此可能识别情境，并非完全盲法或人工金标准。本轮首轮标签仅使用授权匿名包、COMMON 与说明及封存清单；未读取宿主映射、G4 原始执行目录、另一复核者标签、原生审查、策略或 GEPA 结果。",
+  "label_status": "first_independent_labels_sealed_before_comparison",
+  "items": [
+    {
+      "review_id": "review-2eefdb41c7e71759",
+      "packet_sha256": "690b2ec36f5a9bb0de94eb810b10e1ec4b68d4cbb592262b8d9b8583fca49822",
+      "artifact_sha256": {
+        "request.json": "b2350698ffb514f048da8092e9de4102cd5a63b45165b105ca0420dbb67717fb",
+        "outcome.json": "96521530780e91eb61a919b4027e3d4bf91cf7508886228616c29bc0302f2ed4",
+        "trajectory.json": "f6dedecd38dedc45e9acee54ae0a77278a200236a07709003df0237d69a8e92f",
+        "simulation.json": "89c0d9fb5b1140e53f967aa5934bb25c8beb47516e0fa375b8640c42809e868a",
+        "calls.jsonl": "d0b3b14691921e2c56d1a8e48329199f9b7a86c555c8b82329e8f8416e19b559"
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        {
+          "turn_idx": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "clause": "Retail authentication; single-user restriction",
+          "reason": "先用姓名与邮编查得身份，再访问同一用户的资料与订单，未见身份或所有权绕过。"
+        },
+        {
+          "turn_idx": [
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "clause": "Retail modify pending order; transfer to human",
+          "reason": "工具没有从待发货订单删除部分商品的操作。Agent 对部分取消请求执行转交，工具成功后使用规定的转交话术；用户使用 TRANSFER 结束。此路径符合转交政策。"
+        },
+        {
+          "turn_idx": [
+            1,
+            10,
+            12,
+            13
+          ],
+          "clause": "Scenario conditional fallback: if partial cancellation is unavailable, change shipping address",
+          "reason": "场景期待的改寄地址后备目标没有实现，故完成状态 fail；但用户此前只披露部分取消请求，未说出改址后备意图。不能把隐藏后备目标当作 Agent 当时已知，也不能仅因该目标未实现认定关键政策违规。"
+        }
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "clause": "Retail authentication",
+              "reason": "认证在账户查询前完成，订单属于该用户。"
+            }
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            {
+              "turn_idx": [
+                10,
+                11,
+                12
+              ],
+              "clause": "Retail explicit confirmation before database-changing actions",
+              "reason": "仅转交，没有取消、改址等订单状态写入；未到数据库修改确认机会。"
+            }
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                10,
+                12,
+                13
+              ],
+              "clause": "Scenario shipping-address fallback; progressive disclosure",
+              "reason": "部分取消不可用后直接转交，改寄地址意图尚未由用户披露。后备交互未到达，不能把未披露的要求归为已证实的策略错误。"
+            }
+          ]
+        },
+        "explicit_unsupported_operation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                9,
+                10,
+                11,
+                12
+              ],
+              "clause": "Retail pending-item modification and transfer",
+              "reason": "识别部分取消不在工具能力内，没有调用伪造的删除操作，完成政策允许的转交。"
+            }
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                10,
+                11,
+                12
+              ],
+              "clause": "Retail information grounded in user/tools",
+              "reason": "未声称部分取消、退款或地址修改已完成；转交成功有工具支持。"
+            }
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                4,
+                6,
+                8,
+                10
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "没有订单数据库写入。"
+            }
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                9,
+                10,
+                11,
+                12
+              ],
+              "clause": "Retail no invented information",
+              "reason": "转交摘要中的三件办公商品与两件保留商品均可在订单中定位；成功转交有工具回执。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-6db0fdda658d24f7",
+      "packet_sha256": "168f3a7a38f79625b20ed252ba7d870e882fd6cf8e33393787ff6202dea1af85",
+      "artifact_sha256": {
+        "request.json": "f6cd2e328ec09a6b16dc934480fe82c4729aeddef3f0dac9a7b24d18756058ef",
+        "outcome.json": "b3d869ab34f508937717e29b4472ae3803b8e1984378c7725335fc36a97c8d08",
+        "trajectory.json": "d1b3d18712c0d121cf73ba2338170be2f2fea894bfc41e9a2d68849e5ac2092b",
+        "simulation.json": "4f9a1ef1cc107e5dc5cc624ff9479c66719d71ff0b0c39242d46d6bb07555c14",
+        "calls.jsonl": "ad1ec42c0cb3bba2a09d250640bcb1a77e1f86917badad4e1acda9f8d22e6b47"
+      },
+      "semantic_status": "fail",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        {
+          "turn_idx": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "clause": "Retail authentication; single-user restriction",
+          "reason": "姓名邮编认证成功，查询的两个订单属于同一认证用户。"
+        },
+        {
+          "turn_idx": [
+            1,
+            3,
+            7,
+            9,
+            11,
+            12,
+            13
+          ],
+          "clause": "Scenario older-order cancellation; UserSimulator unknown information",
+          "reason": "两个订单均 pending，但工具内容没有下单日期或排序依据。Agent 明示无法判断哪单更早并询问；场景也未提供用户能回答的更早订单身份，用户 OUT-OF-SCOPE 与未知信息规则相容。不能从参考动作反推 Agent 可见信息。"
+        },
+        {
+          "turn_idx": [
+            12,
+            13
+          ],
+          "clause": "Scenario cancellation and address change",
+          "reason": "两个写操作均未发生，因此整体任务未完成。用户已提供的新地址也没有被修改；这是真实未完成，不等于已证明询问更早订单违反政策。"
+        },
+        {
+          "turn_idx": [
+            7,
+            9,
+            11,
+            12
+          ],
+          "clause": "Retail cancellation timing; scenario requested totals",
+          "reason": "最终面向用户明确给出 625.60 和 164.28，并将退款说成取消后的条件性结果。没有承诺 5 天内处理订单；取消信用卡退款的 5–7 个工作日来自政策。"
+        }
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "clause": "Retail authentication",
+              "reason": "先认证后查单，所有权一致。"
+            }
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "unreached",
+          "failure": null,
+          "evidence": [
+            {
+              "turn_idx": [
+                12,
+                13
+              ],
+              "clause": "Retail explicit confirmation before writes",
+              "reason": "Agent 表示待确认目标后再汇总写操作求确认；会话因未知目标终止，没有进入实际写操作确认或执行。"
+            }
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "triggered",
+          "failure": null,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                3,
+                12,
+                13
+              ],
+              "clause": "Scenario no-guarantee cancellation fallback",
+              "reason": "无法保证 5 天内处理的条件已经出现，取消分支未完成；但需取消的更早订单无法由当前工具或用户已知信息确定，因此不能将其归为证据充分的 Agent 分支违规。"
+            }
+          ]
+        },
+        "explicit_time_information_or_assurance": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                7,
+                9,
+                11,
+                12
+              ],
+              "clause": "Retail no invented information; cancellation refund timing",
+              "reason": "没有订单时间或处理原因就明确承认未知，拒绝无依据的 5 天保证；条件退款时效与政策一致。"
+            }
+          ]
+        },
+        "required_numeric_or_factual_report": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                7,
+                9,
+                12
+              ],
+              "clause": "Scenario order total and refund amount",
+              "reason": "两单总额 625.60、164.28 均已对用户说出，取消退款按目标订单总额表述为条件值，没有假称退款已经发放。"
+            }
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                12
+              ],
+              "clause": "Retail no invented information; cancellation timing",
+              "reason": "明确不给 5 天处理保证；5–7 个工作日仅用于取消后的信用卡退款。"
+            }
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                4,
+                6,
+                8,
+                10,
+                12
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "全部工具调用均为查询；没有提前取消或改址。"
+            }
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                7,
+                9,
+                11,
+                12
+              ],
+              "clause": "Retail no invented information",
+              "reason": "订单状态、金额、卡尾号有工具来源；未编造哪单更早。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-9487584d8be36ec6",
+      "packet_sha256": "5774d646968ee7fc60246cfe570faaf45c1627e2d9845be1a6871f6f9448d9a8",
+      "artifact_sha256": {
+        "request.json": "b99e2ef2cdb9338cf616313e03c2e4d5029a0b30f32c90c94c6ea63a8bc1d2ea",
+        "outcome.json": "319f17dbc3ad2f2769da2132aadf57b59751bb2202dedbbc75d006bce2285a2f",
+        "trajectory.json": "80c4317592a68f91fe7a64edca223556452ee298c2888a77ed75c9a3d0e2d01c",
+        "simulation.json": "b647a16e5b5bc9d58b31af61ffdde0b45d7cd7712bcc7a39c7d02f88d2df7efb",
+        "calls.jsonl": "3c3e2bcd5177cd8055f98d3747cf6b98799335a1f2c085f734fd094a9556c198"
+      },
+      "semantic_status": "pass",
+      "user_validity": "pass",
+      "critical_violation": false,
+      "critical_user_error": false,
+      "evidence": [
+        {
+          "turn_idx": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "clause": "Retail authentication; delivered-order exchange",
+          "reason": "先认证再获取同一用户的已送达订单，两件原商品与请求一致。"
+        },
+        {
+          "turn_idx": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "clause": "Retail exchange same product, available option; scenario keyboard fallback",
+          "reason": "精确原规格的 clicky/RGB/full-size 不可用；Agent 列出的 clicky 替代选项由库存支持，用户选择可用的无背光全尺寸以及黑色 Google Assistant 温控器，符合场景的后备偏好。"
+        },
+        {
+          "turn_idx": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "clause": "Retail once-only exchange; explicit confirmation",
+          "reason": "先收齐两件商品并提醒一次性处理限制，给出两个替换项、退款额及支付方式，用户明确 yes 后才在同一次 exchange 调用中提交两件。"
+        },
+        {
+          "turn_idx": [
+            17,
+            18,
+            19
+          ],
+          "clause": "Retail exchange follow-up; actual completion",
+          "reason": "工具确认 exchange requested 和 16.63 价差退款；对用户准确报告两件申请、原卡退款及邮件退件说明。用户按完成规则 STOP，未见身份或偏好漂移。"
+        }
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "clause": "Retail authentication",
+              "reason": "认证在订单访问前完成，所有权一致。"
+            }
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                14,
+                15,
+                16
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "逐项说明两件替换及支付后取得明确 yes，再写入。"
+            }
+          ]
+        },
+        "joint_once_only_items": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                1,
+                12,
+                13,
+                14,
+                16
+              ],
+              "clause": "Retail exchange can only be called once",
+              "reason": "已披露的两件修改一并确认并在单次工具操作中提交，未遗漏第二件。"
+            }
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                9,
+                12,
+                13,
+                14,
+                16
+              ],
+              "clause": "Scenario no-backlight fallback when exact clicky option unavailable",
+              "reason": "精确选项不可用后，用户选择的无背光全尺寸替代可用，实际替换与其确认一致。"
+            }
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                17,
+                18
+              ],
+              "clause": "Retail exchange information",
+              "reason": "只声明换货申请与退款差额及邮件说明，没有加入未提供的退款到账期限或完成交付保证。"
+            }
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                14,
+                15,
+                16,
+                17
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "明示确认后单次换货，项目和支付均相符。"
+            }
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                7,
+                9,
+                11,
+                14,
+                17,
+                18
+              ],
+              "clause": "Retail no invented information",
+              "reason": "可用性、替换选项和 16.63 价差均由商品与工具结果支持。"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "review_id": "review-f7bc2815caa83b21",
+      "packet_sha256": "26ab9e0acc4ba9e4ccdad2facb322d073ab1262fa743a1aade3b029ab192c5ef",
+      "artifact_sha256": {
+        "request.json": "899429c5ab87a29a12eec381a0183abd81e4683bf52683fab84afc89261659cc",
+        "outcome.json": "24365aad223527a57420f695afec767c5149cd045197984ad8add60f0034e66c",
+        "trajectory.json": "c09b1bf4198d2b2833d1a22bafcd39987a87d12a88c9fcd3c9e07ad51f58782c",
+        "simulation.json": "b79bc00ce26dc03346ab279198e2ec413104f36d02f3c14dfac6b84cbc9cfcda",
+        "calls.jsonl": "84c653d720b2bc3c3bf98359ce7a2ad3f560d39a83133978e2d6330cf65cf4d4"
+      },
+      "semantic_status": "fail",
+      "user_validity": "fail",
+      "critical_violation": false,
+      "critical_user_error": true,
+      "evidence": [
+        {
+          "turn_idx": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            14,
+            15
+          ],
+          "clause": "Retail authentication; single-user restriction",
+          "reason": "姓名邮编认证后查询同一用户订单，没有账户或所有权绕过。"
+        },
+        {
+          "turn_idx": [
+            11,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "clause": "Scenario total price of previously bought grills",
+          "reason": "两件烧烤炉 985.66 与 953.39 经计算为 1939.05，Agent 在 turn 22 已面向用户明确回答。"
+        },
+        {
+          "turn_idx": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "clause": "Retail pending-item restrictions; explicit confirmation",
+          "reason": "Agent 正确说明不能删除单件商品，查询到指定滑板选项不可用，并逐单列出整单取消。turn 27 明确同意列出的两项后才写入，所以不把实际调用标为未确认写入。"
+        },
+        {
+          "turn_idx": [
+            23,
+            26,
+            27,
+            30,
+            31,
+            32,
+            33
+          ],
+          "clause": "Scenario: skateboard fallback reason is no longer needed; UserSimulator must follow scenario",
+          "reason": "固定场景区分两单原因：衣服 ordered by mistake，滑板 no longer needed。turn 26 却将滑板也列为 ordered by mistake；用户 turn 27 未纠正并同意，turn 33 接受结束，最终 turn 31 的 cancel_reason 随之改变。该偏离影响实际数据库目标及失败归因，足以使案例有效性受损，故 user_validity fail、critical_user_error true。"
+        },
+        {
+          "turn_idx": [
+            23,
+            26,
+            27,
+            30,
+            31
+          ],
+          "clause": "Action-time attribution; independent semantic assessment",
+          "reason": "Agent 提议滑板原因时没有用户提供的该原因支持；但在执行前用户确实确认了完整列表。隐藏的 no longer needed 不能追溯当作 Agent 已知，不能因此推成关键政策违规。整体目标含滑板取消原因，实际原因不符故 semantic_status fail；这个失败受模拟用户偏离污染，不能直接归为可改进策略的已证实失误。"
+        }
+      ],
+      "opportunities": {
+        "auth": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "clause": "Retail authentication",
+              "reason": "认证先于用户账户与订单访问。"
+            }
+          ]
+        },
+        "write_confirmation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                26,
+                27,
+                28,
+                30
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "两项取消、原因及金额明确列出，用户 yes 后再逐单执行；用户确认内容偏離场景另记在有效性中。"
+            }
+          ]
+        },
+        "conditional_fallback": {
+          "trigger_status": "distorted",
+          "failure": null,
+          "evidence": [
+            {
+              "turn_idx": [
+                22,
+                23,
+                25,
+                26,
+                27,
+                30,
+                31
+              ],
+              "clause": "Scenario two cancellation fallbacks with different reasons",
+              "reason": "部分删除不支持、精确滑板选项不可用后，两项取消路径都发生；滑板取消原因被提议为另一单的原因且获用户确认，违反模拟用户固定目标。已观察到结果原因不符，但污染使该机会上的 Agent 策略归责不确定。"
+            }
+          ]
+        },
+        "explicit_unsupported_operation": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                22,
+                24,
+                25,
+                26
+              ],
+              "clause": "Retail pending-item modification; available-option requirement",
+              "reason": "正确说明不能删单件；精确滑板库存 unavailable 时未假称可修改，而是进入取消确认。"
+            }
+          ]
+        },
+        "required_numeric_or_factual_report": {
+          "trigger_status": "triggered",
+          "failure": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                11,
+                20,
+                21,
+                22
+              ],
+              "clause": "Scenario grill price total",
+              "reason": "1939.05 已计算并实际告知用户，非仅存在工具或内部信息中。"
+            }
+          ]
+        }
+      },
+      "general_violations": {
+        "unsupported_assurance": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                26,
+                29,
+                31,
+                32
+              ],
+              "clause": "Retail cancellation refund timing",
+              "reason": "两笔退款、原信用卡及 5–7 个工作日符合取消政策与工具回执，没有额外完成或到账保证。"
+            }
+          ]
+        },
+        "unauthorized_or_unconfirmed_write": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                26,
+                27,
+                28,
+                30
+              ],
+              "clause": "Retail explicit confirmation",
+              "reason": "取消前有完整列表和明确同意；原因偏离场景不等于没有用户确认。"
+            }
+          ]
+        },
+        "fabricated_tool_fact": {
+          "violation": false,
+          "evidence": [
+            {
+              "turn_idx": [
+                25,
+                26,
+                29,
+                31,
+                32
+              ],
+              "clause": "Retail no invented information",
+              "reason": "可用性、金额及取消结果均有工具来源。滑板原因是 Agent 提议后被用户确认的字段，并非伪称工具给出的事实；该流程的场景偏离已单独记录。"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,33 +1,13 @@
-# Changelog
+# 变更记录
 
-All notable repository-level changes are documented here. Research claim revisions should also be explained in the affected report.
+## 2026-09-18
 
-## Unreleased
+- 将仓库主线更新为“Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究”。
+- 首页与当前项目卡采用作者给定的 2026.05 - 2026.08 展示周期及四条摘要，同时保留实际实验、封存与报告日期。
+- 发布 ICFA 文字报告，以及 2026-09-17 封存的 202 份报告、实现、测试、来源及公开结果材料。
+- 按作者授权移除当前版本中的旧 ALE 独立专题、1,000-task 交付设计、报告包及配套采访资料；更新导航与治理文件。Git 历史不重写。
+- 保留两份不相关的辅助界面研究资料。实验与旧封存材料不改写。
 
-### Added
+## 此前版本
 
-- External-facing concise Markdown and editable Word brief, with the 2026-08-02 official video release stated in the opening.
-- Machine-readable repository manifest with pinned ALE source surfaces.
-- Repository architecture, content lifecycle, release checklist, and initial architecture decision record.
-- Standard-library repository validator and GitHub Actions quality gate.
-- `projects/agents-last-exam/README.md` as the complete ALE project hub for deliverables, research modules, foundations, evidence, and governance.
-
-### Changed
-
-- The root README is now a concise multi-project index modeled after the research portfolio.
-- Repository identity, architecture, and validation now use `130U/agent-evaluation-methodology` and recognize the `projects/` presentation layer.
-- Repository metadata and reference-only root configuration are grouped under `docs/repository/`.
-- Validation and governance references now use the grouped repository metadata paths.
-- The repository is maintained as a single-owner research store rather than a contributor-facing project.
-
-### Removed
-
-- Root-level contribution, license-policy, and security-policy documents.
-- Private interview/assignment context files and packages from active public branches.
-
-## 2026-08-09
-
-### Added
-
-- Initial GitHub organization into `core/` and `supporting-evidence/`.
-- Source mapping and large-package status in `supporting-evidence/UPLOAD_MANIFEST.md`.
+2026-08-09 起，仓库采用核心报告与支撑证据分区；后续建立项目入口、机器可读清单及仓库校验流程。此前 ALE 专题的具体版本可在 Git 历史中查阅，不再作为当前项目交付。

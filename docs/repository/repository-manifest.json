@@ -23,28 +23,29 @@
   },
   "required_paths": [
     "README.md",
-    "projects/agents-last-exam/README.md",
-    "core/00-executive-deliverables",
-    "core/01-ale-foundations",
-    "core/02-1000-task-delivery-design",
+    "projects/tau-bench/README.md",
+    "core/04-icfa-report/README.md",
+    "core/03-tau-feedback-evidence/RESEARCH_REPORT.md",
+    "supporting-evidence/tau-feedback-evidence/PUBLIC_EXPORT_MANIFEST.json",
     "supporting-evidence/UPLOAD_MANIFEST.md",
     "docs/REPOSITORY_ARCHITECTURE.md",
     "docs/repository/CHANGELOG.md",
     "docs/repository/repository-manifest.json",
+    "docs/repository/publication-2026-09-18.json",
     "scripts/validate_repository.py",
     ".github/workflows/repository-quality.yml"
   ],
   "source_pins": {
-    "paper": {
-      "identifier": "arXiv:2606.05405v2",
-      "url": "https://arxiv.org/abs/2606.05405v2"
+    "tau2_bench": {
+      "repository": "sierra-research/tau2-bench",
+      "commit": "2174a603f6d014ef94473ffa95957f6ce27100db",
+      "paper": "https://arxiv.org/abs/2506.07982"
     },
-    "official_code": {
-      "repository": "rdi-berkeley/agents-last-exam",
-      "commit": "1e615e456de7cef57706680613cb80ee13c7fc76"
-    },
-    "hugging_face_dataset": {
-      "revision": "a8c1fd174a1f6cfa76526572a2e3ebece1276be2"
+    "gepa": {
+      "repository": "gepa-ai/gepa",
+      "commit": "15ee314f9c7d34ec153b809d401f42f55c4dcd76",
+      "version": "0.1.4",
+      "paper": "https://arxiv.org/abs/2507.19457"
     }
   },
   "validation": {
@@ -61,5 +62,27 @@
     "path": "docs/repository/config",
     "status": "reference-only",
     "note": "These files are grouped for storage and do not apply repository-wide from this location."
+  },
+  "project": {
+    "title": "Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究",
+    "subtitle": "ICFA：面向智能体反思优化的干预约束反馈准入",
+    "display_period": "2026.05 - 2026.08",
+    "display_period_source": "author-supplied project card",
+    "experiment_and_archive_dates": [
+      "2026-09-15",
+      "2026-09-17"
+    ],
+    "report_date": "2026-09-18",
+    "icfa_name_date": "2026-09-18",
+    "research_scope": [
+      "tau-bench",
+      "GEPA",
+      "ALE"
+    ],
+    "experiment_scope": [
+      "tau2-bench text retail",
+      "GEPA"
+    ],
+    "ale_role": "related benchmark background; previous standalone topic retired"
   }
 }
