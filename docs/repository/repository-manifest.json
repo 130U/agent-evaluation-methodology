@@ -65,9 +65,7 @@
   },
   "project": {
     "title": "Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究",
-    "subtitle": "ICFA：面向智能体反思优化的干预约束反馈准入",
-    "display_period": "2026.05 - 2026.08",
-    "display_period_source": "author-supplied project card",
+    "subtitle": "ICFA (Intervention-Constrained Feedback Admission)：干预约束反馈准入",
     "experiment_and_archive_dates": [
       "2026-09-15",
       "2026-09-17"
@@ -83,6 +81,9 @@
       "tau2-bench text retail",
       "GEPA"
     ],
-    "ale_role": "related benchmark background; previous standalone topic retired"
+    "ale_role": "inspiration: real-world workflows, verifiable outcomes, and evaluation validity",
+    "start_month": "2026-05",
+    "end_month": "2026-09",
+    "period": "2026.05 - 2026.09"
   }
 }

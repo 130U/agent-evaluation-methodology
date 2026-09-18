@@ -1,6 +1,6 @@
 # 仓库结构
 
-当前主线为 **Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究**。首页与当前项目卡使用同一标题、展示周期和四行摘要。
+当前主线为 **Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究**。首页与当前项目卡使用同一标题、2026 年 5 月至 9 月的项目周期和研究摘要。
 
 | 路径 | 用途 |
 |---|---|
