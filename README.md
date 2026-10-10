@@ -1,50 +1,71 @@
 # Agent Evaluation Methodology
 
-## 基于 τ-bench 的 Agent 评测有效性与反馈优化研究
+**Study which evaluation feedback can justify a specific change to an agent.**
 
-**2026.05 — 2026.09**
+A May–September 2026 study of τ2-bench retail tasks and GEPA prompt optimization. The project develops **ICFA — Intervention-Constrained Feedback Admission**: checks that connect a diagnosis to its evidence, the component responsible, and the component an optimization run is allowed to change.
 
-本项目于 2026 年 5 月启动，2026 年 9 月完成。围绕“评测反馈如何成为可靠的优化依据”，提出 **ICFA（Intervention-Constrained Feedback Admission）**，即干预约束反馈准入机制，将评价完整性、行为来源与策略更新纳入同一研究框架。
+本研究围绕“什么反馈能够指导什么修改”，将评价完整性、行动时信息、行为来源与更新验收分别核查。
 
-[完整研究报告](core/04-icfa-report/README.md) · [实验与发现](core/03-tau-feedback-evidence/RESEARCH_REPORT.md) · [代码与复现](supporting-evidence/tau-feedback-evidence/README.md)
+[Research report · 完整研究报告](core/04-icfa-report/README.md) · [Experiments](core/03-tau-feedback-evidence/RESEARCH_REPORT.md) · [Code and reproduction](supporting-evidence/tau-feedback-evidence/README.md)
 
-## 研究概览
+## The research question
 
-**研究基础**：梳理 τ-bench 交互评测与 GEPA 提示词优化，选定 τ2-bench 文本零售任务，研究评测反馈如何转化为可验证的策略改进依据。
+A failed task does not by itself establish who caused the failure or which change would fix it. A diagnosis may use information the agent never saw, attribute a framework-generated message to the model, or overlook a regression that the official task score does not measure.
 
-**问题发现**：源码审计与组件测试发现，自然语言评分分项在评价结果缺失或漏项时仍可能通过；行为来源审计进一步发现，框架预置消息可能被误归责于 Agent 策略。
+ICFA examines the step between evaluation and prompt revision. It builds on τ2-bench's interaction environment and GEPA's reflective optimizer; the intervention studied here is a prompt change, not model-weight training.
 
-**方法设计**：建立“证据核验—来源归责—策略修改—回归验收”的反馈流程，使每条优化建议与其证据、责任组件及可修改范围相对应。
+## How feedback is admitted
 
-**研究结论**：受控样例中，完整性检查将缺失、漏项和重复断言结果识别为待核验；来源约束进一步排除超出提示词干预范围的反馈，明确了评价可信度与反馈可用性的不同条件。
+1. **Check evaluation integrity.** Verify required assertions, record identity, types, and run binding; preserve an unknown result when evidence is incomplete.
+2. **Check action-time evidence.** Test the diagnosis against the policy, messages, and tool information available when the action occurred.
+3. **Check origin and control.** Distinguish model-generated actions from framework-inserted behavior, and route feedback according to the permitted intervention.
+4. **Evaluate the proposed update.** Run candidate strategies and examine both task outcomes and semantic regressions before adopting a change.
 
-## 核心观点
+Passing an admission check gives a suggestion eligibility for further review. It does not establish that the diagnosis is correct or that the resulting update will improve performance.
 
-**反馈的价值，取决于它能否为具体修改提供可信依据。**
+## Evidence and outcomes
 
-ICFA 将反馈使用拆成三个可检验的问题：诊断是否有证据、修改对象是否匹配、更新后是否通过验收。对应的优化流程为：
+| Study | Recorded result | What it supports |
+|---|---|---|
+| [E1 · Evaluation integrity](supporting-evidence/tau-feedback-evidence/results/OFFLINE_FINDINGS.md) | 120 valid controls retained; 440 predefined malformed or mismatched inputs marked unknown | Detection of specified structural faults, rather than a natural error rate |
+| [E4 · Action origin](core/03-tau-feedback-evidence/E4_ACTION_ORIGIN_REVIEW.md) | 12 tasks × 3 prompt strategies produced the same framework-inserted opening in 36 initialization checks, without model calls | A concrete behavior outside the prompt intervention's control |
+| [C1 · Synthetic admission calibration](core/03-tau-feedback-evidence/C1_SYNTHETIC_RESULT.md) | All 5 supported cards retained and all 3 unsupported cards rejected; 1 of 4 insufficient-evidence cards still passed the combined gate | Local component behavior on 12 fixed synthetic cards |
+| [G3 · Candidate pilot](core/03-tau-feedback-evidence/G3_PILOT_RESULT.md) | 14 optimization episodes and 2 candidates; all final groups retained the initial strategy. Final testing stopped after 18 scored runs and 1 unscored interruption | Candidate-generation and acceptance records, including a semantic regression |
+| [G4 · Shared-feedback study](core/03-tau-feedback-evidence/G4_STOP_RESULT.md) | Stopped after 4 of 120 planned optimization episodes because of a critical simulated-user error; no candidate proposal or final test followed | A documented validity failure and preserved stopping decision |
 
-1. **核验证据**：检查评价是否完整，诊断是否符合行动当时的信息。
-2. **识别来源**：区分模型生成、框架预置与来源不明的行为，明确本轮可修改的对象。
-3. **提出修改**：将符合条件的反馈用于生成候选策略。
-4. **重跑验收**：分别检查业务结果、回答依据与原有能力，决定是否采用更新。
+**The study has not established an improvement in agent success rate, generalization, or optimization cost.** The latest endpoint is G4's stopped study together with C1's completed component calibration. Full denominators, failures, and unexecuted stages are retained in the [project status](core/03-tau-feedback-evidence/PROJECT_STATUS.md).
 
-## 研究启发
+## Read or reproduce
 
-| 研究来源 | 对本项目的启发 |
-|---|---|
-| [ALE · Agents’ Last Exam](https://arxiv.org/abs/2606.05405v2) | 将评测放回真实工作流与可验证结果中，促使本项目关注“一个分数究竟证明了什么”，把评测有效性作为研究起点。 |
-| [τ2-bench](https://arxiv.org/abs/2506.07982) | 通过交互环境与细粒度分析区分错误来源，为本项目提供文本零售任务、业务政策和可追踪的执行过程。 |
-| [GEPA](https://arxiv.org/abs/2507.19457) | 从执行轨迹中反思并生成提示词修改，启发本项目进一步研究“哪些反馈有资格进入优化”，并沿用其候选生成与测试机制。 |
+Start with the [ICFA report](core/04-icfa-report/README.md) for the method and its theoretical limits. The [experiment report](core/03-tau-feedback-evidence/RESEARCH_REPORT.md) connects each conclusion to its protocol, result, and review record.
 
-三条研究思路汇合于本项目的核心问题：**让评测结果有证据，让优化反馈有归属，让策略更新有验收。**
+For the no-model E0–E3 reproduction, clone the repository and enter the public package:
 
-## 研究材料
+```powershell
+git clone https://github.com/130U/agent-evaluation-methodology.git
+cd agent-evaluation-methodology\supporting-evidence\tau-feedback-evidence
+```
 
-| 内容 | 入口 |
-|---|---|
-| 方法、理论与研究贡献 | [ICFA 完整报告](core/04-icfa-report/README.md) |
-| 评价完整性实验 | [E1 受控结果](supporting-evidence/tau-feedback-evidence/results/OFFLINE_FINDINGS.md) |
-| 行为来源与归责分析 | [E4 来源审计](core/03-tau-feedback-evidence/E4_ACTION_ORIGIN_REVIEW.md) |
-| 反馈准入与候选验证 | [C1 校准](core/03-tau-feedback-evidence/C1_SYNTHETIC_RESULT.md) · [G3 试点](core/03-tau-feedback-evidence/G3_PILOT_RESULT.md) |
-| 实现、测试与复现说明 | [公开研究代码](supporting-evidence/tau-feedback-evidence/README.md) |
+Follow the [Windows / Python 3.12 setup](supporting-evidence/tau-feedback-evidence/README.md), which downloads the pinned upstream sources, archives, and locked dependencies. After that setup:
+
+```powershell
+.venv\Scripts\uv.exe --cache-dir vendor\gepa\.uv-cache run --no-project --python .venv\Scripts\python.exe python -B -X utf8 scripts\run_offline.py
+.venv\Scripts\python.exe -B -X utf8 scripts\reproduce_origin_initialization.py
+.venv\Scripts\python.exe -B -X utf8 -m unittest discover -s tests -q
+```
+
+These entry points cover offline audits, initialization controls, and public component tests. They do not recreate the author's historical model interactions.
+
+## Public evidence boundary
+
+The public package is a documented derivative export. It includes implementation, protocols, result summaries, selected trajectories, and review materials. Original CLI event logs, authentication, model catalog snapshots, and some frozen execution artifacts are excluded.
+
+Published trajectories support semantic inspection; a hash cannot reconstruct or independently authenticate an unavailable original log. Fresh model experiments require a new registration and the reproducer's own access. See the [reproduction boundary](supporting-evidence/tau-feedback-evidence/PUBLIC_REPRODUCTION_BOUNDARY.md) and [publication policy](docs/PUBLICATION_AND_PRIVACY_BOUNDARY.md).
+
+## Research foundations
+
+- [τ2-bench](https://arxiv.org/abs/2506.07982): task environment, retail policy, tools, and interaction traces.
+- [GEPA](https://arxiv.org/abs/2507.19457): reflective prompt optimization and candidate testing.
+- [Agents' Last Exam](https://arxiv.org/abs/2606.05405v2): motivation to examine what an evaluation result actually verifies.
+
+The project's specific contribution is the binding of feedback evidence and action origin to an explicit intervention scope. Its [related-work review](supporting-evidence/tau-feedback-evidence/research/FULLTEXT_NOVELTY_CHECK.md) discusses the limits of that claim.
