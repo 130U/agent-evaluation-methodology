@@ -31,11 +31,11 @@ ICFA treats every diagnosis as a claim that must earn its way into the optimizer
 |---|---|---|
 | Origin audit of real traces | 181 of 181 assistant messages bound to their source: 18 framework, 163 model | Origin can be established message by message |
 | Controlled initialization | 36 of 36 identical openings across 12 tasks and 3 prompts, with no model calls | A prompt cannot reach a framework-inserted message |
-| Evaluation integrity | 120 valid controls preserved, 440 predefined anomalies marked unknown | Missing evidence is never read as success |
-| Sealed synthetic admission | Admitted 5 of 5 supported claims, 0 of 3 refuted, 1 of 4 with insufficient evidence | The origin check removes what semantic review alone lets through |
+| Evaluation integrity | 120 valid controls preserved, 440 predefined anomalies marked unknown | Missing or mismatched evidence is held as unknown instead of passing |
+| Sealed synthetic admission | Admitted 5 of 5 supported claims, 0 of 3 refuted, and 1 of 4 with insufficient evidence, where semantic review alone admitted 2 | Origin is an independent check: it excluded a framework action that semantic review had admitted |
 | Live candidate pilot | Passed both official tasks while promising a refund deadline with no basis in policy | Task score and answer quality need separate acceptance |
 
-These studies establish the mechanism and its boundary. The next study measures its effect on task success and optimization cost at scale.
+These studies establish the mechanism and its boundary. Its effect on task success and optimization cost is the question for the next controlled study.
 
 ## The Mathematics
 
@@ -45,7 +45,7 @@ $$
 P(\text{valid}\mid\text{admitted})=\frac{pt}{pt+(1-p)f}.
 $$
 
-Precision rises exactly when $t>f$. Rejecting more proves nothing. A gate earns its place only by telling valid feedback from invalid feedback, which is why ICFA is built to preserve uncertainty instead of forcing a verdict.
+Precision rises exactly when $t>f$. Rejecting more proves nothing. A gate earns its place only by telling valid feedback from invalid feedback. Uncertain feedback belongs in neither class, which is why ICFA preserves uncertainty instead of forcing a verdict.
 
 ## Read the Work
 
