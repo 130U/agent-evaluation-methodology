@@ -18,7 +18,7 @@
     },
     "repository_metadata": {
       "path": "docs/repository",
-      "purpose": "Repository history, machine-readable metadata, and reference-only configuration."
+      "purpose": "Machine-readable repository structure, source pins, and frozen evidence integrity."
     }
   },
   "required_paths": [
@@ -29,11 +29,12 @@
     "supporting-evidence/tau-feedback-evidence/PUBLIC_EXPORT_MANIFEST.json",
     "supporting-evidence/UPLOAD_MANIFEST.md",
     "docs/REPOSITORY_ARCHITECTURE.md",
-    "docs/repository/CHANGELOG.md",
     "docs/repository/repository-manifest.json",
-    "docs/repository/publication-2026-09-18.json",
     "scripts/validate_repository.py",
-    ".github/workflows/repository-quality.yml"
+    ".github/workflows/repository-quality.yml",
+    ".gitignore",
+    ".gitattributes",
+    "docs/repository/evidence-manifest.json"
   ],
   "source_pins": {
     "tau2_bench": {
@@ -57,11 +58,6 @@
   "policies": {
     "content_lifecycle": "docs/CONTENT_LIFECYCLE.md",
     "release": "docs/RELEASE_CHECKLIST.md"
-  },
-  "reference_configuration": {
-    "path": "docs/repository/config",
-    "status": "reference-only",
-    "note": "These files are grouped for storage and do not apply repository-wide from this location."
   },
   "project": {
     "title": "Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究",
