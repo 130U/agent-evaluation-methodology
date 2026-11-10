@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import subprocess
@@ -14,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = ROOT / "docs" / "repository" / "repository-manifest.json"
 
 ALLOWED_TOP_LEVEL = {
+    ".gitattributes",
+    ".gitignore",
     ".github",
     "README.md",
     "core",
@@ -208,6 +211,19 @@ def check_markdown_links(files: list[Path], errors: list[str]) -> None:
                 )
 
 
+def check_evidence(errors: list[str]) -> None:
+    evidence_path = ROOT / "docs/repository/evidence-manifest.json"
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8"))
+    for entry in evidence["files"]:
+        path = ROOT / entry["path"]
+        if not path.is_file():
+            errors.append(f"Missing frozen evidence: {entry['path']}")
+            continue
+        content = path.read_bytes()
+        if hashlib.sha256(content).hexdigest() != entry["sha256"]:
+            errors.append(f"Frozen evidence hash mismatch: {entry['path']}")
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -218,6 +234,7 @@ def main() -> int:
     check_sizes(manifest, files, errors, warnings)
     check_secrets(files, errors)
     check_markdown_links(files, errors)
+    check_evidence(errors)
 
     print(f"Validated {len(files)} files.")
     for warning in sorted(set(warnings)):

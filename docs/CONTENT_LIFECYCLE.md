@@ -39,7 +39,7 @@
 
 ### Source-surface migration
 
-论文、代码、数据集或 evaluator 版本发生变化。更新 `docs/repository/repository-manifest.json`、`docs/repository/CHANGELOG.md`、受影响报告及跨版本可比性说明。
+论文、代码、数据集或 evaluator 版本发生变化。更新 `docs/repository/repository-manifest.json`、`docs/repository/evidence-manifest.json`、受影响报告及跨版本可比性说明。
 
 ## Retirement
 

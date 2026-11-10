@@ -1,14 +1,10 @@
 {
   "schema_version": 1,
-  "publication_date": "2026-09-18",
-  "base_commit": "2821ff225aeefa7ac68ba4210058802510e7af14",
-  "title": "Agent Evaluation Methodology | 基于 τ-bench 的 Agent 评测有效性与反馈优化研究",
-  "subtitle": "ICFA：面向智能体反思优化的干预约束反馈准入",
-  "display_period": "2026.05 - 2026.08",
-  "display_period_is_not_experiment_timestamp": true,
-  "report_date": "2026-09-18",
-  "frozen_export_manifest_sha256": "992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db",
-  "frozen_export_files_preserved_byte_for_byte": [
+  "repository": "130U/agent-evaluation-methodology",
+  "export_date": "2026-09-17",
+  "export_manifest_sha256": "992c16deae870d2614d4cccbcbff6e25a75507c42032822242e29059fa4896db",
+  "hash_basis": "Exact exported bytes. Git attributes disable line-ending conversion for the frozen evidence paths.",
+  "files": [
     {
       "path": "core/03-tau-feedback-evidence/C1_SYNTHETIC_RESULT.md",
       "sha256": "09d6055ddecdca2bdfdbaf8206b920d54575846264b9bf161db3caf6d5663807"
@@ -817,95 +813,5 @@
       "path": "supporting-evidence/tau-feedback-evidence/THIRD_PARTY_NOTICES.md",
       "sha256": "dbd6be19c3ae5726c796d4048e19e6a14021100673e79c95e842969e6a407087"
     }
-  ],
-  "auxiliary_files_preserved": [
-    {
-      "path": "supporting-evidence/auxiliary-interface-research/theodore-ouyang-particle-hero-build-prompt.md",
-      "sha256": "08060acb29fdb1160bb1526505b0847782291ef2134b95ca76f90c682d5cc029"
-    },
-    {
-      "path": "supporting-evidence/auxiliary-interface-research/unipat-particle-morph-replication-report.md",
-      "sha256": "325fb4d917156d1b75409124fbfb17ecc325f1250028a8294c95d24c137984e7"
-    }
-  ],
-  "removed_paths": [
-    "core/00-executive-deliverables/ale-1000-task-delivery-plan-editable.docx",
-    "core/00-executive-deliverables/ale-benchmark-short-report-2026-08-08.md",
-    "core/00-executive-deliverables/build-ale-delivery-plan-docx.py",
-    "core/00-executive-deliverables/final/ale-private-benchmark-interview-brief-2026-08-09.docx",
-    "core/00-executive-deliverables/final/ale-private-benchmark-interview-brief-2026-08-09.md",
-    "core/00-executive-deliverables/report-architecture/deep-research-prompts-06-to-12-2026-08-09.md",
-    "core/00-executive-deliverables/report-architecture/report-outline.yaml",
-    "core/00-executive-deliverables/report-architecture/research-fields.yaml",
-    "core/00-executive-deliverables/report-architecture/research-plan.md",
-    "core/00-executive-deliverables/report-architecture/source-index.csv",
-    "core/00-executive-deliverables/report-architecture/synthesis-and-report-architecture-2026-08-09.md",
-    "core/00-project-context/benchmaxxing-interview-hook-brief-2026-08-08.md",
-    "core/01-ale-foundations/ale-beginner-explainer-2026-08-05.md",
-    "core/01-ale-foundations/ale-bilingual-deep-reading-and-six-question-analysis.md",
-    "core/01-ale-foundations/ale-taxonomy-13-domains-55-subdomains-2026-08-06.md",
-    "core/02-1000-task-delivery-design/01-scope-and-product-definition/decision-report-2026-08-08.md",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/ale-style-task-minimum-schema.yaml",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/glossary.md",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/one-page-system-diagram.md",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/one-thousand-tasks-interpretation.md",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/proof-boundary.md",
-    "core/02-1000-task-delivery-design/02-ale-blueprint-and-version-audit/technical-blueprint-2026-08-08.md",
-    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/README.md",
-    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/evaluator-archetype-library.md",
-    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/mini-case-studies.md",
-    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/public-corpus-audit-report.md",
-    "core/02-1000-task-delivery-design/03-public-task-corpus-audit/validation.json",
-    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/benchmark-matrix-16.md",
-    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/landscape-report-2026-08-08.md",
-    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/quality-assurance.md",
-    "core/02-1000-task-delivery-design/04-adjacent-benchmark-landscape/reusable-production-framework.md",
-    "core/02-1000-task-delivery-design/05-portfolio-and-sampling-strategy/portfolio-and-sampling-strategy-report.md",
-    "core/02-1000-task-delivery-design/06-expert-production-governance/expert-production-governance-report-2026-08-09.docx",
-    "core/02-1000-task-delivery-design/06-expert-production-governance/expert-production-governance-report-2026-08-09.md",
-    "core/02-1000-task-delivery-design/06-expert-production-governance/quality-assurance.md",
-    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/evaluator-validity-and-scoring-integrity-report-2026-08-09.md",
-    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/evaluator-validity-and-scoring-integrity-report.docx",
-    "core/02-1000-task-delivery-design/07-evaluator-validity-and-integrity/validation.md",
-    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/environment-execution-reference-architecture-report-2026-08-09.md",
-    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/environment-manifest-schema.yaml",
-    "core/02-1000-task-delivery-design/08-environment-execution-reference-architecture/validation.md",
-    "core/02-1000-task-delivery-design/09-living-benchmark-governance/claim-to-source-map.csv",
-    "core/02-1000-task-delivery-design/09-living-benchmark-governance/living-benchmark-governance-report-2026-08-09.docx",
-    "core/02-1000-task-delivery-design/09-living-benchmark-governance/living-benchmark-governance-report-2026-08-09.md",
-    "core/02-1000-task-delivery-design/09-living-benchmark-governance/source-manifest.csv",
-    "core/02-1000-task-delivery-design/10-statistical-and-matched-human-protocol/statistical-and-matched-human-protocol-2026-08-09.docx",
-    "core/02-1000-task-delivery-design/10-statistical-and-matched-human-protocol/statistical-and-matched-human-protocol-2026-08-09.md",
-    "docs/ADR/0001-separate-core-from-supporting-evidence.md",
-    "projects/agents-last-exam/README.md",
-    "scripts/build-ale-private-benchmark-interview-brief-docx.py",
-    "supporting-evidence/full-research-packages/01-scope-and-product-definition-full-research-package.zip",
-    "supporting-evidence/full-research-packages/02-ale-blueprint-and-version-audit-full-research-package.zip",
-    "supporting-evidence/full-research-packages/04-adjacent-benchmark-landscape-full-research-package.zip",
-    "supporting-evidence/full-research-packages/agents-last-exam-paper-research.zip",
-    "supporting-evidence/full-research-packages/ale-beginner-deep-read.zip",
-    "supporting-evidence/full-research-packages/ale-benchmark-research-outline-and-results.zip",
-    "supporting-evidence/full-research-packages/ale-bilingual-paper-reading-and-taxonomy-figure.zip",
-    "supporting-evidence/full-research-packages/ale-taxonomy-audit.zip",
-    "supporting-evidence/full-research-packages/final-report-architecture-and-deep-research-prompts.zip",
-    "supporting-evidence/full-research-packages/interview-hook-research.zip",
-    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-auto-captions-en-orig.json3",
-    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-bilingual-transcript-en-zh.md",
-    "supporting-evidence/interview-and-video-source-material/benchmaxxing-video-machine-translated-captions-zh-Hans.json3",
-    "supporting-evidence/interview-and-video-source-material/build-bilingual-transcript.ps1"
-  ],
-  "current_presentation": [
-    "README.md",
-    "projects/tau-bench/README.md",
-    "core/04-icfa-report/README.md"
-  ],
-  "report_editorial_changes": [
-    "project title and subtitle",
-    "date and scope metadata",
-    "public relative links",
-    "GitHub display math delimiters",
-    "publication provenance footer"
-  ],
-  "frozen_experiments_modified": false,
-  "git_history_rewritten": false
+  ]
 }

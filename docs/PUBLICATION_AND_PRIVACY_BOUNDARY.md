@@ -12,4 +12,4 @@
 
 组件校验通过只说明对应规则在所测输入上的行为，不自动证明 Agent 任务成功率提高。合成反馈与真实交互采用不同的证据口径。展示周期、实验记录日期和方法命名日期分别保留。
 
-当前发布范围与历史专题移除记录见[发布清单](../supporting-evidence/UPLOAD_MANIFEST.md)。
+当前发布范围与证据完整性记录见[发布清单](../supporting-evidence/UPLOAD_MANIFEST.md)。
